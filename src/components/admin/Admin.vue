@@ -39,7 +39,7 @@
     bottom: 0;
     right: 0;
     z-index: -1;
-    text-align: center;
+    overflow: auto;
     width: calc(100% - 150px);
     background-color: #f5f5f5;
     transition: 0.3s width;
@@ -60,6 +60,8 @@
 
   .content {
     clear: both;
+    z-index: 3;
+    margin: 60px 30px 0 30px;
   }
 
   @media screen and (max-width: 600px) {

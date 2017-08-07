@@ -26,7 +26,6 @@
     display: inline-block;
     line-height: 50px;
     text-align: center;
-    z-index: 2;
     box-shadow: 0 2px 3px hsla(0, 0%, 7%, .1), 0 0 0 1px hsla(0, 0%, 7%, .1);
   }
 

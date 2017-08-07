@@ -42,7 +42,6 @@
     bottom: 0;
     left: 0;
     width: 150px;
-    z-index: 1;
     background-color: #324157;
     box-shadow: 0 2px 3px hsla(0, 0%, 7%, .1), 0 0 0 1px hsla(0, 0%, 7%, .1);
     transition: 0.3s left;
