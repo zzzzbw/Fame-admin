@@ -14,7 +14,9 @@
         </div>
       </div>
       <div class="content">
-        <router-view></router-view>
+        <transition name="move" mode="out-in">
+          <router-view></router-view>
+        </transition>
       </div>
     </div>
   </div>

@@ -57,6 +57,11 @@
     methods: {
       onSubmit () {
         console.log(this.article)
+        const url = '/api/admin/article/save'
+        const params = this.article
+        this.$post(url, params).then(data => {
+          console.log(data)
+        })
       },
       onDraft () {
         // TODO

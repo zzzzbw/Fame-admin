@@ -1,0 +1,13 @@
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #2c3e50;
+}
+
+.move-enter-active,.move-leave-active{
+  transition: opacity .5s;
+}
+.move-enter,.move-leave{
+  opacity: 0;
+}

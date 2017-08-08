@@ -1,13 +1,13 @@
 <template>
   <div :class="[ showLeftMenu ? 'left-menu-show':'left-menu-hide' ]" class="left-menu">
     <el-menu default-active="" :collapse="false" theme="dark" router>
-      <el-menu-item index="/admin/article">
-        <i class="el-icon-menu"></i>
+      <el-menu-item index="/admin/article/publish">
+        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
         <span slot="title">发布文章</span>
       </el-menu-item>
-      <el-menu-item index="2">
-        <i class="el-icon-menu"></i>
-        <span slot="title">导航二</span>
+      <el-menu-item index="/admin/article/index/1">
+        <i class="fa fa-list" aria-hidden="true"></i>
+        <span slot="title">文章列表</span>
       </el-menu-item>
       <el-menu-item index="3">
         <i class="el-icon-setting"></i>
