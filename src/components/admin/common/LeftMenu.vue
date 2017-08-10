@@ -9,9 +9,9 @@
         <i class="fa fa-list" aria-hidden="true"></i>
         <span slot="title">文章列表</span>
       </el-menu-item>
-      <el-menu-item index="3">
-        <i class="el-icon-setting"></i>
-        <span slot="title">导航三</span>
+      <el-menu-item index="/admin/tag">
+        <i class="fa fa-tag" aria-hidden="true"></i>
+        <span slot="title">标签/分类</span>
       </el-menu-item>
     </el-menu>
   </div>

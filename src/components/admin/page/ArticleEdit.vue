@@ -7,7 +7,19 @@
       <el-row :gutter="30">
         <el-col :xs="24" :sm="12" :md="12" :lg="12">
           <el-form-item>
-            <el-input v-model="article.tag" placeholder="请输入文章标签"></el-input>
+            <el-select
+              v-model="tagsValue"
+              multiple
+              filterable
+              allow-create
+              placeholder="请选择文章标签">
+              <el-option
+                v-for="item in tags"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value">
+              </el-option>
+            </el-select>
           </el-form-item>
         </el-col>
         <el-col :xs="24" :sm="12" :md="12" :lg="12">
@@ -48,7 +60,18 @@
           tag: '',
           category: '',
           content: ''
-        }
+        },
+        tags: [{
+          value: 'HTML',
+          label: 'HTML'
+        }, {
+          value: 'CSS',
+          label: 'CSS'
+        }, {
+          value: 'JavaScript',
+          label: 'JavaScript'
+        }],
+        tagsValue: []
       }
     },
     components: {
@@ -77,5 +100,9 @@
 
   .button-list .el-button {
     margin-left: 0;
+  }
+
+  .el-select {
+    display: block;
   }
 </style>
