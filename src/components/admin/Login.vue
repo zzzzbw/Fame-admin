@@ -42,8 +42,15 @@
         self.$refs[formName].validate((valid) => {
           if (valid) {
             this.$router.push('/admin')
+            this.$message({
+              message: '登录成功!',
+              type: 'success'
+            })
           } else {
-            console.log('error submit!!')
+            this.$message({
+              message: '登录失败',
+              type: 'error'
+            })
             return false
           }
         })
@@ -65,7 +72,7 @@
 
   .login-wrap {
     max-width: 330px;
-    margin: 180px auto 0;
+    margin: 100px auto 0;
     background: #fff;
     border-radius: 5px;
     -webkit-border-radius: 5px;

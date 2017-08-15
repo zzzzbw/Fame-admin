@@ -1,6 +1,6 @@
 <template>
   <div :class="[ showLeftMenu ? 'left-menu-show':'left-menu-hide' ]" class="left-menu">
-    <el-menu default-active="" :collapse="false" theme="dark" router>
+    <el-menu default-active="" :collapse="false" theme="dark" router @select="mobileToggle">
       <el-menu-item index="/admin/article/publish">
         <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
         <span slot="title">发布文章</span>
@@ -25,12 +25,17 @@
       }
     },
     methods: {
-      toogleLeftMenu () {
+      toggleLeftMenu () {
         this.showLeftMenu = !this.showLeftMenu
+      },
+      mobileToggle (key, keyPath) {
+        if (document.body.clientWidth < 600) {
+          this.showLeftMenu = false
+        }
       }
     },
     created () {
-      this.$root.$on('collapse', this.toogleLeftMenu)
+      this.$root.$on('collapse', this.toggleLeftMenu)
     }
   }
 </script>
