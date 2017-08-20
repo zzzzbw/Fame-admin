@@ -1,11 +1,15 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Hello from '@/components/Hello'
+import Frontend from '@/components/frontend/Frontend'
+import FArticleList from '@/components/frontend/page/ArticleList'
+import FTagList from '@/components/frontend/page/TagList'
+
 import Login from '@/components/admin/Login'
 import Admin from '@/components/admin/Admin'
-import ArticleEdit from '@/components/admin/page/ArticleEdit'
-import ArticleList from '@/components/admin/page/ArticleList'
-import TagList from '@/components/admin/page/TagList'
+import AArticleEdit from '@/components/admin/page/ArticleEdit'
+import AArticleList from '@/components/admin/page/ArticleList'
+import ATagList from '@/components/admin/page/TagList'
 
 Vue.use(Router)
 
@@ -15,6 +19,21 @@ export default new Router({
       path: '/',
       name: 'Hello',
       component: Hello
+    },
+    {
+      path: '/frontend',
+      name: 'Frontend',
+      component: Frontend,
+      children: [
+        {
+          path: 'article/:page',
+          component: FArticleList
+        },
+        {
+          path: 'tag/:page',
+          component: FTagList
+        }
+      ]
     },
     {
       path: '/admin/login',
@@ -28,18 +47,18 @@ export default new Router({
       children: [
         {
           path: 'article/publish/:id',
-          component: ArticleEdit
+          component: AArticleEdit
         }, {
           path: 'article/publish',
-          component: ArticleEdit
+          component: AArticleEdit
         },
         {
           path: 'article/index/:page',
-          component: ArticleList
+          component: AArticleList
         },
         {
           path: 'tag',
-          component: TagList
+          component: ATagList
         }
       ]
 

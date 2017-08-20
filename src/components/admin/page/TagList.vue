@@ -23,7 +23,7 @@
                       @keyup.enter.native="handleInputConfirmTag"
                       @blur="handleInputConfirmTag">
             </el-input>
-            <el-button v-else class="button-new-tag" size="small" @click="showInputTag">+New Tag</el-button>
+            <el-button v-else class="button-new-tag" size="small" @click="showInputTag">+新增标签</el-button>
           </div>
         </el-card>
       </el-col>
@@ -49,7 +49,7 @@
                       @keyup.enter.native="handleInputConfirmCategory"
                       @blur="handleInputConfirmCategory">
             </el-input>
-            <el-button v-else class="button-new-category" size="small" @click="showInputCategory">+New Category</el-button>
+            <el-button v-else class="button-new-category" size="small" @click="showInputCategory">+新建分类</el-button>
           </div>
         </el-card>
       </el-col>
@@ -121,7 +121,7 @@
           let tag = {name: inputValueTag, type: this.$util.randomColorType()}
           this.tags.push(tag)
         }
-        this.inputValueTag = false
+        this.inputVisibleTag = false
         this.inputValueTag = ''
       },
       handleInputConfirmCategory () {
@@ -130,7 +130,7 @@
           let category = {name: inputValueCategory, type: this.$util.randomColorType()}
           this.categories.push(category)
         }
-        this.inputValueCategory = false
+        this.inputVisibleCategory = false
         this.inputValueCategory = ''
       }
     }
@@ -163,6 +163,23 @@
   }
 
   .button-new-tag {
+    margin-left: 10px;
+    margin-top: 10px;
+    height: 24px;
+    line-height: 22px;
+    padding-top: 0;
+    padding-bottom: 0
+  }
+
+  .input-new-category {
+    width: 78px;
+    margin-left: 10px;
+    margin-top: 10px;
+    height: 24px;
+    line-height: 22px;
+  }
+
+  .button-new-category {
     margin-left: 10px;
     margin-top: 10px;
     height: 24px;

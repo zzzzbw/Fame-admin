@@ -35,6 +35,8 @@
 </script>
 
 <style scoped>
+  @import '~element-ui/lib/theme-default/index.css';
+
   .container {
     position: fixed;
     top: 50px;

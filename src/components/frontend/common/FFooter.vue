@@ -1,0 +1,24 @@
+<template>
+  <div class="footer">
+    <p class="copyright">
+      © 2017 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+      <br>
+      Theme by <a href="https://github.com/yanm1ng">yanm1ng</a></p>
+  </div>
+</template>
+
+<script type="text/ecmascript-6">
+
+</script>
+
+<style scoped>
+  .footer{
+    padding: 1em 0;
+    margin: 0 auto;
+    max-width: 850px;
+    border-top: 1px solid #e5e5e5;
+    background-color: #fff;
+    text-align: center;
+    font-size: 0.9em;
+  }
+</style>

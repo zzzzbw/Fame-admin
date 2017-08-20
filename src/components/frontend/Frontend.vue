@@ -1,0 +1,45 @@
+<template>
+  <div>
+    <f-header></f-header>
+    <div class="container">
+      <router-view></router-view>
+    </div>
+    <f-scroll-top></f-scroll-top>
+    <f-footer></f-footer>
+  </div>
+</template>
+
+<script type="text/ecmascript-6">
+  import FHeader from './common/FHeader'
+  import FFooter from './common/FFooter'
+  import FScrollTop from './common/FScrollTop'
+
+  export default {
+    created: function () {
+      this.$router.push('/frontend/article/1')
+    },
+    components: {
+      FHeader,
+      FFooter,
+      FScrollTop
+    }
+  }
+
+</script>
+
+<style>
+  a:hover {
+    cursor: pointer;
+  }
+</style>
+<style scoped>
+  @import '~spectre.css';
+
+  .container {
+    padding: 1em;
+    margin: 55px auto;
+    height: 100%;
+    max-width: 750px;
+    position: relative;
+  }
+</style>

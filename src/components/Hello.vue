@@ -4,6 +4,9 @@
     <h2>vue+axios+router+element ui</h2>
     <el-button @click="test">get测试按钮</el-button>
     <el-button type="primary" @click="login">post测试按钮</el-button>
+    <el-button @click="frontend">
+      前台
+    </el-button>
     <el-button @click="admin">
       后台管理
     </el-button>
@@ -41,6 +44,9 @@
       },
       admin () {
         this.$router.push('/admin/login')
+      },
+      frontend () {
+        this.$router.push('/frontend')
       }
     }
   }
@@ -48,6 +54,7 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  @import '~element-ui/lib/theme-default/index.css';
   .hello {
     text-align: center;
   }

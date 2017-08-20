@@ -60,6 +60,8 @@
 </script>
 
 <style scoped>
+  @import '~element-ui/lib/theme-default/index.css';
+
   .container {
     position: absolute;
     bottom: 0;
