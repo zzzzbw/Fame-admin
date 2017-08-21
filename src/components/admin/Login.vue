@@ -41,10 +41,24 @@
         const self = this
         self.$refs[formName].validate((valid) => {
           if (valid) {
-            this.$router.push('/admin')
-            this.$message({
-              message: '登录成功!',
-              type: 'success'
+            const url = '/api/admin/login'
+            const params = {
+              username: this.ruleForm.username,
+              password: this.ruleForm.password
+            }
+            this.$post(url, params).then(data => {
+              if (data.success) {
+                this.$router.push('/admin')
+                this.$message({
+                  message: '登录成功!',
+                  type: 'success'
+                })
+              } else {
+                this.$message({
+                  message: '登录失败,' + data.msg,
+                  type: 'error'
+                })
+              }
             })
           } else {
             this.$message({

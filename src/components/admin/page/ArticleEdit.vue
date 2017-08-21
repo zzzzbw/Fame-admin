@@ -59,7 +59,8 @@
           title: '',
           tag: '',
           category: '',
-          content: ''
+          content: '',
+          status: ''
         },
         tags: [{
           value: 'HTML',
@@ -79,11 +80,22 @@
     },
     methods: {
       onSubmit () {
-        console.log(this.article)
+        this.article.status = 'publish'
         const url = '/api/admin/article/save'
         const params = this.article
         this.$post(url, params).then(data => {
-          console.log(data)
+          if (data.success) {
+            this.$router.push('/admin/article/index/1')
+            this.$message({
+              message: '发布文章成功!',
+              type: 'success'
+            })
+          } else {
+            this.$message({
+              message: '发布文章失败,' + data.msg,
+              type: 'error'
+            })
+          }
         })
       },
       onDraft () {

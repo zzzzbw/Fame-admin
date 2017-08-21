@@ -1,5 +1,5 @@
 <template>
-  <div class="scroll-top opacity" ref="scrollTop" @click="toTop">
+  <div class="scroll-top" ref="scrollTop" @click="toTop">
     <i class="fa fa-arrow-up fa-2x" aria-hidden="true"></i>
   </div>
 </template>
@@ -25,9 +25,16 @@
         }, 1)
       }
     },
-    created () {
-      // 鼠标操作时取消滚动
+    mounted () {
+      // 顶部图标的显示与隐藏
+      let scrollTop = this.$refs.scrollTop
       window.onscroll = function () {
+        if ((document.documentElement.scrollTop || document.body.scrollTop) > 200) {
+          scrollTop.classList.add('opacity')
+        } else {
+          scrollTop.classList.remove('opacity')
+        }
+        // 鼠标操作时取消滚动
         if (!isTop) {
           clearInterval(timer)
         }

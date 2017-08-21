@@ -5,6 +5,8 @@ import qs from 'qs'
 axios.defaults.timeout = 5000
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
 axios.defaults.baseURL = 'http://localhost:9090/'
+// 跨域
+axios.defaults.withCredentials = true
 
 // post 传参序列化
 axios.interceptors.request.use((config) => {
