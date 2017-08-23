@@ -8,7 +8,7 @@
         <el-col :xs="24" :sm="12" :md="12" :lg="12">
           <el-form-item>
             <el-select
-              v-model="tagsValue"
+              v-model="article.tags"
               multiple
               filterable
               allow-create
@@ -34,7 +34,7 @@
       </el-form-item>
       <div class="button-list">
         <el-button>返回列表</el-button>
-        <el-button type="info" @click="onSubmit">发布文章</el-button>
+        <el-button type="info" @click="onPublish">发布文章</el-button>
         <el-button type="warning" @click="onDraft">保存草稿</el-button>
       </div>
     </el-form>
@@ -56,9 +56,10 @@
           }
         },
         article: {
+          id: '',
           title: '',
-          tag: '',
-          category: '',
+          tags: '',
+          categories: '',
           content: '',
           status: ''
         },
@@ -79,11 +80,40 @@
       markdownEditor
     },
     methods: {
-      onSubmit () {
-        this.article.status = 'publish'
-        const url = '/api/admin/article/save'
-        const params = this.article
-        this.$post(url, params).then(data => {
+      getArticle () {
+        const id = this.$route.params.id
+        // 如果有id则表示编辑文章,获取文章信息
+        if (id) {
+          this.$api.getArticleAuth(id).then(data => {
+            if (data.success) {
+              this.initArticle(data.data)
+            } else {
+              this.$message({
+                message: '获取文章失败',
+                type: 'error'
+              })
+            }
+          })
+        } else { // 如果没有id则表示新增文章,不用清空文章信息
+          this.article.id = ''
+          this.article.title = ''
+          this.article.tags = this.$util.stringToTags('')
+          this.article.category = ''
+          this.article.content = ''
+        }
+      },
+      initArticle (data) {
+        this.article.id = data.id
+        this.article.title = data.title
+        this.article.tags = this.$util.stringToTags(data.tags)
+        this.article.category = data.category
+        this.article.content = data.content
+      },
+      onPublish () {
+        this.article.status = this.$util.STATIC.ARTICLE_STATUS_PUBLISH
+        let params = this.article
+        params.tags = this.$util.tagsToString(this.article.tags)
+        this.$api.saveArticleAuth(params).then(data => {
           if (data.success) {
             this.$router.push('/admin/article/index/1')
             this.$message({
@@ -100,6 +130,15 @@
       },
       onDraft () {
         // TODO
+      }
+    },
+    created () {
+      this.getArticle()
+    },
+    watch: {
+      // 监听route刷新绑定的article数据
+      $route (to, from) {
+        this.getArticle()
       }
     }
   }

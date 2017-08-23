@@ -16,7 +16,7 @@
 
   export default {
     created: function () {
-      this.$router.push('/frontend/article/1')
+      this.$router.push('/frontend/article/index/1')
     },
     components: {
       FHeader,

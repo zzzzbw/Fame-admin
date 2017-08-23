@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Hello from '@/components/Hello'
 import Frontend from '@/components/frontend/Frontend'
 import FArticleList from '@/components/frontend/page/ArticleList'
+import FArticleContent from '@/components/frontend/page/ArticleContent'
 import FTagList from '@/components/frontend/page/TagList'
 
 import Login from '@/components/admin/Login'
@@ -26,8 +27,12 @@ export default new Router({
       component: Frontend,
       children: [
         {
-          path: 'article/:page',
+          path: 'article/index/:page',
           component: FArticleList
+        },
+        {
+          path: 'article/content/:id',
+          component: FArticleContent
         },
         {
           path: 'tag/:page',

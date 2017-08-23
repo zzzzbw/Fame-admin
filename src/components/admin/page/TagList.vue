@@ -49,7 +49,7 @@
                       @keyup.enter.native="handleInputConfirmCategory"
                       @blur="handleInputConfirmCategory">
             </el-input>
-            <el-button v-else class="button-new-category" size="small" @click="showInputCategory">+新建分类</el-button>
+            <el-button v-else class="button-new-category" size="small" @click="showInputCategory">+新增分类</el-button>
           </div>
         </el-card>
       </el-col>
@@ -65,22 +65,8 @@
         inputValueTag: '',
         inputVisibleCategory: false,
         inputValueCategory: '',
-        tags: [
-          {name: '标签一', type: ''},
-          {name: '标签二', type: 'gray'},
-          {name: '标签三', type: 'primary'},
-          {name: '标签四', type: 'success'},
-          {name: '标签五', type: 'warning'},
-          {name: '标签六', type: 'danger'}
-        ],
-        categories: [
-          {name: '分类一', type: ''},
-          {name: '分类二', type: 'gray'},
-          {name: '分类三', type: 'primary'},
-          {name: '分类四', type: 'success'},
-          {name: '分类五', type: 'warning'},
-          {name: '分类六', type: 'danger'}
-        ]
+        tags: [],
+        categories: []
       }
     },
     methods: {
@@ -90,7 +76,16 @@
           cancelButtonText: '取消',
           type: 'error'
         }).then(() => {
-          this.tags.splice(this.tags.indexOf(tag), 1)
+          this.$api.deleteTag(tag.name).then(data => {
+            if (data.success) {
+              this.tags.splice(this.tags.indexOf(tag), 1)
+            } else {
+              this.$message({
+                message: '删除标签失败,' + data.msg,
+                type: 'error'
+              })
+            }
+          })
         })
       },
       handleDeleteCategory (category) {
@@ -114,7 +109,6 @@
           this.$refs.saveCategoryInput.$refs.input.focus()
         })
       },
-
       handleInputConfirmTag () {
         let inputValueTag = this.inputValueTag
         if (inputValueTag) {
@@ -132,7 +126,48 @@
         }
         this.inputVisibleCategory = false
         this.inputValueCategory = ''
-      }
+      },
+      getAllCategoriesAuth () {
+        this.$api.getAllCategoriesAuth().then(data => {
+          if (data.success) {
+            let categories = data.data
+            for (let key in categories) {
+              let category = {
+                name: categories[key].name + ' (' + categories[key].articleCount + ')',
+                type: this.$util.randomColorType()
+              }
+              this.categories.push(category)
+            }
+          } else {
+            this.$message({
+              message: '获取分类失败,' + data.msg,
+              type: 'error'
+            })
+          }
+        })
+      },
+      getAllTagsAuth () {
+        this.$api.getAllTagsAuth().then(data => {
+          if (data.success) {
+            let tags = data.data
+            for (let key in tags) {
+              let tag = {
+                name: tags[key].name, type: this.$util.randomColorType()
+              }
+              this.tags.push(tag)
+            }
+          } else {
+            this.$message({
+              message: '获取标签失败,' + data.msg,
+              type: 'error'
+            })
+          }
+        })
+      },
+    },
+    created () {
+      this.getAllCategoriesAuth()
+      this.getAllTagsAuth()
     }
   }
 </script>
