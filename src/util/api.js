@@ -5,11 +5,20 @@ export default {
   login (user) {
     return post('/api/admin/login', user)
   },
+  getArticles (page) {
+    let params = {
+      page: page
+    }
+    return get('/api/article', params)
+  },
   getArticlesAuth (page) {
     let params = {
       page: page
     }
     return get('/api/admin/article', params)
+  },
+  getArticle (id) {
+    return get('/api/article/' + id)
   },
   getArticleAuth (id) {
     return get('/api/admin/article/' + id)

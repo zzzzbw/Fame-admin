@@ -36,6 +36,8 @@
 
 <style scoped>
   @import '~element-ui/lib/theme-default/index.css';
+  @import "/static/css/normalize.css";
+  @import "/static/css/main.css";
 
   .container {
     position: fixed;

@@ -2,14 +2,16 @@
   <div>
     <h2 class="article-title text-bold">{{article.title}}</h2>
     <p class="article-date">{{article.date}}</p>
-    <div class="article-content">
+    <div class="markdown-body">
+      <h2>来个测试的标题</h2>
+      <h3>测试的二级标题</h3>
       {{article.content}}
     </div>
     <div class="article-tags">
       <label class="label-tags">Tags:</label>
-      <label v-for="tag in article.tags" class="chip">
+      <span v-for="tag in article.tags" class="chip text-primary">
         {{tag}}
-      </label>
+      </span>
     </div>
   </div>
 </template>
@@ -41,9 +43,7 @@
       }
     },
     created () {
-      const id = this.$route.params.id
-      const url = 'api/article/' + id
-      this.$get(url).then(data => {
+      this.$api.getArticle(this.$route.params.id).then(data => {
         if (data.success) {
           this.initArticle(data.data)
         } else {
@@ -52,13 +52,27 @@
             type: 'error'
           })
         }
+      }).catch(err => {
+        console.log(err)
+        let article = {
+          id: '2',
+          title: '测试文章',
+          date: '2017-09-01',
+          category: 'JAVA测试',
+          tags: 'css,Javascript',
+          content: '这是做测试的文章!!!'
+        }
+        this.initArticle(article)
       })
     }
   }
 </script>
 
 <style scoped>
+  @import "/static/css/markdown-css.css";
+
   .article-title {
+    color: #24292e;;
     margin-top: 30px;
     text-align: center;
   }
@@ -73,6 +87,13 @@
   }
 
   .article-tags .label-tags {
+    margin-right: 6px;
     font-size: 16px;
+    font-weight: 600;
+    color: #34495e;
+  }
+
+  .article-tags .chip {
+    margin-right: 5px;
   }
 </style>

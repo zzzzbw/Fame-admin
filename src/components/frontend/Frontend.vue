@@ -34,12 +34,20 @@
 </style>
 <style scoped>
   @import '~spectre.css';
+  @import "/static/css/normalize.css";
+  @import "/static/css/main.css";
+
+  @font-face {
+    font-family: 'Source Sans Pro';
+    src: url("/static/fonts/SourceSansPro.ttf");
+  }
 
   .container {
     padding: 1em;
     margin: 55px auto;
     height: 100%;
     max-width: 750px;
+    font-size: 16px;
     position: relative;
   }
 </style>

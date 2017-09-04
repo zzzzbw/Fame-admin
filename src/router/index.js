@@ -15,6 +15,7 @@ import ATagList from '@/components/admin/page/TagList'
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',

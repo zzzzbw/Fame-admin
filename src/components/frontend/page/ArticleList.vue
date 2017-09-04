@@ -6,14 +6,32 @@
       </h3>
       <p class="article-date text-italic">{{article.date}}</p>
       <div class="article-tags">
-        <label v-for="tag in article.tags" class="chip">
+        <label v-for="tag in article.tags" class="chip text-primary">
           {{tag}}
         </label>
       </div>
       <div class="article-summary">
         {{article.content}}
       </div>
-      <a class="article-more" @click="toContent(article.id)">Read more</a>
+      <a class="article-more" @click="toContent(2)">Read more</a>
+    </div>
+    <div class="article-item">
+      <h3 class="article-head text-bold">
+        <a @click="toContent(2)">测试标题</a>
+      </h3>
+      <p class="article-date text-italic">2017-09-01</p>
+      <div class="article-tags">
+        <label class="chip text-primary">
+          css
+        </label>
+        <label class="chip text-primary">
+          Javascript
+        </label>
+      </div>
+      <div class="article-summary">
+        测试标题的第一个测试
+      </div>
+      <a class="article-more" @click="toContent(2)">Read more</a>
     </div>
   </div>
 </template>
@@ -46,12 +64,7 @@
       }
     },
     created () {
-      const page = this.$route.params.page
-      const url = '/api/article'
-      const params = {
-        page: page
-      }
-      this.$get(url, params).then(data => {
+      this.$api.getArticles(this.$route.params.page).then(data => {
         if (data.success) {
           this.initArticles(data.data)
         } else {
@@ -91,7 +104,8 @@
 
   .article-item .article-more {
     font-weight: 600;
-    margin-top: 5px;
+    margin-top: 15px;
+    font-size: 16px;
     text-decoration: none;
     display: inline-block;
     transition: all 0.3s;
