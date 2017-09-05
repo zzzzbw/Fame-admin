@@ -15,9 +15,6 @@
   import FScrollTop from './common/FScrollTop'
 
   export default {
-    created: function () {
-      this.$router.push('/frontend/article/index/1')
-    },
     components: {
       FHeader,
       FFooter,

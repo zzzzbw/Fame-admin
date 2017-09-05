@@ -7,10 +7,10 @@
       </div>
       <ul class="tab tab-block link-list">
         <li class="tab-item">
-          <a class="active" @click="toHome">Home</a>
+          <router-link :to="{ path: '/article', query: {page: '1'}}" exact>Home</router-link>
         </li>
         <li class="tab-item">
-          <a @click="toTag">Tags</a>
+          <router-link :to="{path: '/tag', query: {page: '1'}}">Tag</router-link>
         </li>
         <li class="tab-item">
           <a href="#">Archives</a>
@@ -48,10 +48,10 @@
         this.menuOpen = !this.menuOpen
       },
       toHome () {
-        this.$router.push('/frontend/article/1')
+        this.$router.push({path: '/article', query: {page: '1'}})
       },
       toTag () {
-        this.$router.push('/frontend/tag/1')
+        this.$router.push({path: '/tag', query: {page: '1'}})
       }
     }
   }

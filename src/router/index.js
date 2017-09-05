@@ -1,10 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Hello from '@/components/Hello'
 import Frontend from '@/components/frontend/Frontend'
 import FArticleList from '@/components/frontend/page/ArticleList'
 import FArticleContent from '@/components/frontend/page/ArticleContent'
 import FTagList from '@/components/frontend/page/TagList'
+// import FNotFound from '@/components/frontend/page/NotFound'
 
 import Login from '@/components/admin/Login'
 import Admin from '@/components/admin/Admin'
@@ -16,29 +16,28 @@ Vue.use(Router)
 
 export default new Router({
   mode: 'history',
+  linkActiveClass: 'active',
   routes: [
     {
       path: '/',
-      name: 'Hello',
-      component: Hello
-    },
-    {
-      path: '/frontend',
-      name: 'Frontend',
       component: Frontend,
       children: [
         {
-          path: 'article/index/:page',
+          path: '',
           component: FArticleList
         },
         {
-          path: 'article/content/:id',
+          path: 'article',
+          component: FArticleList
+        },
+        {
+          path: 'article/:id',
           component: FArticleContent
         },
         {
-          path: 'tag/:page',
+          path: 'tag',
           component: FTagList
-        }
+        },
       ]
     },
     {

@@ -2,7 +2,7 @@
   <div>
     <div v-for="article in articles" class="article-item">
       <h3 class="article-head text-bold">
-        <a @click="toContent(article.id)">{{article.title}}</a>
+
       </h3>
       <p class="article-date text-italic">{{article.date}}</p>
       <div class="article-tags">
@@ -17,7 +17,7 @@
     </div>
     <div class="article-item">
       <h3 class="article-head text-bold">
-        <a @click="toContent(2)">测试标题</a>
+        <router-link :to="{ path: '/article/'+2 }">测试标题</router-link>
       </h3>
       <p class="article-date text-italic">2017-09-01</p>
       <div class="article-tags">
@@ -60,11 +60,11 @@
         return 1
       },
       toContent (id) {
-        this.$router.push('/frontend/article/content/' + id)
+        this.$router.push('/article/' + id)
       }
     },
     created () {
-      this.$api.getArticles(this.$route.params.page).then(data => {
+      this.$api.getArticles(this.$route.query.page || 1).then(data => {
         if (data.success) {
           this.initArticles(data.data)
         } else {
