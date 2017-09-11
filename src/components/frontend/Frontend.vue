@@ -2,7 +2,9 @@
   <div>
     <f-header></f-header>
     <div class="container">
-      <router-view></router-view>
+      <transition name="move" mode="out-in">
+        <router-view></router-view>
+      </transition>
     </div>
     <f-scroll-top></f-scroll-top>
     <f-footer></f-footer>

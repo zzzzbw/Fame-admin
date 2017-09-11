@@ -25,8 +25,12 @@
         </div>
         <div class="header-menu-list" :class="{ 'open': menuOpen }">
           <ul>
-            <li class="header-menu-item text-primary">Home</li>
-            <li class="header-menu-item">Tags</li>
+            <li class="header-menu-item text-primary">
+              <router-link :to="{ path: '/article', query: {page: '1'}}" exact>Home</router-link>
+            </li>
+            <li class="header-menu-item">
+              <router-link :to="{path: '/tag', query: {page: '1'}}">Tag</router-link>
+            </li>
             <li class="header-menu-item">Archives</li>
             <li class="header-menu-item">About</li>
           </ul>
