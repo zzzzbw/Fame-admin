@@ -1,9 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Frontend from '@/components/frontend/Frontend'
-import FArticleList from '@/components/frontend/page/ArticleList'
-import FArticleContent from '@/components/frontend/page/ArticleContent'
-import FTagList from '@/components/frontend/page/TagList'
+import FArticleList from '@/components/frontend/page/Articles'
+import FArticleContent from '@/components/frontend/page/Article'
+import FTagList from '@/components/frontend/page/Tags'
+import FArchiveList from '@/components/frontend/page/Archives'
 // import FNotFound from '@/components/frontend/page/NotFound'
 
 import Login from '@/components/admin/Login'
@@ -23,21 +24,21 @@ export default new Router({
       component: Frontend,
       children: [
         {
-          path: '',
+          path: 'articles',
           component: FArticleList
         },
         {
-          path: 'article',
-          component: FArticleList
-        },
-        {
-          path: 'article/:id',
+          path: 'articles/:id',
           component: FArticleContent
         },
         {
-          path: 'tag',
+          path: 'tags',
           component: FTagList
         },
+        {
+          path: 'archives',
+          component: FArchiveList
+        }
       ]
     },
     {

@@ -16,6 +16,11 @@
           HTML
         </span>
       </a>
+      <a class="tag-link" @click="goAnchor('#tag-JAVA')">
+        <span class="tag chip">
+          JAVA
+        </span>
+      </a>
     </div>
     <div class="tag-content">
       <div class="divider"></div>
@@ -172,50 +177,72 @@
           <a>测试标题26</a>
         </li>
       </ul>
+      <div class="tag-title" id="tag-JAVA">JAVA</div>
+      <ul class="tag-ul">
+        <li class="article-title">
+          <a>测试标题31</a>
+        </li>
+        <li class="article-title">
+          <a>测试标题32</a>
+        </li>
+        <li class="article-title">
+          <a>测试标题33</a>
+        </li>
+        <li class="article-title">
+          <a>测试标题34</a>
+        </li>
+        <li class="article-title">
+          <a>测试标题35</a>
+        </li>
+        <li class="article-title">
+          <a>测试标题36</a>
+        </li>
+      </ul>
     </div>
 
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-  let timer = null
-  let isTop = true
-  let osTop = null
-
   export default {
     methods: {
       goAnchor (selector) {
         let anchor = this.$el.querySelector(selector)
         let position = anchor.offsetTop
-        let scrollHeight = document.body.scrollHeight
-        let clientHeight = document.body.clientHeight
-        console.log('scrollHeight:' + scrollHeight)
-        console.log('clientHeight:' + clientHeight)
-        console.log('position:' + position)
-        // document.body.scrollTop = anchor.offsetTop
-        // document.documentElement.scrollTop = document.body.scrollTop = anchor.offsetTop
-        timer = setInterval(function () {
-          osTop = document.documentElement.scrollTop = document.body.scrollTop
-          let iSpeed = Math.floor((position - osTop) / 80) || 1// 减速滚动
-          // let iSpeed = -6.5 // 固定速度滚动
-          document.documentElement.scrollTop = document.body.scrollTop = osTop + iSpeed
-          isTop = true
-          console.log(osTop)
-          console.log('clientHeight:' + clientHeight)
-          console.log('scrollHeight:' + scrollHeight)
-          if (osTop === position || osTop + clientHeight === scrollHeight) {
-            clearInterval(timer)
-          }
-        }, 1)
-      }
-    },
-    mounted () {
-      window.onscroll = function () {
-        // 鼠标操作时取消滚动
-        if (!isTop) {
-          clearInterval(timer)
+        this.jump(position)
+      },
+      jump (total) {
+        let distance = document.documentElement.scrollTop || document.body.scrollTop
+        let step = total / 100
+        if (total > distance) {
+          smoothDown()
+        } else {
+          let newTotal = distance - total
+          step = newTotal / 100
+          smoothUp()
         }
-        isTop = false
+        function smoothDown () {
+          if (distance < total) {
+            distance += step
+            document.body.scrollTop = distance
+            document.documentElement.scrollTop = distance
+            setTimeout(smoothDown, 1)
+          } else {
+            document.body.scrollTop = total
+            document.documentElement.scrollTop = total
+          }
+        }
+        function smoothUp () {
+          if (distance > total) {
+            distance -= step
+            document.body.scrollTop = distance
+            document.documentElement.scrollTop = distance
+            setTimeout(smoothUp, 1)
+          } else {
+            document.body.scrollTop = total
+            document.documentElement.scrollTop = total
+          }
+        }
       }
     }
   }

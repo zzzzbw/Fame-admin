@@ -7,13 +7,13 @@
       </div>
       <ul class="tab tab-block link-list">
         <li class="tab-item">
-          <router-link :to="{ path: '/article', query: {page: '1'}}" exact>Home</router-link>
+          <router-link :to="{ path: '/articles', query: {page: '1'}}" exact>Home</router-link>
         </li>
         <li class="tab-item">
-          <router-link :to="{path: '/tag', query: {page: '1'}}">Tag</router-link>
+          <router-link :to="{path: '/tags'}">Tag</router-link>
         </li>
         <li class="tab-item">
-          <a href="#">Archives</a>
+          <router-link :to="{path: '/archives'}">Archive</router-link>
         </li>
         <li class="tab-item">
           <a href="#">About</a>

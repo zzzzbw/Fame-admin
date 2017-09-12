@@ -42,7 +42,7 @@
         }
       }
     },
-    created () {
+    mounted () {
       this.$api.getArticle(this.$route.params.id).then(data => {
         if (data.success) {
           this.initArticle(data.data)

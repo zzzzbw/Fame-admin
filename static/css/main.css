@@ -4,9 +4,17 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.move-enter-active,.move-leave-active{
+.move-enter-active, .move-leave-active {
   transition: opacity .3s;
 }
-.move-enter,.move-leave{
+.move-enter, .move-leave {
+  opacity: 0;
+}
+
+.flow-enter-active, .flow-leave-active {
+  transition: all .5s;
+}
+.flow-enter, .flow-leave {
+  transform: translateY(-20px);
   opacity: 0;
 }

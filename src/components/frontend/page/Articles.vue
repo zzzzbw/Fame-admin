@@ -17,7 +17,7 @@
     </div>
     <div class="article-item">
       <h3 class="article-head text-bold">
-        <router-link :to="{ path: '/article/'+2 }">测试标题</router-link>
+        <router-link :to="{ path: '/articles/'+2 }">测试标题</router-link>
       </h3>
       <p class="article-date text-italic">2017-09-01</p>
       <div class="article-tags">
@@ -60,10 +60,10 @@
         return 1
       },
       toContent (id) {
-        this.$router.push('/article/' + id)
+        this.$router.push('/articles/' + id)
       }
     },
-    created () {
+    mounted () {
       this.$api.getArticles(this.$route.query.page || 1).then(data => {
         if (data.success) {
           this.initArticles(data.data)

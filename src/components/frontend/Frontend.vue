@@ -2,7 +2,7 @@
   <div>
     <f-header></f-header>
     <div class="container">
-      <transition name="move" mode="out-in">
+      <transition name="flow" mode="out-in">
         <router-view></router-view>
       </transition>
     </div>
@@ -21,6 +21,9 @@
       FHeader,
       FFooter,
       FScrollTop
+    },
+    mounted () {
+      this.$router.push('/articles?page=1')
     }
   }
 
