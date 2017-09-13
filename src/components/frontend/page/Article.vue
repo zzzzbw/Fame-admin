@@ -2,10 +2,7 @@
   <div>
     <h2 class="article-title text-bold">{{article.title}}</h2>
     <p class="article-date">{{article.date}}</p>
-    <div class="markdown-body">
-      <h2>来个测试的标题</h2>
-      <h3>测试的二级标题</h3>
-      {{article.content}}
+    <div class="markdown-body" v-html="article.content" v-highlight>
     </div>
     <div class="article-tags">
       <label class="label-tags">Tags:</label>
@@ -47,10 +44,7 @@
         if (data.success) {
           this.initArticle(data.data)
         } else {
-          this.$message({
-            message: '获取文章失败,' + data.msg,
-            type: 'error'
-          })
+          console.log('获取文章失败')
         }
       }).catch(err => {
         console.log(err)

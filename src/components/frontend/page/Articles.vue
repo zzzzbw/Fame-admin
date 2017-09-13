@@ -2,7 +2,7 @@
   <div>
     <div v-for="article in articles" class="article-item">
       <h3 class="article-head text-bold">
-
+        <router-link :to="{ path: '/articles/'+article.id }">{{article.title}}</router-link>
       </h3>
       <p class="article-date text-italic">{{article.date}}</p>
       <div class="article-tags">
@@ -10,28 +10,9 @@
           {{tag}}
         </label>
       </div>
-      <div class="article-summary">
-        {{article.content}}
+      <div class="article-summary markdown-body" v-html="article.content" v-highlight>
       </div>
-      <a class="article-more" @click="toContent(2)">Read more</a>
-    </div>
-    <div class="article-item">
-      <h3 class="article-head text-bold">
-        <router-link :to="{ path: '/articles/'+2 }">测试标题</router-link>
-      </h3>
-      <p class="article-date text-italic">2017-09-01</p>
-      <div class="article-tags">
-        <label class="chip text-primary">
-          css
-        </label>
-        <label class="chip text-primary">
-          Javascript
-        </label>
-      </div>
-      <div class="article-summary">
-        测试标题的第一个测试
-      </div>
-      <a class="article-more" @click="toContent(2)">Read more</a>
+      <router-link class="article-more" :to="{ path: '/articles/'+article.id }">Read more</router-link>
     </div>
   </div>
 </template>
@@ -68,10 +49,7 @@
         if (data.success) {
           this.initArticles(data.data)
         } else {
-          this.$message({
-            message: '获取文章列表失败,' + data.msg,
-            type: 'error'
-          })
+          alert('获取文章列表失败')
         }
       })
     }
@@ -79,6 +57,7 @@
 </script>
 
 <style scoped>
+  @import "/static/css/markdown-css.css";
 
   .article-item {
     margin-top: 40px;

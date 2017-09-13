@@ -17,7 +17,6 @@
     margin: 0 auto;
     max-width: 850px;
     border-top: 1px solid #e5e5e5;
-    background-color: #fff;
     text-align: center;
     font-size: 0.9em;
   }

@@ -24,6 +24,7 @@
     width: 100%;
     height: 50px;
     display: inline-block;
+    background-color: #fff;
     line-height: 50px;
     text-align: center;
     box-shadow: 0 2px 3px hsla(0, 0%, 7%, .1), 0 0 0 1px hsla(0, 0%, 7%, .1);
