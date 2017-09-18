@@ -112,8 +112,17 @@
       handleInputConfirmTag () {
         let inputValueTag = this.inputValueTag
         if (inputValueTag) {
-          let tag = {name: inputValueTag, type: this.$util.randomColorType()}
-          this.tags.push(tag)
+          this.$api.saveTag(inputValueTag).then(data => {
+            if (data.success) {
+              let tag = {name: inputValueTag, type: this.$util.randomColorType()}
+              this.tags.push(tag)
+            } else {
+              this.$message({
+                message: '新增标签失败,' + data.msg,
+                type: 'error'
+              })
+            }
+          })
         }
         this.inputVisibleTag = false
         this.inputValueTag = ''

@@ -41,6 +41,20 @@ export default {
     }
     return get('/admin/meta', params)
   },
+  saveCategory (name) {
+    let params = {
+      name: name,
+      type: util.STATIC.META_CATEGORY
+    }
+    return post('/admin/meta', params)
+  },
+  saveTag (name) {
+    let params = {
+      name: name,
+      type: util.STATIC.META_TAG
+    }
+    return post('/admin/meta', params)
+  },
   deleteCategory (name) {
     let params = {
       name: name,

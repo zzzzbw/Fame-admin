@@ -63,16 +63,7 @@
           content: '',
           status: ''
         },
-        tags: [{
-          value: 'HTML',
-          label: 'HTML'
-        }, {
-          value: 'CSS',
-          label: 'CSS'
-        }, {
-          value: 'JavaScript',
-          label: 'JavaScript'
-        }],
+        tags: [],
         tagsValue: []
       }
     },
@@ -109,6 +100,23 @@
         this.article.category = data.category
         this.article.content = data.content
       },
+      getTags () {
+        this.$api.getAllTagsAuth().then(data => {
+          if (data.success) {
+            for (let key in data.data) {
+              let tag = {
+                value: data.data[key].name, label: data.data[key].name
+              }
+              this.tags.push(tag)
+            }
+          } else {
+            this.$message({
+              message: '获取标签列表失败',
+              type: 'error'
+            })
+          }
+        })
+      },
       onPublish () {
         this.article.status = this.$util.STATIC.ARTICLE_STATUS_PUBLISH
         let params = this.article
@@ -134,6 +142,7 @@
     },
     created () {
       this.getArticle()
+      this.getTags()
     },
     watch: {
       // 监听route刷新绑定的article数据
@@ -147,6 +156,7 @@
 <style>
   .button-list {
     float: right;
+    margin-bottom: 30px;
   }
 
   .button-list .el-button {
