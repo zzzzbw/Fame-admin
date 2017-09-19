@@ -4,7 +4,8 @@
       <h3 class="article-head text-bold">
         <router-link :to="{ path: '/articles/'+article.id }">{{article.title}}</router-link>
       </h3>
-      <p class="article-date text-italic">{{article.date}}</p>
+      <p class="article-date"><i class="fa fa-folder" aria-hidden="true"></i> {{article.category}}</p>
+      <p class="article-date text-italic"><i class="fa fa-calendar" aria-hidden="true"></i> {{article.date}}</p>
       <div class="article-tags">
         <label v-for="tag in article.tags" class="chip text-primary">
           {{tag}}
@@ -72,8 +73,9 @@
   }
 
   .article-item .article-date {
+    display: inline-block;
     color: #7f8c8d;
-    margin: 10px 0;
+    margin: 10px 5px;
     font-size: 0.9em;
   }
 

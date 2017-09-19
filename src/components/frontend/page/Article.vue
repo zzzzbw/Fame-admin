@@ -1,7 +1,11 @@
 <template>
   <div>
     <h2 class="article-title text-bold">{{article.title}}</h2>
-    <p class="article-date">{{article.date}}</p>
+    <div class="article-info">
+      <p class="article-category"><i class="fa fa-folder" aria-hidden="true"></i> {{article.category}}</p>
+      <p class="article-date"><i class="fa fa-calendar" aria-hidden="true"></i> {{article.date}}</p>
+    </div>
+
     <div class="markdown-body" v-html="article.content" v-highlight>
     </div>
     <div class="article-tags">
@@ -71,8 +75,18 @@
     text-align: center;
   }
 
-  .article-date {
+  .article-info {
     text-align: center;
+  }
+
+  .article-date{
+    display: inline-block;
+    margin-left: 8px;
+  }
+
+  .article-category{
+    display: inline-block;
+    margin-right: 8px;
   }
 
   .article-tags {

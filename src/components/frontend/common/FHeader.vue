@@ -7,16 +7,19 @@
       </div>
       <ul class="tab tab-block link-list">
         <li class="tab-item">
-          <router-link :to="{ path: '/articles', query: {page: '1'}}" exact>Home</router-link>
+          <router-link :to="{ path: '/articles', query: {page: '1'}}" exact>首页</router-link>
         </li>
         <li class="tab-item">
-          <router-link :to="{path: '/tags'}">Tag</router-link>
+          <router-link :to="{path: '/category'}">分类</router-link>
         </li>
         <li class="tab-item">
-          <router-link :to="{path: '/archives'}">Archive</router-link>
+          <router-link :to="{path: '/tags'}">标签</router-link>
         </li>
         <li class="tab-item">
-          <a href="#">About</a>
+          <router-link :to="{path: '/archives'}">归档</router-link>
+        </li>
+        <li class="tab-item">
+          <a href="#">关于</a>
         </li>
       </ul>
       <div class="header-menu">
@@ -26,13 +29,16 @@
         <div class="header-menu-list" :class="{ 'open': menuOpen }">
           <ul>
             <li class="header-menu-item text-primary">
-              <router-link :to="{ path: '/article', query: {page: '1'}}" exact>Home</router-link>
+              <router-link :to="{ path: '/articles', query: {page: '1'}}" exact>首页</router-link>
             </li>
             <li class="header-menu-item">
-              <router-link :to="{path: '/tag', query: {page: '1'}}">Tag</router-link>
+              <router-link :to="{path: '/category'}">分类</router-link>
             </li>
-            <li class="header-menu-item">Archives</li>
-            <li class="header-menu-item">About</li>
+            <li class="header-menu-item">
+              <router-link :to="{path: '/tags'}">标签</router-link>
+            </li>
+            <li class="header-menu-item">归档</li>
+            <li class="header-menu-item">关于</li>
           </ul>
         </div>
       </div>

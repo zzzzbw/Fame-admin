@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Frontend from '@/components/frontend/Frontend'
 import FArticleList from '@/components/frontend/page/Articles'
 import FArticleContent from '@/components/frontend/page/Article'
+import FCategoryList from '@/components/frontend/page/Category'
 import FTagList from '@/components/frontend/page/Tags'
 import FArchiveList from '@/components/frontend/page/Archives'
 // import FNotFound from '@/components/frontend/page/NotFound'
@@ -30,6 +31,10 @@ export default new Router({
         {
           path: 'articles/:id',
           component: FArticleContent
+        },
+        {
+          path: 'category',
+          component: FCategoryList
         },
         {
           path: 'tags',
