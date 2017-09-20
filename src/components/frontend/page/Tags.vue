@@ -1,249 +1,67 @@
 <template>
   <div>
     <div class="tag-list">
-      <a class="tag-link" @click="goAnchor('#tag-JavaScript')">
+      <a v-for="tag in tags" class="tag-link" @click="changeArticles(tag.key)">
         <span class="tag chip">
-            JavaScript
-        </span>
-      </a>
-      <a class="tag-link" @click="goAnchor('#tag-CSS')">
-        <span class="tag chip">
-          CSS
-        </span>
-      </a>
-      <a class="tag-link" @click="goAnchor('#tag-HTML')">
-        <span class="tag chip">
-          HTML
-        </span>
-      </a>
-      <a class="tag-link" @click="goAnchor('#tag-JAVA')">
-        <span class="tag chip">
-          JAVA
+            {{tag.name}}
         </span>
       </a>
     </div>
-    <div class="tag-content">
-      <div class="divider"></div>
-      <div class="tag-title" id="tag-JavaScript">JavaScript</div>
-      <ul class="tag-ul">
-        <li class="article-title">
-          <a>测试标题1</a>
-        </li>
-        <li class="article-title">
-          <a>测试标题2</a>
-        </li>
-        <li class="article-title">
-          <a>测试标题3</a>
-        </li>
-        <li class="article-title">
-          <a>测试标题5</a>
-        </li>
-        <li class="article-title">
-          <a>测试标题6</a>
-        </li>
-        <li class="article-title">
-          <a>测试标题7</a>
-        </li>
-        <li class="article-title">
-          <a>测试标题1</a>
-        </li>
-        <li class="article-title">
-          <a>测试标题2</a>
-        </li>
-        <li class="article-title">
-          <a>测试标题3</a>
-        </li>
-        <li class="article-title">
-          <a>测试标题5</a>
-        </li>
-        <li class="article-title">
-          <a>测试标题6</a>
-        </li>
-        <li class="article-title">
-          <a>测试标题7</a>
-        </li>
-        <li class="article-title">
-          <a>测试标题1</a>
-        </li>
-        <li class="article-title">
-          <a>测试标题2</a>
-        </li>
-        <li class="article-title">
-          <a>测试标题3</a>
-        </li>
-        <li class="article-title">
-          <a>测试标题5</a>
-        </li>
-        <li class="article-title">
-          <a>测试标题6</a>
-        </li>
-        <li class="article-title">
-          <a>测试标题7</a>
-        </li>
-        <li class="article-title">
-          <a>测试标题1</a>
-        </li>
-        <li class="article-title">
-          <a>测试标题2</a>
-        </li>
-        <li class="article-title">
-          <a>测试标题3</a>
-        </li>
-        <li class="article-title">
-          <a>测试标题5</a>
-        </li>
-        <li class="article-title">
-          <a>测试标题6</a>
-        </li>
-        <li class="article-title">
-          <a>测试标题7</a>
-        </li>
-        <li class="article-title">
-          <a>测试标题1</a>
-        </li>
-        <li class="article-title">
-          <a>测试标题2</a>
-        </li>
-        <li class="article-title">
-          <a>测试标题3</a>
-        </li>
-        <li class="article-title">
-          <a>测试标题5</a>
-        </li>
-        <li class="article-title">
-          <a>测试标题6</a>
-        </li>
-        <li class="article-title">
-          <a>测试标题7</a>
-        </li>
-        <li class="article-title">
-          <a>测试标题1</a>
-        </li>
-        <li class="article-title">
-          <a>测试标题2</a>
-        </li>
-        <li class="article-title">
-          <a>测试标题3</a>
-        </li>
-        <li class="article-title">
-          <a>测试标题5</a>
-        </li>
-        <li class="article-title">
-          <a>测试标题6</a>
-        </li>
-        <li class="article-title">
-          <a>测试标题7</a>
-        </li>
-      </ul>
-      <div class="tag-title" id="tag-CSS">CSS</div>
-      <ul class="tag-ul">
-        <li class="article-title">
-          <a>测试标题11</a>
-        </li>
-        <li class="article-title">
-          <a>测试标题12</a>
-        </li>
-        <li class="article-title">
-          <a>测试标题13</a>
-        </li>
-        <li class="article-title">
-          <a>测试标题14</a>
-        </li>
-        <li class="article-title">
-          <a>测试标题15</a>
-        </li>
-        <li class="article-title">
-          <a>测试标题16</a>
-        </li>
-      </ul>
-      <div class="tag-title" id="tag-HTML">HTML</div>
-      <ul class="tag-ul">
-        <li class="article-title">
-          <a>测试标题21</a>
-        </li>
-        <li class="article-title">
-          <a>测试标题22</a>
-        </li>
-        <li class="article-title">
-          <a>测试标题23</a>
-        </li>
-        <li class="article-title">
-          <a>测试标题24</a>
-        </li>
-        <li class="article-title">
-          <a>测试标题25</a>
-        </li>
-        <li class="article-title">
-          <a>测试标题26</a>
-        </li>
-      </ul>
-      <div class="tag-title" id="tag-JAVA">JAVA</div>
-      <ul class="tag-ul">
-        <li class="article-title">
-          <a>测试标题31</a>
-        </li>
-        <li class="article-title">
-          <a>测试标题32</a>
-        </li>
-        <li class="article-title">
-          <a>测试标题33</a>
-        </li>
-        <li class="article-title">
-          <a>测试标题34</a>
-        </li>
-        <li class="article-title">
-          <a>测试标题35</a>
-        </li>
-        <li class="article-title">
-          <a>测试标题36</a>
-        </li>
-      </ul>
-    </div>
-
+    <transition name="flow" mode="out-in">
+      <div class="tag-content" v-if="show">
+        <div class="divider"></div>
+        <div class="tag-title">{{tagTitle}}</div>
+        <ul class="tag-ul">
+          <li v-for="article in articles" class="article-title">
+            <router-link :to="{ path: '/articles/'+article.id }">{{article.title}}</router-link>
+          </li>
+        </ul>
+      </div>
+    </transition>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
   export default {
+    data: function () {
+      return {
+        data: [],
+        tags: [],
+        articles: [],
+        tagTitle: '',
+        show: false,
+      }
+    },
     methods: {
-      goAnchor (selector) {
-        let anchor = this.$el.querySelector(selector)
-        let position = anchor.offsetTop
-        this.jump(position)
+      initTags (data) {
+        for (let key in data) {
+          let d = data[key]
+          let tag = {
+            key: key,
+            name: d.name
+          }
+          this.tags.push(tag)
+        }
       },
-      jump (total) {
-        let distance = document.documentElement.scrollTop || document.body.scrollTop
-        let step = total / 100
-        if (total > distance) {
-          smoothDown()
-        } else {
-          let newTotal = distance - total
-          step = newTotal / 100
-          smoothUp()
-        }
-        function smoothDown () {
-          if (distance < total) {
-            distance += step
-            document.body.scrollTop = distance
-            document.documentElement.scrollTop = distance
-            setTimeout(smoothDown, 1)
-          } else {
-            document.body.scrollTop = total
-            document.documentElement.scrollTop = total
-          }
-        }
-        function smoothUp () {
-          if (distance > total) {
-            distance -= step
-            document.body.scrollTop = distance
-            document.documentElement.scrollTop = distance
-            setTimeout(smoothUp, 1)
-          } else {
-            document.body.scrollTop = total
-            document.documentElement.scrollTop = total
-          }
+      changeArticles (key) {
+        let tag = this.data[key]
+        if (tag !== null) {
+          this.show = false
+          this.tagTitle = tag.name
+          this.articles = tag.articles
+          this.show = true
         }
       }
+    },
+    mounted () {
+      this.$api.getTagsWithArticle().then(data => {
+        if (data.success) {
+          this.data = data.data
+          this.initTags(data.data)
+        } else {
+          alert('获取标签列表失败')
+        }
+      })
     }
   }
 </script>

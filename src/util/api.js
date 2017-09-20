@@ -29,11 +29,17 @@ export default {
   deleteArticleAuth (id) {
     return del('/admin/article/' + id)
   },
+  getCategoriesWithArticle () {
+    return get('/category')
+  },
   getAllCategoriesAuth () {
     let params = {
       type: util.STATIC.META_CATEGORY
     }
     return get('/admin/meta', params)
+  },
+  getTagsWithArticle () {
+    return get('/tag')
   },
   getAllTagsAuth () {
     let params = {
