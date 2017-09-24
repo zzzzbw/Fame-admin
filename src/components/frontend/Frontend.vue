@@ -1,7 +1,7 @@
 <template>
   <div>
     <f-header></f-header>
-    <div class="container">
+    <div class="container" id="main">
       <transition name="flow" mode="out-in">
         <router-view></router-view>
       </transition>
@@ -35,6 +35,7 @@
   }
 </style>
 <style scoped>
+  @import '~element-ui/lib/theme-default/loading.css';
   @import '~spectre.css';
   @import "/static/css/normalize.css";
   @import "/static/css/main.css";
@@ -46,7 +47,7 @@
 
   .container {
     padding: 1em;
-    margin: 55px auto;
+    margin: 65px auto;
     height: 100%;
     max-width: 750px;
     font-size: 16px;

@@ -3,9 +3,7 @@
     <div class="collapse">
       <a @click="collapse"><i aria-hidden="true" class="fa fa-bars"></i></a>
     </div>
-    <div class="title">
-      <h3>Fame</h3>
-    </div>
+    <h3 class="title">Fame</h3>
   </div>
 </template>
 
@@ -36,7 +34,7 @@
     width: 64px;
   }
 
-  .title h3 {
+  .title {
     margin: 0 64px 0 0;
   }
 

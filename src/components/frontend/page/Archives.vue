@@ -1,38 +1,19 @@
 <template>
   <div class="timeline">
-    <div class="timeline-item">
+    <div v-for="archive in archives" class="timeline-item">
       <div class="timeline-left">
         <div class="timeline-left icon-lg">
-          <a class="timeline-icon tooltip" data-tooltip="2017"></a>
+          <a class="timeline-icon"></a>
         </div>
       </div>
       <div class="timeline-content">
         <div class="tile">
           <div class="tile-content">
-            <p class="tile-subtitle">2017</p>
-            <p class="tile-title"><label class="text-italic">09-10</label><a>测试文章1</a></p>
-            <p class="tile-title"><label class="text-italic">10-05</label><a>测试文章2</a></p>
-            <p class="tile-title"><label class="text-italic">11-21</label><a>测试文章3</a></p>
-            <p class="tile-title"><label class="text-italic">12-03</label><a>测试文章4</a></p>
-            <p class="tile-title"><label class="text-italic">01-05</label><a>测试文章5</a></p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-left">
-        <div class="timeline-left icon-lg">
-          <a class="timeline-icon tooltip" data-tooltip="2016"></a>
-        </div>
-      </div>
-      <div class="timeline-content">
-        <div class="tile">
-          <div class="tile-content">
-            <p class="tile-subtitle">2016</p>
-            <p class="tile-title"><label class="text-italic">09-10</label><a>测试文章222</a></p>
-            <p class="tile-title"><label class="text-italic">10-05</label><a>测试文章123</a></p>
-            <p class="tile-title"><label class="text-italic">11-21</label><a>测试文章123</a></p>
-            <p class="tile-title"><label class="text-italic">12-03</label><a>测试文章234</a></p>
+            <p class="tile-subtitle">{{archive.year}}</p>
+            <p v-for="article in archive.articles" class="tile-title">
+              <label class="text-italic">{{article.created, 'MM-DD' | time}}</label>
+              <router-link :to="{ path: '/articles/'+article.id }">{{article.title}}</router-link>
+            </p>
           </div>
         </div>
       </div>
@@ -41,6 +22,34 @@
 </template>
 
 <script>
+  export default {
+    data: function () {
+      return {
+        archives: []
+      }
+    },
+    methods: {
+      initArchives (archives) {
+        for (let key in archives) {
+          let data = archives[key]
+          let archive = {
+            year: data.dateStr,
+            articles: data.articles
+          }
+          this.archives.push(archive)
+        }
+      }
+    },
+    mounted () {
+      this.$api.getArchives(this.$route.query.page || 1).then(data => {
+        if (data.success) {
+          this.initArchives(data.data)
+        } else {
+          alert('获取归档列表失败')
+        }
+      })
+    }
+  }
 </script>
 
 <style scoped>

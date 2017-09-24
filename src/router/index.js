@@ -6,7 +6,7 @@ import FArticleContent from '@/components/frontend/page/Article'
 import FCategoryList from '@/components/frontend/page/Category'
 import FTagList from '@/components/frontend/page/Tags'
 import FArchiveList from '@/components/frontend/page/Archives'
-// import FNotFound from '@/components/frontend/page/NotFound'
+import Error from '@/components/Error'
 
 import Login from '@/components/admin/Login'
 import Admin from '@/components/admin/Admin'
@@ -16,8 +16,8 @@ import ATagList from '@/components/admin/page/TagList'
 
 Vue.use(Router)
 
-export default new Router({
-  mode: 'history',
+const router = new Router({
+  mode: 'hash',
   linkActiveClass: 'active',
   routes: [
     {
@@ -72,7 +72,16 @@ export default new Router({
           component: ATagList
         }
       ]
-
+    },
+    {
+      path: 'error/:state',
+      component: Error
+    },
+    {
+      path: '*',
+      component: Error
     }
   ]
 })
+
+export default router

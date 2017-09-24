@@ -32,7 +32,7 @@
           let article = {
             id: data.id,
             title: data.title,
-            date: this.$moment(data.date).format('YYYY-MM-DD'),
+            date: this.$moment(data.created).format('YYYY-MM-DD'),
             category: data.category || this.$util.STATIC.DEFAULT_CATEGORY,
             tags: this.$util.stringToTags(data.tags),
             content: data.content
@@ -40,9 +40,6 @@
           this.articles.push(article)
         }
         return 1
-      },
-      toContent (id) {
-        this.$router.push('/articles/' + id)
       }
     },
     mounted () {

@@ -1,8 +1,10 @@
 import axios from 'axios'
 import qs from 'qs'
+import { Message, Loading } from 'element-ui'
+import router from '../router/index'
 
 const Axios = axios.create({
-  baseURL: 'http://localhost:9090/', // 因为我本地做了反向代理
+  baseURL: 'http://localhost:9090/', // 本地做反向代理
   timeout: 5000,
   responseType: 'json',
   withCredentials: true, // 是否允许带cookie这些
@@ -11,8 +13,13 @@ const Axios = axios.create({
   }
 })
 
+let loadingInstace = null
 // 请求拦截（配置发送请求的信息） 传参序列化
 Axios.interceptors.request.use((config) => {
+  if (loadingInstace !== null) {
+    loadingInstace = Loading.service({target: '#main', fullscreen: false})
+  }
+
   if (
     config.method === 'post' ||
     config.method === 'put' ||
@@ -23,15 +30,49 @@ Axios.interceptors.request.use((config) => {
   }
   return config
 }, (error) => {
+  Message({
+    showClose: true,
+    message: error,
+    type: 'error.data.error.message'
+  })
   return Promise.reject(error)
 })
 
 // 响应拦截（配置请求回来的信息）
 Axios.interceptors.response.use(function (response) {
   // 处理响应数据
+  if (loadingInstace !== null) { loadingInstace.close() }
+  let msg = ''
+  if (response.data && !response.data.success) {
+    switch (response.data.code) {
+      case 999:
+        router.push('/admin/login')
+        msg = '未登录,请先登录'
+        break
+    }
+    Message({
+      showClose: true,
+      message: msg || response.data.msg,
+      type: 'error'
+    })
+  }
   return response
 }, function (error) {
   // 处理响应失败
+  if (loadingInstace !== null) { loadingInstace.close() }
+  let msg = ''
+  switch (error.response.status) {
+    case 404:
+      router.push('/error/404')
+      msg = '该页面不存在'
+      break
+  }
+  Message({
+    showClose: true,
+    message: msg || error.data.error ? error.data.error.message : error.data,
+    type: 'error'
+  })
+
   return Promise.reject(error)
 })
 

@@ -7,7 +7,7 @@
       </div>
       <ul class="tab tab-block link-list">
         <li class="tab-item">
-          <router-link :to="{ path: '/articles', query: {page: '1'}}" exact>首页</router-link>
+          <router-link :to="{ path: '/articles', query: {page: '1'}}">首页</router-link>
         </li>
         <li class="tab-item">
           <router-link :to="{path: '/category'}">分类</router-link>
@@ -16,7 +16,7 @@
           <router-link :to="{path: '/tags'}">标签</router-link>
         </li>
         <li class="tab-item">
-          <router-link :to="{path: '/archives'}">归档</router-link>
+          <router-link :to="{path: '/archives', query: {page: '1'}}">归档</router-link>
         </li>
         <li class="tab-item">
           <a href="#">关于</a>

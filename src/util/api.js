@@ -74,5 +74,11 @@ export default {
       type: util.STATIC.META_TAG
     }
     return del('/admin/meta', params)
+  },
+  getArchives (page) {
+    let params = {
+      page: page
+    }
+    return get('/archive', params)
   }
 }
