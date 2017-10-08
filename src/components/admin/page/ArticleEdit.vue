@@ -123,7 +123,7 @@
         params.tags = this.$util.tagsToString(this.article.tags)
         this.$api.saveArticleAuth(params).then(data => {
           if (data.success) {
-            this.$router.push('/admin/article/index/1')
+            this.$router.push('/admin/article')
             this.$message({
               message: '发布文章成功!',
               type: 'success'

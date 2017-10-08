@@ -10,7 +10,7 @@
     </div>
     <div class="article-tags">
       <label class="label-tags">Tags:</label>
-      <span v-for="tag in article.tags" class="chip text-primary">
+      <span v-for="tag in article.tags" class="chip">
         {{tag}}
       </span>
     </div>
@@ -72,6 +72,7 @@
   .article-title {
     color: #24292e;;
     margin-top: 30px;
+    font-size: 2.0rem;
     text-align: center;
   }
 
@@ -79,12 +80,14 @@
     text-align: center;
   }
 
-  .article-date{
+  .article-date {
+    color: #50596c;
     display: inline-block;
     margin-left: 8px;
   }
 
-  .article-category{
+  .article-category {
+    color: #50596c;
     display: inline-block;
     margin-right: 8px;
   }

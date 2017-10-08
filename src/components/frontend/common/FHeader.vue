@@ -5,7 +5,7 @@
         <img src="../assets/logo.svg" width="26px" height="26px">
         <span class="text-primary" style="margin-left: 10px">Fame</span>
       </div>
-      <ul class="tab tab-block link-list">
+      <ul class="tab link-list">
         <li class="tab-item">
           <router-link :to="{ path: '/articles', query: {page: '1'}}">首页</router-link>
         </li>
@@ -68,6 +68,11 @@
 </script>
 
 <style scoped>
+  a{
+    color: #5764c6;
+    text-decoration: none;
+  }
+
   .header {
     position: fixed;
     background-color: rgba(255, 255, 255, 0.98);
@@ -82,9 +87,10 @@
 
   .header-container {
     max-width: 1200px;
-    height: 60px;
+    height: 40px;
     margin: 0 auto;
     padding: 10px 30px;
+    font-size: .9rem;
     position: relative;
   }
 
@@ -92,14 +98,36 @@
     display: flex;
     align-items: center;
     float: left;
+    margin: 5px 0;
     font-weight: 600;
-    font-size: 2em;
-    line-height: 40px;
+    font-size: 1.5em;
   }
 
-  .header-container .link-list {
+  .header-container .tab {
+    list-style: none;
     float: right;
+    padding: 0;
+    margin: 5px 0;
     border-bottom: none;
+  }
+
+  .header-container .tab .tab-item {
+    display: inline-block;
+    margin: 0 8px;
+  }
+
+  .header-container .tab .tab-item a {
+    border-bottom: .1rem solid transparent;
+    display: block;
+    margin: 0;
+    padding: .4rem .2rem .3rem .2rem;
+    color: #50596c;
+    text-decoration: none;
+  }
+
+  .header-container .tab .tab-item a.active {
+    border-bottom-color: #5764c6;
+    color: #5764c6;
   }
 
   @media screen and (max-width: 600px) {

@@ -1,28 +1,21 @@
 <template>
   <div class="error">
     <h1>{{state}}</h1>
-    <h3>Page Not Found</h3>
+    <h3>{{message}}</h3>
   </div>
 </template>
 
 <script>
-  export default{
+  export default {
     data: function () {
       return {
         state: '',
-        errorArray: {
-          404: 'Page Not Found'
-        }
+        message: ''
       }
     },
     mounted () {
-      let state = this.$route.params.state
-      console.log('state:' + state)
-      if (state) {
-        this.state = state
-      } else {
-        this.state = 404
-      }
+      this.state = this.$route.params.state || 404
+      this.message = this.$route.params.message || 'Page Not found'
     }
   }
 </script>

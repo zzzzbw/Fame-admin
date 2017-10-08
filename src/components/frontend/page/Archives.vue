@@ -88,6 +88,7 @@
 
   .tile .tile-content .tile-title a {
     color: #34495e;
+    text-decoration: none;
   }
 
   .tile .tile-content .tile-title a:hover {

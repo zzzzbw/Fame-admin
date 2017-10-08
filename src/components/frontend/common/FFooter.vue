@@ -20,4 +20,9 @@
     text-align: center;
     font-size: 0.9em;
   }
+
+  a{
+    color: #5764c6;
+    text-decoration: none;
+  }
 </style>

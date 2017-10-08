@@ -5,7 +5,7 @@
         <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
         <span slot="title">发布文章</span>
       </el-menu-item>
-      <el-menu-item index="/admin/article/index/1">
+      <el-menu-item index="/admin/article?page=1">
         <i class="fa fa-list" aria-hidden="true"></i>
         <span slot="title">文章列表</span>
       </el-menu-item>
@@ -43,7 +43,7 @@
 <style scoped>
   .left-menu {
     position: fixed;
-    top: 50px;
+    top: 60px;
     bottom: 0;
     left: 0;
     width: 150px;

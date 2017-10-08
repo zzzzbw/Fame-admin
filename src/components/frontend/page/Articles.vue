@@ -7,13 +7,13 @@
       <p class="article-date"><i class="fa fa-folder" aria-hidden="true"></i> {{article.category}}</p>
       <p class="article-date text-italic"><i class="fa fa-calendar" aria-hidden="true"></i> {{article.date}}</p>
       <div class="article-tags">
-        <label v-for="tag in article.tags" class="chip text-primary">
+        <label v-for="tag in article.tags" class="chip">
           {{tag}}
         </label>
       </div>
       <div class="article-summary markdown-body" v-html="article.content" v-highlight>
       </div>
-      <router-link class="article-more" :to="{ path: '/articles/'+article.id }">Read more</router-link>
+      <router-link class="article-more text-primary" :to="{ path: '/articles/'+article.id }">Read more</router-link>
     </div>
   </div>
 </template>
@@ -61,12 +61,21 @@
     margin-top: 40px;
   }
 
-  .article-item .article-head {
-    margin-bottom: 0;
+  .article-head {
+    line-height: 1.2;
+    font-size: 1.8rem;
+    margin: 0;
   }
 
   .article-head > a {
     color: #34495e;
+    outline: none;
+    text-decoration: none;
+  }
+
+  .article-head > a:hover {
+    outline-width: 0;
+    text-decoration: underline;
   }
 
   .article-item .article-date {

@@ -60,16 +60,19 @@ Axios.interceptors.response.use(function (response) {
 }, function (error) {
   // 处理响应失败
   if (loadingInstace !== null) { loadingInstace.close() }
-  let msg = ''
+  let msg = error.response.data.msg
   switch (error.response.status) {
     case 404:
-      router.push('/error/404')
       msg = '该页面不存在'
+      router.push('/error/404/' + msg)
+      break
+    default:
+      router.push('/error/' + error.response.status + '/' + msg)
       break
   }
   Message({
     showClose: true,
-    message: msg || error.data.error ? error.data.error.message : error.data,
+    message: msg || '网络错误',
     type: 'error'
   })
 

@@ -21,9 +21,6 @@
       FHeader,
       FFooter,
       FScrollTop
-    },
-    mounted () {
-      this.$router.push('/articles?page=1')
     }
   }
 
@@ -36,7 +33,6 @@
 </style>
 <style scoped>
   @import '~element-ui/lib/theme-default/loading.css';
-  @import '~spectre.css';
   @import "/static/css/normalize.css";
   @import "/static/css/main.css";
 

@@ -4,6 +4,14 @@
       <a @click="collapse"><i aria-hidden="true" class="fa fa-bars"></i></a>
     </div>
     <h3 class="title">Fame</h3>
+    <ul class="header-right">
+      <li>
+        <a @click="logout">
+          <i class="fa fa-sign-out" aria-hidden="true"></i>
+          Log out
+        </a>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -12,6 +20,23 @@
     methods: {
       collapse: function () {
         this.$root.$emit('collapse')
+      },
+      logout () {
+        this.$api.logout().then(data => {
+          if (data.success) {
+            this.$message({
+              type: 'success',
+              message: '登出成功!'
+            })
+            this.$router.push('/admin/login')
+          } else {
+            this.$message({
+              type: 'error',
+              message: data.msg || '登出失败!'
+            })
+            this.$router.push('/admin/login')
+          }
+        })
       }
     }
   }
@@ -20,10 +45,10 @@
 <style scoped>
   .header {
     width: 100%;
-    height: 50px;
+    height: 60px;
     display: inline-block;
     background-color: #fff;
-    line-height: 50px;
+    line-height: 60px;
     text-align: center;
     box-shadow: 0 2px 3px hsla(0, 0%, 7%, .1), 0 0 0 1px hsla(0, 0%, 7%, .1);
   }
@@ -35,7 +60,21 @@
   }
 
   .title {
-    margin: 0 64px 0 0;
+    margin: 0;
+    display: inline-block;
+  }
+
+  .header-right {
+    list-style: none;
+    float: right;
+    margin: 0 15px 0 0;
+    color: #7f8c8d;
+  }
+
+  .header-right a {
+    color: #7f8c8d;
+    cursor: pointer;
+    text-decoration: none;
   }
 
   @media screen and (max-width: 600px) {

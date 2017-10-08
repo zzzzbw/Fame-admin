@@ -5,6 +5,9 @@ export default {
   login (user) {
     return post('/admin/login', user)
   },
+  logout () {
+    return post('/admin/logout')
+  },
   getArticles (page) {
     let params = {
       page: page

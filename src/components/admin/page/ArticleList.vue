@@ -1,10 +1,11 @@
 <template>
   <el-table :data="tableData">
     <el-table-column prop="id" label="id" width="60"></el-table-column>
-    <el-table-column prop="title" label="标题"></el-table-column>
-    <el-table-column prop="publish" label="发布日期" :formatter="dateFormat"></el-table-column>
-    <el-table-column prop="category" label="分类"></el-table-column>
-    <el-table-column prop="status" label="状态"></el-table-column>
+    <el-table-column prop="title" label="标题" min-width="150" show-overflow-tooltip></el-table-column>
+    <el-table-column prop="publish" label="发布日期" :formatter="dateFormat" min-width="150"
+                     show-overflow-tooltip></el-table-column>
+    <el-table-column prop="category" label="分类" width="180" show-overflow-tooltip></el-table-column>
+    <el-table-column prop="status" label="状态" width="100" show-overflow-tooltip></el-table-column>
     <el-table-column label="操作" width="140">
       <template scope="scope">
         <el-button
@@ -82,7 +83,7 @@
         })
       },
       getArticles () {
-        this.$api.getArticlesAuth(this.$route.params.page).then(data => {
+        this.$api.getArticlesAuth(this.$route.query.page || 1).then(data => {
           if (data.success) {
             this.initTableData(data.data)
           } else {
@@ -100,6 +101,30 @@
   }
 </script>
 
-<style scoped>
+<style>
+  .el-table ::-webkit-scrollbar {
+    display: block;
+    height: 10px;
+  }
 
+  .el-table ::-webkit-scrollbar-thumb {
+    background-color: #324157;
+  }
+
+  .el-table ::-webkit-scrollbar-thumb:active {
+    background-color: #00aff0
+  }
+
+  @media screen and (min-width: 600px) {
+    .el-table ::-webkit-scrollbar {
+      display: block;
+      height: 10px;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    .el-table ::-webkit-scrollbar {
+      display: none;
+    }
+  }
 </style>

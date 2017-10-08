@@ -6,25 +6,17 @@
           <div slot="header">
             <span style="line-height: 36px;">标签列表</span>
           </div>
-          <div class="tag-list">
-            <el-tag v-for="tag in tags"
-                    :key="tag.name"
-                    :type="tag.type"
-                    :closable="true"
-                    :close-transition="false"
-                    @close="handleDeleteTag(tag)">
-              {{tag.name}}
-            </el-tag>
-            <el-input class="input-new-tag"
-                      v-if="inputVisibleTag"
-                      v-model="inputValueTag"
-                      ref="saveTagInput"
-                      size="mini"
-                      @keyup.enter.native="handleInputConfirmTag"
-                      @blur="handleInputConfirmTag">
-            </el-input>
-            <el-button v-else class="button-new-tag" size="small" @click="showInputTag">+新增标签</el-button>
-          </div>
+          <ul class="meta-list">
+            <li v-for="tag in tags">
+              <span class="meta" @click="clickTag(tag.id,tag.name)">{{tag.name}}</span>
+              <span style="float: right;clear: both">
+                <span class="meta-count">{{tag.count}}</span>
+                <el-button type="danger" size="small">删除</el-button>
+              </span>
+            </li>
+          </ul>
+          <el-input placeholder="请输入标签名称" class="meta-input" v-model.trim="tagName"></el-input>
+          <el-button type="success" style="float: right;clear: both" @click="saveOrUpdateTag">保存标签</el-button>
         </el-card>
       </el-col>
       <el-col :xs="24" :sm="12" :md="12" :lg="12" style="margin-top: 30px">
@@ -32,25 +24,17 @@
           <div slot="header">
             <span style="line-height: 36px;">分类列表</span>
           </div>
-          <div class="category-list">
-            <el-tag v-for="category in categories"
-                    :key="category.name"
-                    :type="category.type"
-                    :closable="true"
-                    :close-transition="false"
-                    @close="handleDeleteCategory(category)">
-              {{category.name}}
-            </el-tag>
-            <el-input class="input-new-category"
-                      v-if="inputVisibleCategory"
-                      v-model="inputValueCategory"
-                      ref="saveCategoryInput"
-                      size="mini"
-                      @keyup.enter.native="handleInputConfirmCategory"
-                      @blur="handleInputConfirmCategory">
-            </el-input>
-            <el-button v-else class="button-new-category" size="small" @click="showInputCategory">+新增分类</el-button>
-          </div>
+          <ul class="meta-list">
+            <li v-for="category in categories">
+              <span class="meta" @click="clickCategory(category.id,category.name)">{{category.name}}</span>
+              <span style="float: right;clear: both">
+                <span class="meta-count">{{category.count}}</span>
+                <el-button type="danger" size="small">删除</el-button>
+              </span>
+            </li>
+          </ul>
+          <el-input placeholder="请输入分类名称" class="meta-input" v-model.trim="categoryName"></el-input>
+          <el-button type="success" style="float: right;clear: both">保存分类</el-button>
         </el-card>
       </el-col>
     </el-row>
@@ -61,175 +45,118 @@
   export default {
     data () {
       return {
-        inputVisibleTag: false,
-        inputValueTag: '',
-        inputVisibleCategory: false,
-        inputValueCategory: '',
         tags: [],
-        categories: []
+        categories: [],
+        tagId: '',
+        tagName: '',
+        categoryId: '',
+        categoryName: ''
       }
     },
     methods: {
-      handleDeleteTag (tag) {
-        this.$confirm('此操作将删除该标签, 是否继续?', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'error'
-        }).then(() => {
-          this.$api.deleteTag(tag.name).then(data => {
-            if (data.success) {
-              this.tags.splice(this.tags.indexOf(tag), 1)
-            } else {
-              this.$message({
-                message: '删除标签失败,' + data.msg,
-                type: 'error'
-              })
-            }
-          })
-        })
-      },
-      handleDeleteCategory (category) {
-        this.$confirm('此操作将删除该分类, 是否继续?', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'error'
-        }).then(() => {
-          this.categories.splice(this.categories.indexOf(category), 1)
-        })
-      },
-      showInputTag () {
-        this.inputVisibleTag = true
-        this.$nextTick(_ => {
-          this.$refs.saveTagInput.$refs.input.focus()
-        })
-      },
-      showInputCategory () {
-        this.inputVisibleCategory = true
-        this.$nextTick(_ => {
-          this.$refs.saveCategoryInput.$refs.input.focus()
-        })
-      },
-      handleInputConfirmTag () {
-        let inputValueTag = this.inputValueTag
-        if (inputValueTag) {
-          this.$api.saveTag(inputValueTag).then(data => {
-            if (data.success) {
-              let tag = {name: inputValueTag, type: this.$util.randomColorType()}
-              this.tags.push(tag)
-            } else {
-              this.$message({
-                message: '新增标签失败,' + data.msg,
-                type: 'error'
-              })
-            }
-          })
-        }
-        this.inputVisibleTag = false
-        this.inputValueTag = ''
-      },
-      handleInputConfirmCategory () {
-        let inputValueCategory = this.inputValueCategory
-        if (inputValueCategory) {
-          let category = {name: inputValueCategory, type: this.$util.randomColorType()}
-          this.categories.push(category)
-        }
-        this.inputVisibleCategory = false
-        this.inputValueCategory = ''
-      },
-      getAllCategoriesAuth () {
-        this.$api.getAllCategoriesAuth().then(data => {
-          if (data.success) {
-            let categories = data.data
-            for (let key in categories) {
-              let category = {
-                name: categories[key].name + ' (' + categories[key].articleCount + ')',
-                type: this.$util.randomColorType()
-              }
-              this.categories.push(category)
-            }
-          } else {
-            this.$message({
-              message: '获取分类失败,' + data.msg,
-              type: 'error'
-            })
-          }
-        })
-      },
-      getAllTagsAuth () {
+      getTags () {
         this.$api.getAllTagsAuth().then(data => {
           if (data.success) {
-            let tags = data.data
-            for (let key in tags) {
-              let tag = {
-                name: tags[key].name, type: this.$util.randomColorType()
-              }
-              this.tags.push(tag)
+            for (let key in data.data) {
+              this.tags.push(data.data[key])
             }
           } else {
             this.$message({
-              message: '获取标签失败,' + data.msg,
+              message: '获取tag失败,' + data.msg,
               type: 'error'
             })
           }
         })
       },
+      getCategories () {
+        this.$api.getAllCategoriesAuth().then(data => {
+          if (data.success) {
+            for (let key in data.data) {
+              this.categories.push(data.data[key])
+            }
+          } else {
+            this.$message({
+              message: '获取category失败,' + data.msg,
+              type: 'error'
+            })
+          }
+        })
+      },
+      clickTag (tagId, tagName) {
+        this.tagId = tagId
+        this.tagName = tagName
+      },
+      clickCategory (categoryId, categoryName) {
+        this.categoryId = categoryId
+        this.categoryName = categoryName
+      },
+      saveOrUpdateTag () {
+        console.log(this.tagName + this.tagId)
+      }
     },
     created () {
-      this.getAllCategoriesAuth()
-      this.getAllTagsAuth()
+      this.getTags()
+      this.getCategories()
     }
   }
 </script>
-<style>
-  .tag-list .el-input .el-input__inner {
-    height: 24px
-  }
-
-  @media screen and (max-width: 600px) {
-    .el-message-box {
-      width: 100%;
-    }
-  }
-</style>
 
 <style scoped>
-  .el-tag {
-    margin-left: 10px;
-    margin-top: 10px;
+
+  .meta-list {
+    margin: 0 0 30px 0;
+    padding: 0;
+    list-style: none;
   }
 
-  .input-new-tag {
-    width: 78px;
-    margin-left: 10px;
-    margin-top: 10px;
-    height: 24px;
-    line-height: 22px;
+  .meta-list li {
+    line-height: 2.4rem;
   }
 
-  .button-new-tag {
-    margin-left: 10px;
-    margin-top: 10px;
-    height: 24px;
-    line-height: 22px;
-    padding-top: 0;
-    padding-bottom: 0
+  .meta-list .meta {
+    box-shadow: 0 0 3px rgba(14, 14, 14, 0.3);
+    margin: .4rem;
+    max-width: 350px;
+    padding: .4rem .5rem;
+    white-space: nowrap;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    border: 1px solid #ffd740;
+    background-color: #ffd740;
   }
 
-  .input-new-category {
-    width: 78px;
-    margin-left: 10px;
-    margin-top: 10px;
-    height: 24px;
-    line-height: 22px;
+  .meta-list .meta:hover {
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    transition: all .2s;
   }
 
-  .button-new-category {
-    margin-left: 10px;
-    margin-top: 10px;
-    height: 24px;
-    line-height: 22px;
-    padding-top: 0;
-    padding-bottom: 0
+  .meta-list .meta:active {
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
   }
+
+  .meta-list .meta-count {
+    display: inline-block;
+    min-width: 10px;
+    line-height: 12px;
+    padding: 4px 7px;
+    margin-right: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    background-color: #F36A5A;
+    border-radius: 10px;
+  }
+
+  .meta-input {
+    width: 200px;
+    margin-left: 5px;
+    display: inline-block;
+  }
+
 
 </style>

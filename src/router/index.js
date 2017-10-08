@@ -1,11 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Frontend from '@/components/frontend/Frontend'
-import FArticleList from '@/components/frontend/page/Articles'
-import FArticleContent from '@/components/frontend/page/Article'
-import FCategoryList from '@/components/frontend/page/Category'
-import FTagList from '@/components/frontend/page/Tags'
-import FArchiveList from '@/components/frontend/page/Archives'
 import Error from '@/components/Error'
 
 import Login from '@/components/admin/Login'
@@ -16,33 +10,70 @@ import ATagList from '@/components/admin/page/TagList'
 
 Vue.use(Router)
 
+const Index = (resolve) => {
+  import('@/components/frontend/Frontend').then((module) => {
+    resolve(module)
+  })
+}
+
+const Home = (resolve) => {
+  import('@/components/frontend/page/Articles').then((module) => {
+    resolve(module)
+  })
+}
+
+const Post = (resolve) => {
+  import('@/components/frontend/page/Article').then((module) => {
+    resolve(module)
+  })
+}
+
+const Category = (resolve) => {
+  import('@/components/frontend/page/Category').then((module) => {
+    resolve(module)
+  })
+}
+
+const Tag = (resolve) => {
+  import('@/components/frontend/page/Tags').then((module) => {
+    resolve(module)
+  })
+}
+
+const Archive = (resolve) => {
+  import('@/components/frontend/page/Archives').then((module) => {
+    resolve(module)
+  })
+}
+
 const router = new Router({
   mode: 'hash',
   linkActiveClass: 'active',
   routes: [
     {
       path: '/',
-      component: Frontend,
+      component: Index,
+      redirect: '/articles',
       children: [
         {
           path: 'articles',
-          component: FArticleList
+          component: Home
         },
         {
           path: 'articles/:id',
-          component: FArticleContent
+          component: Post
         },
         {
           path: 'category',
-          component: FCategoryList
+          component: Category
         },
         {
           path: 'tags',
-          component: FTagList
+          component: Tag
         },
         {
           path: 'archives',
-          component: FArchiveList
+          component: Archive
         }
       ]
     },
@@ -55,6 +86,7 @@ const router = new Router({
       path: '/admin',
       name: 'Admin',
       component: Admin,
+      redirect: '/admin/article',
       children: [
         {
           path: 'article/publish/:id',
@@ -64,7 +96,7 @@ const router = new Router({
           component: AArticleEdit
         },
         {
-          path: 'article/index/:page',
+          path: 'article',
           component: AArticleList
         },
         {
@@ -74,7 +106,7 @@ const router = new Router({
       ]
     },
     {
-      path: 'error/:state',
+      path: '/error/:state/:message',
       component: Error
     },
     {

@@ -43,7 +43,7 @@
 
   .container {
     position: fixed;
-    top: 50px;
+    top: 60px;
     bottom: 0;
     right: 0;
     z-index: -1;

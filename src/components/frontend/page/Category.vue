@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="category-list">
-      <a v-for="category in categories" class="category-link category text-bold"
+      <a v-for="category in categories" class="category text-bold"
          @click='goAnchor("#category-"+category.name)'>
         {{category.name}}({{category.count}})
       </a>
@@ -12,7 +12,7 @@
         <div class="category-title" :id="'category-'+category.name">{{category.name}}</div>
         <ul class="category-ul">
           <li v-for="article in category.articles" class="article-title">
-            <router-link :to="{ path: '/articles/'+article.id }">{{article.title}}</router-link>
+            <router-link :to="{ path: '/articles/'+article.id }" class="text-primary">{{article.title}}</router-link>
           </li>
         </ul>
       </div>
@@ -87,8 +87,8 @@
     text-align: center;
   }
 
-  .category-link {
-    color: #34495e;
+  .category-list a:hover{
+    text-decoration: underline;
   }
 
   .category {
