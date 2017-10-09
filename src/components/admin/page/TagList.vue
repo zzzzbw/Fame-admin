@@ -11,7 +11,7 @@
               <span class="meta" @click="clickTag(tag.id,tag.name)">{{tag.name}}</span>
               <span style="float: right;clear: both">
                 <span class="meta-count">{{tag.count}}</span>
-                <el-button type="danger" size="small">删除</el-button>
+                <el-button type="danger" size="small" @click="deleteTagHandle(tag.name)">删除</el-button>
               </span>
             </li>
           </ul>
@@ -29,12 +29,12 @@
               <span class="meta" @click="clickCategory(category.id,category.name)">{{category.name}}</span>
               <span style="float: right;clear: both">
                 <span class="meta-count">{{category.count}}</span>
-                <el-button type="danger" size="small">删除</el-button>
+                <el-button type="danger" size="small" @click="deleteCategoryHandle(category.name)">删除</el-button>
               </span>
             </li>
           </ul>
           <el-input placeholder="请输入分类名称" class="meta-input" v-model.trim="categoryName"></el-input>
-          <el-button type="success" style="float: right;clear: both">保存分类</el-button>
+          <el-button type="success" style="float: right;clear: both" @click="saveOrUpdateCategory">保存分类</el-button>
         </el-card>
       </el-col>
     </el-row>
@@ -90,8 +90,139 @@
         this.categoryId = categoryId
         this.categoryName = categoryName
       },
+      deleteTagHandle (tagName) {
+        this.$confirm('确定删除该标签?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'error'
+        }).then(() => {
+          this.$api.deleteTag(tagName).then(data => {
+            if (data.success) {
+              this.refreshTags()
+              this.$message({
+                type: 'success',
+                message: '删除成功!'
+              })
+            } else {
+              this.$message({
+                message: '删除tag失败,' + data.msg,
+                type: 'error'
+              })
+            }
+          })
+        }).catch(() => {
+        })
+      },
+      deleteCategoryHandle (categoryName) {
+        this.$confirm('确定删除该分类?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'error'
+        }).then(() => {
+          this.$api.deleteCategory(categoryName).then(data => {
+            if (data.success) {
+              this.refreshCategories()
+              this.$message({
+                type: 'success',
+                message: '删除成功!'
+              })
+            } else {
+              this.$message({
+                message: '删除category失败,' + data.msg,
+                type: 'error'
+              })
+            }
+          })
+        }).catch(() => {
+        })
+      },
       saveOrUpdateTag () {
-        console.log(this.tagName + this.tagId)
+        if (this.tagName === null || this.tagName === '') {
+          this.$message({
+            message: '标签名称不能为空',
+            type: 'error'
+          })
+          return
+        }
+        if (this.tagId !== null && this.tagId !== '') {
+          this.$api.updateTag(this.tagId, this.tagName).then(data => {
+            if (data.success) {
+              this.refreshTags()
+              this.$message({
+                message: '更新tag成功!',
+                type: 'success'
+              })
+            } else {
+              this.$message({
+                message: '更新tag失败,' + data.msg,
+                type: 'error'
+              })
+            }
+          })
+        } else {
+          this.$api.saveTag(this.tagName).then(data => {
+            if (data.success) {
+              this.refreshTags()
+              this.$message({
+                message: '新建tag成功!',
+                type: 'success'
+              })
+            } else {
+              this.$message({
+                message: '新建tag失败,' + data.msg,
+                type: 'error'
+              })
+            }
+          })
+        }
+      },
+      saveOrUpdateCategory () {
+        if (this.categoryName === null || this.categoryName === '') {
+          this.$message({
+            message: '分类名称不能为空',
+            type: 'error'
+          })
+          return
+        }
+        if (this.categoryId !== null && this.categoryId !== '') {
+          this.$api.updateCategory(this.categoryId, this.categoryName).then(data => {
+            if (data.success) {
+              this.refreshCategories()
+              this.$message({
+                message: '更新category成功!',
+                type: 'success'
+              })
+            } else {
+              this.$message({
+                message: '更新category失败,' + data.msg,
+                type: 'error'
+              })
+            }
+          })
+        } else {
+          this.$api.saveCategory(this.categoryName).then(data => {
+            if (data.success) {
+              this.refreshCategories()
+              this.$message({
+                message: '新建category成功!',
+                type: 'success'
+              })
+            } else {
+              this.$message({
+                message: '新建category失败,' + data.msg,
+                type: 'error'
+              })
+            }
+          })
+        }
+      },
+      refreshTags () {
+        this.tags = []
+        this.getTags()
+      },
+      refreshCategories () {
+        this.categories = []
+        this.getCategories()
       }
     },
     created () {

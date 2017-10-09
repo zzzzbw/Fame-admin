@@ -64,6 +64,20 @@ export default {
     }
     return post('/admin/meta', params)
   },
+  updateCategory (id, name) {
+    let params = {
+      name: name,
+      type: util.STATIC.META_CATEGORY
+    }
+    return post('/admin/meta/' + id, params)
+  },
+  updateTag (id, name) {
+    let params = {
+      name: name,
+      type: util.STATIC.META_TAG
+    }
+    return post('/admin/meta/' + id, params)
+  },
   deleteCategory (name) {
     let params = {
       name: name,

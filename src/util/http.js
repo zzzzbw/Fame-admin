@@ -16,7 +16,7 @@ const Axios = axios.create({
 let loadingInstace = null
 // 请求拦截（配置发送请求的信息） 传参序列化
 Axios.interceptors.request.use((config) => {
-  if (loadingInstace !== null) {
+  if (loadingInstace === null) {
     loadingInstace = Loading.service({target: '#main', fullscreen: false})
   }
 
@@ -41,7 +41,10 @@ Axios.interceptors.request.use((config) => {
 // 响应拦截（配置请求回来的信息）
 Axios.interceptors.response.use(function (response) {
   // 处理响应数据
-  if (loadingInstace !== null) { loadingInstace.close() }
+  if (loadingInstace !== null) {
+    loadingInstace.close()
+    loadingInstace = null
+  }
   let msg = ''
   if (response.data && !response.data.success) {
     switch (response.data.code) {
@@ -59,7 +62,10 @@ Axios.interceptors.response.use(function (response) {
   return response
 }, function (error) {
   // 处理响应失败
-  if (loadingInstace !== null) { loadingInstace.close() }
+  if (loadingInstace !== null) {
+    loadingInstace.close()
+    loadingInstace = null
+  }
   let msg = error.response.data.msg
   switch (error.response.status) {
     case 404:

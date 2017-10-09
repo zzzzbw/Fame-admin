@@ -11,20 +11,26 @@
               v-model="article.tags"
               multiple
               filterable
-              allow-create
               placeholder="请选择文章标签">
               <el-option
-                v-for="item in tags"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value">
+                v-for="tag in tags"
+                :key="tag.value"
+                :label="tag.label"
+                :value="tag.value">
               </el-option>
             </el-select>
           </el-form-item>
         </el-col>
         <el-col :xs="24" :sm="12" :md="12" :lg="12">
           <el-form-item>
-            <el-input v-model="article.category" placeholder="请输入文章分类"></el-input>
+            <el-select v-model="article.category" filterable placeholder="请选择文章分类">
+              <el-option
+                v-for="category in categories"
+                :key="category.value"
+                :label="category.label"
+                :value="category.value">
+              </el-option>
+            </el-select>
           </el-form-item>
         </el-col>
       </el-row>
@@ -59,12 +65,12 @@
           id: '',
           title: '',
           tags: '',
-          categories: '',
+          category: '',
           content: '',
           status: ''
         },
         tags: [],
-        tagsValue: []
+        categories: [],
       }
     },
     components: {
@@ -117,6 +123,23 @@
           }
         })
       },
+      getCategories () {
+        this.$api.getAllCategoriesAuth().then(data => {
+          if (data.success) {
+            for (let key in data.data) {
+              let category = {
+                value: data.data[key].name, label: data.data[key].name
+              }
+              this.categories.push(category)
+            }
+          } else {
+            this.$message({
+              message: '获取分类列表失败',
+              type: 'error'
+            })
+          }
+        })
+      },
       onPublish () {
         this.article.status = this.$util.STATIC.ARTICLE_STATUS_PUBLISH
         let params = this.article
@@ -143,6 +166,7 @@
     created () {
       this.getArticle()
       this.getTags()
+      this.getCategories()
     },
     watch: {
       // 监听route刷新绑定的article数据
