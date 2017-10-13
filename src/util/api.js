@@ -8,6 +8,18 @@ export default {
   logout () {
     return post('/admin/logout')
   },
+  getArticleCount () {
+    return get('/admin/article/count')
+  },
+  getVisitCount () {
+    return get('/admin/site/visit')
+  },
+  getLogs (page) {
+    let params = {
+      page: page
+    }
+    return get('/admin/site/logs', params)
+  },
   getArticles (page) {
     let params = {
       page: page

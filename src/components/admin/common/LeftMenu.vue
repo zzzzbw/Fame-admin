@@ -1,6 +1,10 @@
 <template>
   <div :class="[ showLeftMenu ? 'left-menu-show':'left-menu-hide' ]" class="left-menu">
     <el-menu default-active="" :collapse="false" theme="dark" router @select="mobileToggle">
+      <el-menu-item index="/admin/dashboard">
+        <i class="fa fa-tachometer" aria-hidden="true"></i>
+        <span slot="title">仪表盘</span>
+      </el-menu-item>
       <el-menu-item index="/admin/article/publish">
         <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
         <span slot="title">发布文章</span>

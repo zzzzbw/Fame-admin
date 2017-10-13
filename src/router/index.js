@@ -4,9 +4,10 @@ import Error from '@/components/Error'
 
 import Login from '@/components/admin/Login'
 import Admin from '@/components/admin/Admin'
-import AArticleEdit from '@/components/admin/page/ArticleEdit'
-import AArticleList from '@/components/admin/page/ArticleList'
-import ATagList from '@/components/admin/page/TagList'
+import AArticleEdit from '@/components/admin/page/Article'
+import AArticleList from '@/components/admin/page/Articles'
+import ATagList from '@/components/admin/page/Tags'
+import ADashboard from '@/components/admin/page/Dashboard'
 
 Vue.use(Router)
 
@@ -86,8 +87,12 @@ const router = new Router({
       path: '/admin',
       name: 'Admin',
       component: Admin,
-      redirect: '/admin/article',
+      redirect: '/admin/dashboard',
       children: [
+        {
+          path: 'dashboard',
+          component: ADashboard
+        },
         {
           path: 'article/publish/:id',
           component: AArticleEdit
