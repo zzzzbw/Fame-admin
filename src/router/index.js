@@ -8,6 +8,7 @@ import AArticleEdit from '@/components/admin/page/Article'
 import AArticleList from '@/components/admin/page/Articles'
 import ATagList from '@/components/admin/page/Tags'
 import ADashboard from '@/components/admin/page/Dashboard'
+import ASetting from '@/components/admin/page/Setting'
 
 Vue.use(Router)
 
@@ -107,6 +108,10 @@ const router = new Router({
         {
           path: 'tag',
           component: ATagList
+        },
+        {
+          path: 'setting',
+          component: ASetting
         }
       ]
     },

@@ -17,6 +17,10 @@
         <i class="fa fa-tag" aria-hidden="true"></i>
         <span slot="title">标签/分类</span>
       </el-menu-item>
+      <el-menu-item index="/admin/setting">
+        <i class="fa fa-cog" aria-hidden="true"></i>
+        <span slot="title">网站设置</span>
+      </el-menu-item>
     </el-menu>
   </div>
 </template>

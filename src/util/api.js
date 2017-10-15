@@ -8,6 +8,28 @@ export default {
   logout () {
     return post('/admin/logout')
   },
+  getUsername () {
+    return get('/admin/username')
+  },
+  resetPassword (username, oldPassword, newPassword) {
+    let params = {
+      username: username,
+      oldPassword: oldPassword,
+      newPassword: newPassword
+    }
+    return post('/admin/reset', params)
+  },
+  getSitestatic () {
+    return get('/admin/site/static')
+  },
+  saveSitestatic (title, description, keywords) {
+    let params = {
+      title: title,
+      description: description,
+      keywords: keywords
+    }
+    return post('/admin/site/static', params)
+  },
   getArticleCount () {
     return get('/admin/article/count')
   },

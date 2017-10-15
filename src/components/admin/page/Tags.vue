@@ -4,7 +4,7 @@
       <el-col :xs="24" :sm="12" :md="12" :lg="12" style="margin-top: 30px">
         <el-card class="box-card">
           <div slot="header">
-            <span style="line-height: 36px;">标签列表</span>
+            <span>标签列表</span>
           </div>
           <ul class="meta-list">
             <li v-for="tag in tags">
@@ -22,7 +22,7 @@
       <el-col :xs="24" :sm="12" :md="12" :lg="12" style="margin-top: 30px">
         <el-card class="box-card">
           <div slot="header">
-            <span style="line-height: 36px;">分类列表</span>
+            <span>分类列表</span>
           </div>
           <ul class="meta-list">
             <li v-for="category in categories">
