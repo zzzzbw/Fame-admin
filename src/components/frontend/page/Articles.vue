@@ -6,6 +6,7 @@
       </h3>
       <p class="article-date"><i class="fa fa-folder" aria-hidden="true"></i> {{article.category}}</p>
       <p class="article-date text-italic"><i class="fa fa-calendar" aria-hidden="true"></i> {{article.date}}</p>
+      <p class="article-date"><i class="fa fa-eye" aria-hidden="true"></i> {{article.hits}}</p>
       <div class="article-tags">
         <label v-for="tag in article.tags" class="chip">
           {{tag}}
@@ -34,6 +35,7 @@
             title: data.title,
             date: this.$moment(data.created).format('YYYY-MM-DD'),
             category: data.category || this.$util.STATIC.DEFAULT_CATEGORY,
+            hits: data.hits,
             tags: this.$util.stringToTags(data.tags),
             content: data.content
           }

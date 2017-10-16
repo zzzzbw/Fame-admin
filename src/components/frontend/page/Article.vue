@@ -4,6 +4,7 @@
     <div class="article-info">
       <p class="article-category"><i class="fa fa-folder" aria-hidden="true"></i> {{article.category}}</p>
       <p class="article-date"><i class="fa fa-calendar" aria-hidden="true"></i> {{article.date}}</p>
+      <p class="article-date"><i class="fa fa-eye" aria-hidden="true"></i> {{article.hits}}</p>
     </div>
 
     <div class="markdown-body" v-html="article.content" v-highlight>
@@ -38,6 +39,7 @@
           title: data.title,
           date: this.$moment(data.created).format('YYYY-MM-DD'),
           category: data.category || this.$util.STATIC.DEFAULT_CATEGORY,
+          hits: data.hits,
           tags: this.$util.stringToTags(data.tags),
           content: data.content
         }
