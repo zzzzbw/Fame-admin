@@ -126,6 +126,21 @@ export default {
     }
     return del('/admin/meta', params)
   },
+  getPagesAuth (page) {
+    let params = {
+      page: page
+    }
+    return get('/admin/page', params)
+  },
+  getPageAuth (id) {
+    return get('/admin/page/' + id)
+  },
+  savePageAuth (page) {
+    return post('/admin/page', page)
+  },
+  deletePageAuth (id) {
+    return del('/admin/page/' + id)
+  },
   getArchives (page) {
     let params = {
       page: page

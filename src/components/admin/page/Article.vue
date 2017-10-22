@@ -177,7 +177,7 @@
   }
 </script>
 
-<style>
+<style scoped>
   .button-list {
     float: right;
     margin-bottom: 30px;

@@ -1,5 +1,5 @@
 <template>
-  <el-table :data="articleDatas">
+  <el-table :data="pageDatas">
     <el-table-column prop="id" label="id" width="60"></el-table-column>
     <el-table-column prop="title" label="标题" min-width="150" show-overflow-tooltip></el-table-column>
     <el-table-column prop="publish" label="发布日期" min-width="150"
@@ -26,60 +26,46 @@
   export default {
     data: function () {
       return {
-        articleDatas: []
+        pageDatas: []
       }
     },
     methods: {
       handleEdit (id) {
-        this.$router.push('/admin/article/publish/' + id)
+        this.$router.push('/admin/page/publish/' + id)
       },
       handleDelete (id) {
-        this.$confirm('此操作将永久删除该文章, 是否继续?', '提示', {
+        this.$confirm('此操作将永久删除该自定义页面, 是否继续?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'danger'
         }).then(() => {
-          this.deleteArticle(id)
+          this.deletePage(id)
         }).catch(() => {
         })
       },
-      initArticleDatas (articles) {
-        this.articleDatas = []
-        for (let key in articles) {
-          let data = articles[key]
-          let article = {
+      initPageDatas (pages) {
+        this.pageDatas = []
+        for (let key in pages) {
+          let data = pages[key]
+          let page = {
             id: data.id,
             title: data.title,
             publish: this.$moment(data.created).format('YYYY-MM-DD HH:mm'),
-            category: data.category || this.$util.STATIC.DEFAULT_CATEGORY,
             status: data.status
           }
-          this.articleDatas.push(article)
+          this.pageDatas.push(page)
         }
       },
-      deleteArticle (id) {
-        this.$api.deleteArticleAuth(id).then(data => {
-          if (data.success) {
-            this.$message({
-              type: 'success',
-              message: '删除成功!'
-            })
-            this.getArticles()
-          } else {
-            this.$message({
-              type: 'error',
-              message: '删除失败!'
-            })
-          }
-        })
+      deletePage (id) {
+        console.log('123')
       },
-      getArticles () {
-        this.$api.getArticlesAuth(this.$route.query.page || 1).then(data => {
+      getPages () {
+        this.$api.getPagesAuth(this.$route.query.page || 1).then(data => {
           if (data.success) {
-            this.initArticleDatas(data.data)
+            this.initPageDatas(data.data)
           } else {
             this.$message({
-              message: '获取文章列表失败,' + data.msg,
+              message: '获取自定义页面列表失败,' + data.msg,
               type: 'error'
             })
           }
@@ -87,35 +73,13 @@
       }
     },
     created () {
-      this.getArticles()
+      this.getPages()
     }
   }
 </script>
 
 <style>
-  .el-table ::-webkit-scrollbar {
-    display: block;
-    height: 10px;
-  }
-
-  .el-table ::-webkit-scrollbar-thumb {
-    background-color: #324157;
-  }
-
-  .el-table ::-webkit-scrollbar-thumb:active {
-    background-color: #00aff0
-  }
-
-  @media screen and (min-width: 600px) {
-    .el-table ::-webkit-scrollbar {
-      display: block;
-      height: 10px;
-    }
-  }
-
-  @media screen and (max-width: 600px) {
-    .el-table ::-webkit-scrollbar {
-      display: none;
-    }
+  .el-submenu .el-menu-item {
+    min-width: 0px;
   }
 </style>
