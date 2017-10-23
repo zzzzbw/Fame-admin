@@ -44,7 +44,8 @@ export default {
   },
   getArticles (page) {
     let params = {
-      page: page
+      page: page,
+      limit: 5
     }
     return get('/article', params)
   },

@@ -16,6 +16,14 @@
       </div>
       <router-link class="article-more text-primary" :to="{ path: '/articles/'+article.id }">Read more</router-link>
     </div>
+    <div class="front-page">
+      <div class="pre text-primary" v-if="hasPre">
+        <router-link :to="{path:'/articles', query: { page: pre }}">← Pre</router-link>
+      </div>
+      <div class="next text-primary" v-if="hasNext">
+        <router-link :to="{path:'/articles', query: { page: next }}">Next →</router-link>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -23,11 +31,16 @@
   export default {
     data: function () {
       return {
-        articles: []
+        articles: [],
+        pre: '',
+        hasPre: false,
+        next: '',
+        hasNext: false
       }
     },
     methods: {
       initArticles (articles) {
+        this.articles = []
         for (let key in articles) {
           let data = articles[key]
           let article = {
@@ -42,16 +55,40 @@
           this.articles.push(article)
         }
         return 1
+      },
+      init (page) {
+        this.$api.getArticles(page || 1).then(data => {
+          if (data.success) {
+            console.log(data)
+            this.initArticles(data.data.list)
+            let nowPage = page || 1
+            if (nowPage > 1) {
+              this.hasPre = true
+              this.pre = Number(nowPage) - 1
+            } else {
+              this.hasPre = false
+            }
+            if (nowPage < data.data.pages) {
+              this.hasNext = true
+              this.next = Number(nowPage) + 1
+            } else {
+              this.hasNext = false
+            }
+          } else {
+            alert('获取文章列表失败')
+          }
+        })
       }
     },
     mounted () {
-      this.$api.getArticles(this.$route.query.page || 1).then(data => {
-        if (data.success) {
-          this.initArticles(data.data)
-        } else {
-          alert('获取文章列表失败')
-        }
-      })
+      this.init(this.$route.query.page)
+    },
+    watch: {
+      // 监听route刷新绑定的article数据
+      $route (to, from) {
+        let toPage = to.query.page
+        this.init(toPage)
+      }
     }
   }
 </script>
@@ -102,5 +139,25 @@
 
   .article-item .article-more:hover {
     transform: translateX(10px);
+  }
+
+  .front-page{
+    margin: 4em 3em;
+    font-size: 15px;
+    font-weight: 600;
+    
+  }
+
+  .front-page a{
+    color: #5764c6;
+    text-decoration: none;
+  }
+
+  .front-page .pre{
+    float: left;
+  }
+
+  .front-page .next{
+    float: right;
   }
 </style>
