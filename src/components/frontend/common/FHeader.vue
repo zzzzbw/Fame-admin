@@ -19,7 +19,7 @@
           <router-link :to="{path: '/archives', query: {page: '1'}}">归档</router-link>
         </li>
         <li class="tab-item">
-          <a href="#">关于</a>
+          <router-link :to="{path: '/about'}">关于</router-link>
         </li>
       </ul>
       <div class="header-menu">
@@ -37,8 +37,12 @@
             <li class="header-menu-item">
               <router-link :to="{path: '/tags'}">标签</router-link>
             </li>
-            <li class="header-menu-item">归档</li>
-            <li class="header-menu-item">关于</li>
+            <li class="header-menu-item">
+              <router-link :to="{path: '/archives', query: {page: '1'}}">归档</router-link>
+            </li>
+            <li class="header-menu-item">
+              <router-link :to="{path: '/about'}">关于</router-link>
+            </li>
           </ul>
         </div>
       </div>

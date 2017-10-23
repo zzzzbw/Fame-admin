@@ -140,8 +140,7 @@
           }
         })
       },
-      onPublish () {
-        this.article.status = this.$util.STATIC.ARTICLE_STATUS_PUBLISH
+      saveArticle () {
         let params = this.article
         params.tags = this.$util.tagsToString(this.article.tags)
         this.$api.saveArticleAuth(params).then(data => {
@@ -159,8 +158,13 @@
           }
         })
       },
+      onPublish () {
+        this.article.status = this.$util.STATIC.STATUS_PUBLISH
+        this.saveArticle()
+      },
       onDraft () {
-        // TODO
+        this.article.status = this.$util.STATIC.STATUS_DRAFT
+        this.saveArticle()
       }
     },
     created () {
@@ -181,10 +185,6 @@
   .button-list {
     float: right;
     margin-bottom: 30px;
-  }
-
-  .button-list .el-button {
-    margin-left: 0;
   }
 
   .el-select {

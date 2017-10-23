@@ -4,7 +4,8 @@
  */
 const STATIC = {
   DEFAULT_CATEGORY: '默认分类',
-  ARTICLE_STATUS_PUBLISH: 'publish',
+  STATUS_PUBLISH: 'publish',
+  STATUS_DRAFT: 'draft',
   META_CATEGORY: 'category',
   META_TAG: 'tag'
 }

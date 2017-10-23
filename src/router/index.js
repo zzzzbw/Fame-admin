@@ -50,6 +50,12 @@ const Archive = (resolve) => {
   })
 }
 
+const About = (resolve) => {
+  import('@/components/frontend/page/About').then((module) => {
+    resolve(module)
+  })
+}
+
 const router = new Router({
   mode: 'hash',
   linkActiveClass: 'active',
@@ -78,6 +84,10 @@ const router = new Router({
         {
           path: 'archives',
           component: Archive
+        },
+        {
+          path: 'about',
+          component: About
         }
       ]
     },

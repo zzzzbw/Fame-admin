@@ -58,6 +58,12 @@
   }
 </script>
 
+<style>
+  .el-submenu .el-menu-item {
+    min-width: 0px;
+  }
+</style>
+
 <style scoped>
   .left-menu {
     position: fixed;

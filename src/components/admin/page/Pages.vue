@@ -1,32 +1,45 @@
 <template>
-  <el-table :data="pageDatas">
-    <el-table-column prop="id" label="id" width="60"></el-table-column>
-    <el-table-column prop="title" label="标题" min-width="150" show-overflow-tooltip></el-table-column>
-    <el-table-column prop="publish" label="发布日期" min-width="150"
-                     show-overflow-tooltip></el-table-column>
-    <el-table-column prop="category" label="分类" width="180" show-overflow-tooltip></el-table-column>
-    <el-table-column prop="status" label="状态" width="100" show-overflow-tooltip></el-table-column>
-    <el-table-column label="操作" width="140">
-      <template scope="scope">
-        <el-button
-          size="small"
-          @click="handleEdit(scope.row.id)">编辑
-        </el-button>
-        <el-button
-          size="small"
-          type="danger"
-          @click="handleDelete(scope.row.id)">删除
-        </el-button>
-      </template>
-    </el-table-column>
-  </el-table>
+  <div>
+    <el-table :data="pageDatas">
+      <el-table-column prop="id" label="id" width="60"></el-table-column>
+      <el-table-column prop="title" label="标题" min-width="150" show-overflow-tooltip></el-table-column>
+      <el-table-column prop="publish" label="发布日期" min-width="150"
+                       show-overflow-tooltip></el-table-column>
+      <el-table-column prop="status" label="状态" width="100" show-overflow-tooltip></el-table-column>
+      <el-table-column label="操作" width="140">
+        <template scope="scope">
+          <el-button
+            size="small"
+            @click="handleEdit(scope.row.id)">编辑
+          </el-button>
+          <el-button
+            size="small"
+            type="danger"
+            @click="handleDelete(scope.row.id)">删除
+          </el-button>
+        </template>
+      </el-table-column>
+    </el-table>
+    <div class="admin-page">
+      <el-pagination
+        layout="total,prev, pager, next"
+        @current-change="init"
+        :current-page.sync="currentPage"
+        :page-size="pageSize"
+        :total="total">
+      </el-pagination>
+    </div>
+  </div>
 </template>
 
 <script type="text/ecmascript-6">
   export default {
     data: function () {
       return {
-        pageDatas: []
+        pageDatas: [],
+        total: 0,
+        pageSize: 10,
+        currentPage: 1
       }
     },
     methods: {
@@ -57,12 +70,28 @@
         }
       },
       deletePage (id) {
-        console.log('123')
-      },
-      getPages () {
-        this.$api.getPagesAuth(this.$route.query.page || 1).then(data => {
+        this.$api.deletePageAuth(id).then(data => {
           if (data.success) {
-            this.initPageDatas(data.data)
+            this.$message({
+              type: 'success',
+              message: '删除成功!'
+            })
+            this.init(this.$route.query.page)
+          } else {
+            this.$message({
+              type: 'error',
+              message: '删除失败!'
+            })
+          }
+        })
+      },
+      init (page) {
+        this.$api.getPagesAuth(page || 1).then(data => {
+          if (data.success) {
+            this.initPageDatas(data.data.list)
+            this.total = data.data.total
+            this.pageSize = data.data.pageSize
+            this.currentPage = page || 1
           } else {
             this.$message({
               message: '获取自定义页面列表失败,' + data.msg,
@@ -73,13 +102,42 @@
       }
     },
     created () {
-      this.getPages()
+      this.init()
     }
   }
 </script>
 
 <style>
-  .el-submenu .el-menu-item {
-    min-width: 0px;
+  .el-table ::-webkit-scrollbar {
+    display: block;
+    height: 10px;
+  }
+
+  .el-table ::-webkit-scrollbar-thumb {
+    background-color: #324157;
+  }
+
+  .el-table ::-webkit-scrollbar-thumb:active {
+    background-color: #00aff0
+  }
+
+  @media screen and (min-width: 600px) {
+    .el-table ::-webkit-scrollbar {
+      display: block;
+      height: 10px;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    .el-table ::-webkit-scrollbar {
+      display: none;
+    }
+  }
+</style>
+
+<style scoped>
+  .admin-page {
+    margin-top: 30px;
+    text-align: center;
   }
 </style>

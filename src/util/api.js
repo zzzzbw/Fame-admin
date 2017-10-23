@@ -127,6 +127,9 @@ export default {
     }
     return del('/admin/meta', params)
   },
+  getPage (title) {
+    return get('/page/' + title)
+  },
   getPagesAuth (page) {
     let params = {
       page: page

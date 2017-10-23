@@ -84,9 +84,8 @@
       getLogs () {
         this.$api.getLogs(1).then(data => {
           if (data.success) {
-            console.log(data.data)
-            for (let key in data.data) {
-              let d = data.data[key]
+            for (let key in data.data.list) {
+              let d = data.data.list[key]
               let log = {
                 message: (d.message || d.action) + d.data,
                 created: this.$moment(d.created).format('YYYY-MM-DD HH:mm')

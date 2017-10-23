@@ -1,32 +1,46 @@
 <template>
-  <el-table :data="articleDatas">
-    <el-table-column prop="id" label="id" width="60"></el-table-column>
-    <el-table-column prop="title" label="标题" min-width="150" show-overflow-tooltip></el-table-column>
-    <el-table-column prop="publish" label="发布日期" min-width="150"
-                     show-overflow-tooltip></el-table-column>
-    <el-table-column prop="category" label="分类" width="180" show-overflow-tooltip></el-table-column>
-    <el-table-column prop="status" label="状态" width="100" show-overflow-tooltip></el-table-column>
-    <el-table-column label="操作" width="140">
-      <template scope="scope">
-        <el-button
-          size="small"
-          @click="handleEdit(scope.row.id)">编辑
-        </el-button>
-        <el-button
-          size="small"
-          type="danger"
-          @click="handleDelete(scope.row.id)">删除
-        </el-button>
-      </template>
-    </el-table-column>
-  </el-table>
+  <div>
+    <el-table :data="articleDatas">
+      <el-table-column prop="id" label="id" width="60"></el-table-column>
+      <el-table-column prop="title" label="标题" min-width="150" show-overflow-tooltip></el-table-column>
+      <el-table-column prop="publish" label="发布日期" min-width="150"
+                       show-overflow-tooltip></el-table-column>
+      <el-table-column prop="category" label="分类" width="180" show-overflow-tooltip></el-table-column>
+      <el-table-column prop="status" label="状态" width="100" show-overflow-tooltip></el-table-column>
+      <el-table-column label="操作" width="140">
+        <template scope="scope">
+          <el-button
+            size="small"
+            @click="handleEdit(scope.row.id)">编辑
+          </el-button>
+          <el-button
+            size="small"
+            type="danger"
+            @click="handleDelete(scope.row.id)">删除
+          </el-button>
+        </template>
+      </el-table-column>
+    </el-table>
+    <div class="admin-page">
+      <el-pagination
+        layout="total,prev, pager, next"
+        @current-change="init"
+        :current-page.sync="currentPage"
+        :page-size="pageSize"
+        :total="total">
+      </el-pagination>
+    </div>
+  </div>
 </template>
 
 <script type="text/ecmascript-6">
   export default {
     data: function () {
       return {
-        articleDatas: []
+        articleDatas: [],
+        total: 0,
+        pageSize: 10,
+        currentPage: 1
       }
     },
     methods: {
@@ -64,7 +78,7 @@
               type: 'success',
               message: '删除成功!'
             })
-            this.getArticles()
+            this.init(this.$route.query.page)
           } else {
             this.$message({
               type: 'error',
@@ -73,10 +87,13 @@
           }
         })
       },
-      getArticles () {
-        this.$api.getArticlesAuth(this.$route.query.page || 1).then(data => {
+      init (page) {
+        this.$api.getArticlesAuth(page || 1).then(data => {
           if (data.success) {
-            this.initArticleDatas(data.data)
+            this.initArticleDatas(data.data.list)
+            this.total = data.data.total
+            this.pageSize = data.data.pageSize
+            this.currentPage = page || 1
           } else {
             this.$message({
               message: '获取文章列表失败,' + data.msg,
@@ -87,7 +104,7 @@
       }
     },
     created () {
-      this.getArticles()
+      this.init(this.$route.query.page)
     }
   }
 </script>
@@ -118,4 +135,12 @@
       display: none;
     }
   }
+</style>
+
+<style scoped>
+  .admin-page {
+    margin-top: 30px;
+    text-align: center;
+  }
+
 </style>
