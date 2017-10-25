@@ -22,7 +22,7 @@
         this.$root.$emit('collapse')
       },
       logout () {
-        this.$api.logout().then(data => {
+        this.$api.auth.logout().then(data => {
           if (data.success) {
             this.$message({
               type: 'success',

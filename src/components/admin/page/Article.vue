@@ -81,7 +81,7 @@
         const id = this.$route.params.id
         // 如果有id则表示编辑文章,获取文章信息
         if (id) {
-          this.$api.getArticleAuth(id).then(data => {
+          this.$api.auth.getArticle(id).then(data => {
             if (data.success) {
               this.initArticle(data.data)
             } else {
@@ -107,7 +107,7 @@
         this.article.content = data.content
       },
       getTags () {
-        this.$api.getAllTagsAuth().then(data => {
+        this.$api.auth.getAllTags().then(data => {
           if (data.success) {
             for (let key in data.data) {
               let tag = {
@@ -124,7 +124,7 @@
         })
       },
       getCategories () {
-        this.$api.getAllCategoriesAuth().then(data => {
+        this.$api.auth.getAllCategories().then(data => {
           if (data.success) {
             for (let key in data.data) {
               let category = {
@@ -143,7 +143,7 @@
       saveArticle () {
         let params = this.article
         params.tags = this.$util.tagsToString(this.article.tags)
-        this.$api.saveArticleAuth(params).then(data => {
+        this.$api.auth.saveArticle(params).then(data => {
           if (data.success) {
             this.$router.push('/admin/article')
             this.$message({
@@ -165,12 +165,15 @@
       onDraft () {
         this.article.status = this.$util.STATIC.STATUS_DRAFT
         this.saveArticle()
+      },
+      init () {
+        this.getArticle()
+        this.getTags()
+        this.getCategories()
       }
     },
-    created () {
-      this.getArticle()
-      this.getTags()
-      this.getCategories()
+    mounted () {
+      this.init()
     },
     watch: {
       // 监听route刷新绑定的article数据

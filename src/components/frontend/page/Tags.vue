@@ -54,7 +54,7 @@
       }
     },
     mounted () {
-      this.$api.getTagsWithArticle().then(data => {
+      this.$api.front.getTags().then(data => {
         if (data.success) {
           this.data = data.data
           this.initTags(data.data)

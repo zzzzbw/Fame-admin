@@ -72,7 +72,7 @@
         }
       },
       deleteArticle (id) {
-        this.$api.deleteArticleAuth(id).then(data => {
+        this.$api.auth.deleteArticle(id).then(data => {
           if (data.success) {
             this.$message({
               type: 'success',
@@ -88,12 +88,12 @@
         })
       },
       init (page) {
-        this.$api.getArticlesAuth(page || 1).then(data => {
+        this.$api.auth.getArticles(page || 1).then(data => {
           if (data.success) {
             this.initArticleDatas(data.data.list)
             this.total = data.data.total
             this.pageSize = data.data.pageSize
-            this.currentPage = page || 1
+            this.currentPage = Number(page) || 1
           } else {
             this.$message({
               message: '获取文章列表失败,' + data.msg,
@@ -103,7 +103,7 @@
         })
       }
     },
-    created () {
+    mounted () {
       this.init(this.$route.query.page)
     }
   }

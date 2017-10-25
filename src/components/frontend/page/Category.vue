@@ -43,6 +43,7 @@
           step = newTotal / 100
           smoothUp()
         }
+
         function smoothDown () {
           if (distance < total) {
             distance += step
@@ -69,7 +70,7 @@
       },
     },
     mounted () {
-      this.$api.getCategoriesWithArticle().then(data => {
+      this.$api.front.getCategories().then(data => {
         if (data.success) {
           this.categories = data.data
         } else {
@@ -87,7 +88,7 @@
     text-align: center;
   }
 
-  .category-list a:hover{
+  .category-list a:hover {
     text-decoration: underline;
   }
 

@@ -38,16 +38,19 @@
           }
           this.archives.push(archive)
         }
+      },
+      init () {
+        this.$api.front.getArchives().then(data => {
+          if (data.success) {
+            this.initArchives(data.data)
+          } else {
+            alert('获取归档列表失败')
+          }
+        })
       }
     },
     mounted () {
-      this.$api.getArchives(this.$route.query.page || 1).then(data => {
-        if (data.success) {
-          this.initArchives(data.data)
-        } else {
-          alert('获取归档列表失败')
-        }
-      })
+      this.init()
     }
   }
 </script>

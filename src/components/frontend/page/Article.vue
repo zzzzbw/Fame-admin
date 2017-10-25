@@ -33,7 +33,7 @@
       }
     },
     methods: {
-      initArticle (data) {
+      init (data) {
         this.article = {
           id: data.id,
           title: data.title,
@@ -46,23 +46,12 @@
       }
     },
     mounted () {
-      this.$api.getArticle(this.$route.params.id).then(data => {
+      this.$api.front.getArticle(this.$route.params.id).then(data => {
         if (data.success) {
-          this.initArticle(data.data)
+          this.init(data.data)
         } else {
           console.log('获取文章失败')
         }
-      }).catch(err => {
-        console.log(err)
-        let article = {
-          id: '2',
-          title: '测试文章',
-          date: '2017-09-01',
-          category: 'JAVA测试',
-          tags: 'css,Javascript',
-          content: '这是做测试的文章!!!'
-        }
-        this.initArticle(article)
       })
     }
   }

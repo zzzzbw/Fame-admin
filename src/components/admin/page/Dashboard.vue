@@ -47,7 +47,7 @@
 </template>
 
 <script>
-  export default{
+  export default {
     data () {
       return {
         visitCount: 0,
@@ -58,7 +58,7 @@
     },
     methods: {
       getVisitCount () {
-        this.$api.getVisitCount().then(data => {
+        this.$api.auth.getVisitCount().then(data => {
           if (data.success) {
             this.visitCount = data.data
           } else {
@@ -70,7 +70,7 @@
         })
       },
       getArticleCount () {
-        this.$api.getArticleCount().then(data => {
+        this.$api.auth.getArticleCount().then(data => {
           if (data.success) {
             this.articleCount = data.data
           } else {
@@ -82,7 +82,7 @@
         })
       },
       getLogs () {
-        this.$api.getLogs(1).then(data => {
+        this.$api.auth.getLogs(1).then(data => {
           if (data.success) {
             for (let key in data.data.list) {
               let d = data.data.list[key]
@@ -101,7 +101,7 @@
         })
       },
       getArticle () {
-        this.$api.getArticlesAuth(1).then(data => {
+        this.$api.auth.getArticles(1).then(data => {
           if (data.success) {
             for (let key in data.data) {
               let d = data.data[key]
@@ -115,12 +115,15 @@
             })
           }
         })
+      },
+      init () {
+        this.getVisitCount()
+        this.getArticleCount()
+        this.getLogs()
       }
     },
-    created () {
-      this.getVisitCount()
-      this.getArticleCount()
-      this.getLogs()
+    mounted () {
+      this.init()
     }
   }
 </script>

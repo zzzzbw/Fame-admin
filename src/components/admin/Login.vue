@@ -41,7 +41,7 @@
         const self = this
         self.$refs[formName].validate((valid) => {
           if (valid) {
-            this.$api.login(this.ruleForm).then(data => {
+            this.$api.auth.login(this.ruleForm).then(data => {
               if (data.success) {
                 this.$router.push('/admin')
                 this.$message({

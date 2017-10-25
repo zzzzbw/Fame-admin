@@ -11,7 +11,7 @@
       }
     },
     mounted () {
-      this.$api.getPage('About').then(data => {
+      this.$api.front.getPage('About').then(data => {
         if (data.success) {
           this.content = data.data.content
         } else {

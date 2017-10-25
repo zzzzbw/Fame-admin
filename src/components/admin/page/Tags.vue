@@ -55,7 +55,7 @@
     },
     methods: {
       getTags () {
-        this.$api.getAllTagsAuth().then(data => {
+        this.$api.auth.getAllTags().then(data => {
           if (data.success) {
             for (let key in data.data) {
               this.tags.push(data.data[key])
@@ -69,7 +69,7 @@
         })
       },
       getCategories () {
-        this.$api.getAllCategoriesAuth().then(data => {
+        this.$api.auth.getAllCategories().then(data => {
           if (data.success) {
             for (let key in data.data) {
               this.categories.push(data.data[key])
@@ -96,7 +96,7 @@
           cancelButtonText: '取消',
           type: 'error'
         }).then(() => {
-          this.$api.deleteTag(tagName).then(data => {
+          this.$api.auth.delete(tagName).then(data => {
             if (data.success) {
               this.refreshTags()
               this.$message({
@@ -119,7 +119,7 @@
           cancelButtonText: '取消',
           type: 'error'
         }).then(() => {
-          this.$api.deleteCategory(categoryName).then(data => {
+          this.$api.auth.deleteCategory(categoryName).then(data => {
             if (data.success) {
               this.refreshCategories()
               this.$message({
@@ -145,7 +145,7 @@
           return
         }
         if (this.tagId !== null && this.tagId !== '') {
-          this.$api.updateTag(this.tagId, this.tagName).then(data => {
+          this.$api.auth.updateTag(this.tagId, this.tagName).then(data => {
             if (data.success) {
               this.refreshTags()
               this.$message({
@@ -160,7 +160,7 @@
             }
           })
         } else {
-          this.$api.saveTag(this.tagName).then(data => {
+          this.$api.auth.saveTag(this.tagName).then(data => {
             if (data.success) {
               this.refreshTags()
               this.$message({
@@ -185,7 +185,7 @@
           return
         }
         if (this.categoryId !== null && this.categoryId !== '') {
-          this.$api.updateCategory(this.categoryId, this.categoryName).then(data => {
+          this.$api.auth.updateCategory(this.categoryId, this.categoryName).then(data => {
             if (data.success) {
               this.refreshCategories()
               this.$message({
@@ -200,7 +200,7 @@
             }
           })
         } else {
-          this.$api.saveCategory(this.categoryName).then(data => {
+          this.$api.auth.saveCategory(this.categoryName).then(data => {
             if (data.success) {
               this.refreshCategories()
               this.$message({
@@ -225,7 +225,7 @@
         this.getCategories()
       }
     },
-    created () {
+    mounted () {
       this.getTags()
       this.getCategories()
     }

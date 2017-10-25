@@ -17,17 +17,6 @@ const STATIC = {
  */
 
 /**
- * 生成随机的颜色种类
- * @returns {string}
- */
-function randomColorType () {
-  let colorType = [
-    '', 'gray', 'primary', 'success', 'warning', 'danger'
-  ]
-  return colorType[Math.floor(Math.random() * colorType.length)]
-}
-
-/**
  * 标签转字符串
  * @param tags
  * @returns {string}
@@ -57,7 +46,6 @@ function stringToTags (str) {
 
 export default {
   STATIC,
-  randomColorType,
   tagsToString,
   stringToTags
 }

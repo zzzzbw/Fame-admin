@@ -63,14 +63,14 @@ const router = new Router({
     {
       path: '/',
       component: Index,
-      redirect: '/articles',
+      redirect: '/article',
       children: [
         {
-          path: 'articles',
+          path: 'article',
           component: Home
         },
         {
-          path: 'articles/:id',
+          path: 'article/:id',
           component: Post
         },
         {
@@ -78,11 +78,11 @@ const router = new Router({
           component: Category
         },
         {
-          path: 'tags',
+          path: 'tag',
           component: Tag
         },
         {
-          path: 'archives',
+          path: 'archive',
           component: Archive
         },
         {

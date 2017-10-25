@@ -69,7 +69,7 @@
     },
     methods: {
       getUsername () {
-        this.$api.getUsername().then(data => {
+        this.$api.auth.getUsername().then(data => {
           if (data.success) {
             this.userForm.username = data.data
           } else {
@@ -81,7 +81,7 @@
         })
       },
       getSitestatic () {
-        this.$api.getSitestatic().then(data => {
+        this.$api.auth.getSitestatic().then(data => {
           if (data.success) {
             this.staticForm = data.data
           } else {
@@ -93,14 +93,14 @@
         })
       },
       submitUser () {
-        this.$api.resetPassword(this.userForm.username, this.userForm.oldPassword, this.userForm.newPassword).then(data => {
+        this.$api.auth.resetPassword(this.userForm.username, this.userForm.oldPassword, this.userForm.newPassword).then(data => {
           if (data.success) {
             if (data.data === true) {
               this.$message({
                 message: '保存成功,请重新登陆',
                 type: 'success'
               })
-              this.$api.logout()
+              this.$api.auth.logout()
               this.$router.push('/admin/login')
             } else {
               this.$message({
@@ -117,13 +117,13 @@
         })
       },
       submitSitestatic () {
-        this.$api.saveSitestatic(this.staticForm.title, this.staticForm.description, this.staticForm.keywords).then(data => {
+        this.$api.auth.saveSitestatic(this.staticForm.title, this.staticForm.description, this.staticForm.keywords).then(data => {
           if (data.success) {
             this.$message({
               message: '保存成功,请重新登陆',
               type: 'success'
             })
-            this.$api.logout()
+            this.$api.auth.logout()
             this.$router.push('/admin/login')
           } else {
             this.$message({
@@ -134,7 +134,7 @@
         })
       }
     },
-    created () {
+    mounted () {
       this.getUsername()
       this.getSitestatic()
     }

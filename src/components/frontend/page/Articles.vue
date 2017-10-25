@@ -2,7 +2,7 @@
   <div>
     <div v-for="article in articles" class="article-item">
       <h3 class="article-head text-bold">
-        <router-link :to="{ path: '/articles/'+article.id }">{{article.title}}</router-link>
+        <router-link :to="{ path: '/article/'+article.id }">{{article.title}}</router-link>
       </h3>
       <p class="article-date"><i class="fa fa-folder" aria-hidden="true"></i> {{article.category}}</p>
       <p class="article-date text-italic"><i class="fa fa-calendar" aria-hidden="true"></i> {{article.date}}</p>
@@ -14,14 +14,14 @@
       </div>
       <div class="article-summary markdown-body" v-html="article.content" v-highlight>
       </div>
-      <router-link class="article-more text-primary" :to="{ path: '/articles/'+article.id }">Read more</router-link>
+      <router-link class="article-more text-primary" :to="{ path: '/article/'+article.id }">Read more</router-link>
     </div>
     <div class="front-page">
       <div class="pre text-primary" v-if="hasPre">
-        <router-link :to="{path:'/articles', query: { page: pre }}">← Pre</router-link>
+        <router-link :to="{path:'/article', query: { page: pre }}">← Pre</router-link>
       </div>
       <div class="next text-primary" v-if="hasNext">
-        <router-link :to="{path:'/articles', query: { page: next }}">Next →</router-link>
+        <router-link :to="{path:'/article', query: { page: next }}">Next →</router-link>
       </div>
     </div>
   </div>
@@ -57,9 +57,8 @@
         return 1
       },
       init (page) {
-        this.$api.getArticles(page || 1).then(data => {
+        this.$api.front.getArticles(page || 1).then(data => {
           if (data.success) {
-            console.log(data)
             this.initArticles(data.data.list)
             let nowPage = page || 1
             if (nowPage > 1) {
@@ -145,7 +144,7 @@
     margin: 4em 3em;
     font-size: 15px;
     font-weight: 600;
-    
+
   }
 
   .front-page a{

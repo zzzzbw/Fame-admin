@@ -1,7 +1,32 @@
 import { get, post, del } from './http'
 import util from './fame'
 
-export default {
+const front = {
+  getArticles (page) {
+    let params = {
+      page: page,
+      limit: 5
+    }
+    return get('/article', params)
+  },
+  getArticle (id) {
+    return get('/article/' + id)
+  },
+  getCategories () {
+    return get('/category')
+  },
+  getTags () {
+    return get('/tag')
+  },
+  getPage (title) {
+    return get('/page/' + title)
+  },
+  getArchives () {
+    return get('/archive')
+  }
+}
+
+const auth = {
   login (user) {
     return post('/admin/login', user)
   },
@@ -44,42 +69,26 @@ export default {
   },
   getArticles (page) {
     let params = {
-      page: page,
-      limit: 5
-    }
-    return get('/article', params)
-  },
-  getArticlesAuth (page) {
-    let params = {
       page: page
     }
     return get('/admin/article', params)
   },
   getArticle (id) {
-    return get('/article/' + id)
-  },
-  getArticleAuth (id) {
     return get('/admin/article/' + id)
   },
-  saveArticleAuth (article) {
+  saveArticle (article) {
     return post('/admin/article', article)
   },
-  deleteArticleAuth (id) {
+  deleteArticle (id) {
     return del('/admin/article/' + id)
   },
-  getCategoriesWithArticle () {
-    return get('/category')
-  },
-  getAllCategoriesAuth () {
+  getAllCategories () {
     let params = {
       type: util.STATIC.META_CATEGORY
     }
     return get('/admin/meta', params)
   },
-  getTagsWithArticle () {
-    return get('/tag')
-  },
-  getAllTagsAuth () {
+  getAllTags () {
     let params = {
       type: util.STATIC.META_TAG
     }
@@ -127,28 +136,24 @@ export default {
     }
     return del('/admin/meta', params)
   },
-  getPage (title) {
-    return get('/page/' + title)
-  },
-  getPagesAuth (page) {
+  getPages (page) {
     let params = {
       page: page
     }
     return get('/admin/page', params)
   },
-  getPageAuth (id) {
+  getPage (id) {
     return get('/admin/page/' + id)
   },
-  savePageAuth (page) {
+  savePage (page) {
     return post('/admin/page', page)
   },
-  deletePageAuth (id) {
+  deletePage (id) {
     return del('/admin/page/' + id)
-  },
-  getArchives (page) {
-    let params = {
-      page: page
-    }
-    return get('/archive', params)
   }
+}
+
+export default {
+  front,
+  auth
 }
