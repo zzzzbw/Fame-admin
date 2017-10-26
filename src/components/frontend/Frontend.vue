@@ -21,6 +21,9 @@
       FHeader,
       FFooter,
       FScrollTop
+    },
+    created () {
+      document.title = 'Fame Blog'
     }
   }
 

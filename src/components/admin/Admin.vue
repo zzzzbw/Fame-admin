@@ -4,22 +4,22 @@
     <left-menu></left-menu>
     <div class="container">
       <div class="main" id="main">
-          <div class="level-bar">
-            <div class="level-bar-left">
-              <el-breadcrumb separator="/">
-                <el-breadcrumb-item :to="{ path: '/admin' }">首页</el-breadcrumb-item>
-              </el-breadcrumb>
-            </div>
-            <div class="level-bar-left-mobile">
-              <h3>首页</h3>
-            </div>
+        <div class="level-bar">
+          <div class="level-bar-left">
+            <el-breadcrumb separator="/">
+              <el-breadcrumb-item :to="{ path: '/admin' }">首页</el-breadcrumb-item>
+            </el-breadcrumb>
           </div>
-          <div class="content" id="content">
-            <transition name="move" mode="out-in">
-              <router-view></router-view>
-            </transition>
+          <div class="level-bar-left-mobile">
+            <h3>首页</h3>
           </div>
         </div>
+        <div class="content" id="content">
+          <transition name="move" mode="out-in">
+            <router-view></router-view>
+          </transition>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -32,6 +32,9 @@
     components: {
       MHeader,
       LeftMenu
+    },
+    created () {
+      document.title = 'Fame Admin'
     }
   }
 </script>

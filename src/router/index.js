@@ -1,18 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Error from '@/components/Error'
-
-import Login from '@/components/admin/Login'
-import Admin from '@/components/admin/Admin'
-import AArticleEdit from '@/components/admin/page/Article'
-import AArticleList from '@/components/admin/page/Articles'
-import ATagList from '@/components/admin/page/Tags'
-import ADashboard from '@/components/admin/page/Dashboard'
-import ASetting from '@/components/admin/page/Setting'
-import APageList from '@/components/admin/page/Pages'
-import APageEdit from '@/components/admin/page/Page'
 
 Vue.use(Router)
+
+const Error = (resolve) => {
+  import('@/components/Error').then((module) => {
+    resolve(module)
+  })
+}
 
 const Index = (resolve) => {
   import('@/components/frontend/Frontend').then((module) => {
@@ -52,6 +47,60 @@ const Archive = (resolve) => {
 
 const About = (resolve) => {
   import('@/components/frontend/page/About').then((module) => {
+    resolve(module)
+  })
+}
+
+const Login = (resolve) => {
+  import('@/components/admin/Login').then((module) => {
+    resolve(module)
+  })
+}
+
+const Admin = (resolve) => {
+  import('@/components/admin/Admin').then((module) => {
+    resolve(module)
+  })
+}
+
+const AArticleEdit = (resolve) => {
+  import('@/components/admin/page/Article').then((module) => {
+    resolve(module)
+  })
+}
+
+const ATagList = (resolve) => {
+  import('@/components/admin/page/Tags').then((module) => {
+    resolve(module)
+  })
+}
+
+const AArticleList = (resolve) => {
+  import('@/components/admin/page/Articles').then((module) => {
+    resolve(module)
+  })
+}
+
+const ADashboard = (resolve) => {
+  import('@/components/admin/page/Dashboard').then((module) => {
+    resolve(module)
+  })
+}
+
+const ASetting = (resolve) => {
+  import('@/components/admin/page/Setting').then((module) => {
+    resolve(module)
+  })
+}
+
+const APageList = (resolve) => {
+  import('@/components/admin/page/Pages').then((module) => {
+    resolve(module)
+  })
+}
+
+const APageEdit = (resolve) => {
+  import('@/components/admin/page/Page').then((module) => {
     resolve(module)
   })
 }
