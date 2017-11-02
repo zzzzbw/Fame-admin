@@ -12,7 +12,7 @@
         <div class="category-title" :id="'category-'+category.name">{{category.name}}</div>
         <ul class="category-ul">
           <li v-for="article in category.articles" class="article-title">
-            <router-link :to="{ path: '/articles/'+article.id }" class="text-primary">{{article.title}}</router-link>
+            <router-link :to="{ path: '/article/'+article.id }" class="text-primary">{{article.title}}</router-link>
           </li>
         </ul>
       </div>
@@ -67,7 +67,7 @@
             document.documentElement.scrollTop = total
           }
         }
-      },
+      }
     },
     mounted () {
       this.$api.front.getCategories().then(data => {

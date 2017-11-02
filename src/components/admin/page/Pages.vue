@@ -1,13 +1,13 @@
 <template>
   <div>
-    <el-table :data="pageDatas">
+    <el-table :data="pageDatas" border style="width: 100%">
       <el-table-column prop="id" label="id" width="60"></el-table-column>
       <el-table-column prop="title" label="标题" min-width="150" show-overflow-tooltip></el-table-column>
       <el-table-column prop="publish" label="发布日期" min-width="150"
                        show-overflow-tooltip></el-table-column>
       <el-table-column prop="status" label="状态" width="100" show-overflow-tooltip></el-table-column>
-      <el-table-column label="操作" width="140">
-        <template scope="scope">
+      <el-table-column label="操作" width="150">
+        <template slot-scope="scope">
           <el-button
             size="small"
             @click="handleEdit(scope.row.id)">编辑
@@ -33,7 +33,20 @@
 </template>
 
 <script type="text/ecmascript-6">
+  import {
+    Button,
+    Table,
+    TableColumn,
+    Pagination
+  } from 'element-ui'
+
   export default {
+    components: {
+      'el-button': Button,
+      'el-table': Table,
+      'el-table-column': TableColumn,
+      'el-pagination': Pagination
+    },
     data: function () {
       return {
         pageDatas: [],
@@ -136,6 +149,10 @@
 </style>
 
 <style scoped>
+  .el-table {
+    border: 1px solid #e6ebf5;
+  }
+
   .admin-page {
     margin-top: 30px;
     text-align: center;

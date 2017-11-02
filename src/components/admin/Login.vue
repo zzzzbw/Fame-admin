@@ -2,13 +2,13 @@
   <div class="container">
     <div class="login-wrap">
       <h2 class="title">Fame Login</h2>
-      <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="0px" class="demo-ruleForm">
+      <el-form :model="userForm" :rules="rules" ref="ruleForm" label-width="0px" class="userForm">
         <el-form-item prop="username">
-          <el-input v-model="ruleForm.username" placeholder="用户名"></el-input>
+          <el-input v-model="userForm.username" placeholder="用户名"></el-input>
         </el-form-item>
         <el-form-item prop="password">
-          <el-input type="password" placeholder="密码" v-model="ruleForm.password"
-                    @keyup.enter.native="submitForm('ruleForm')"></el-input>
+          <el-input type="password" placeholder="密码" v-model="userForm.password"
+                    @keyup.enter.native="submitForm('userForm')"></el-input>
         </el-form-item>
         <div class="login-btn">
           <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
@@ -19,10 +19,18 @@
 </template>
 
 <script type="text/ecmascript-6">
+  import { Button, Input, Form, FormItem } from 'element-ui'
+
   export default {
+    components: {
+      'el-button': Button,
+      'el-input': Input,
+      'el-form': Form,
+      'el-form-item': FormItem
+    },
     data: function () {
       return {
-        ruleForm: {
+        userForm: {
           username: '',
           password: ''
         },
@@ -38,10 +46,9 @@
     },
     methods: {
       submitForm (formName) {
-        const self = this
-        self.$refs[formName].validate((valid) => {
+        this.$refs[formName].validate((valid) => {
           if (valid) {
-            this.$api.auth.login(this.ruleForm).then(data => {
+            this.$api.auth.login(this.userForm).then(data => {
               if (data.success) {
                 this.$router.push('/admin')
                 this.$message({
@@ -69,8 +76,6 @@
 </script>
 
 <style scoped>
-  @import '~element-ui/lib/theme-default/index.css';
-
   .container {
     position: absolute;
     bottom: 0;

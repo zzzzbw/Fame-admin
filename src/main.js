@@ -3,12 +3,24 @@ import App from './App'
 import router from './router'
 import Api from './util/api'
 import FameUtil from './util/fame'
-import ElementUI from 'element-ui'
-import 'font-awesome/css/font-awesome.min.css'
-import Hljs from 'highlight.js'
-import 'highlight.js/styles/googlecode.css'
-
 import Moment from 'moment'
+import hljs from 'highlight.js/lib/highlight' // 引入lib而不是整个文件
+
+import { Message } from 'element-ui'
+
+// 引入需要的语言
+['javascript', 'python', 'java', 'xml'].forEach((langName) => {
+  const langModule = require(`highlight.js/lib/languages/${langName}`)
+  hljs.registerLanguage(langName, langModule)
+})
+
+// 引用highlight
+Vue.directive('highlight', function (el) {
+  let blocks = el.querySelectorAll('pre code')
+  blocks.forEach((block) => {
+    hljs.highlightBlock(block)
+  })
+})
 
 // 时间过滤器
 Vue.filter('time', function (data, fmt) {
@@ -16,19 +28,11 @@ Vue.filter('time', function (data, fmt) {
   return Moment(data).format(fmt)
 })
 
-// 引用highlight
-Vue.directive('highlight', function (el) {
-  let blocks = el.querySelectorAll('pre code')
-  blocks.forEach((block) => {
-    Hljs.highlightBlock(block)
-  })
-})
-
 Vue.config.productionTip = false
-Vue.use(ElementUI)
 Vue.prototype.$api = Api
 Vue.prototype.$util = FameUtil
 Vue.prototype.$moment = Moment
+Vue.prototype.$message = Message
 
 /* eslint-disable no-new */
 new Vue({

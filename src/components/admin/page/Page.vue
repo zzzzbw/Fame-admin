@@ -5,8 +5,9 @@
         <el-input v-model="page.title" placeholder="请输入自定义页面标题"></el-input>
       </el-form-item>
       <el-form-item>
-        <markdown-editor v-model="page.content" :configs="configs" ref="markdownEditor">
-        </markdown-editor>
+<!--        <markdown-editor v-model="page.content" :configs="configs" ref="markdownEditor">
+        </markdown-editor>-->
+        <markdown-editor v-model="page.content" ref="markdownEditor"></markdown-editor>
       </el-form-item>
       <div class="button-list">
         <el-button>返回列表</el-button>
@@ -19,9 +20,22 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import { markdownEditor } from 'vue-simplemde'
+  import markdownEditor from 'vue-simplemde/src/markdown-editor'
+  import {
+    Button,
+    Input,
+    Form,
+    FormItem
+  } from 'element-ui'
 
   export default {
+    components: {
+      'el-button': Button,
+      'el-input': Input,
+      'el-form': Form,
+      'el-form-item': FormItem,
+      markdownEditor
+    },
     data: function () {
       return {
         configs: {
@@ -38,9 +52,6 @@
           status: ''
         }
       }
-    },
-    components: {
-      markdownEditor
     },
     methods: {
       getPage () {
@@ -93,8 +104,11 @@
       this.getPage()
     }
   }
-
 </script>
+
+<style>
+  @import '~simplemde/dist/simplemde.min.css';
+</style>
 
 <style scoped>
   .button-list {

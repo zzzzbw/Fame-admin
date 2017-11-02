@@ -63,44 +63,44 @@ const Admin = (resolve) => {
   })
 }
 
-const AArticleEdit = (resolve) => {
-  import('@/components/admin/page/Article').then((module) => {
-    resolve(module)
-  })
-}
-
-const ATagList = (resolve) => {
-  import('@/components/admin/page/Tags').then((module) => {
-    resolve(module)
-  })
-}
-
-const AArticleList = (resolve) => {
-  import('@/components/admin/page/Articles').then((module) => {
-    resolve(module)
-  })
-}
-
-const ADashboard = (resolve) => {
+const Dashboard = (resolve) => {
   import('@/components/admin/page/Dashboard').then((module) => {
     resolve(module)
   })
 }
 
-const ASetting = (resolve) => {
-  import('@/components/admin/page/Setting').then((module) => {
+const ArticleEdit = (resolve) => {
+  import('@/components/admin/page/Article').then((module) => {
     resolve(module)
   })
 }
 
-const APageList = (resolve) => {
+const ArticleList = (resolve) => {
+  import('@/components/admin/page/Articles').then((module) => {
+    resolve(module)
+  })
+}
+
+const TagList = (resolve) => {
+  import('@/components/admin/page/Tags').then((module) => {
+    resolve(module)
+  })
+}
+
+const PageList = (resolve) => {
   import('@/components/admin/page/Pages').then((module) => {
     resolve(module)
   })
 }
 
-const APageEdit = (resolve) => {
+const PageEdit = (resolve) => {
   import('@/components/admin/page/Page').then((module) => {
+    resolve(module)
+  })
+}
+
+const Setting = (resolve) => {
+  import('@/components/admin/page/Setting').then((module) => {
     resolve(module)
   })
 }
@@ -153,38 +153,39 @@ const router = new Router({
       children: [
         {
           path: 'dashboard',
-          component: ADashboard
+          component: Dashboard
         },
         {
           path: 'article/publish/:id',
-          component: AArticleEdit
-        }, {
+          component: ArticleEdit
+        },
+        {
           path: 'article/publish',
-          component: AArticleEdit
+          component: ArticleEdit
         },
         {
           path: 'article',
-          component: AArticleList
+          component: ArticleList
         },
         {
           path: 'tag',
-          component: ATagList
+          component: TagList
         },
         {
           path: 'page',
-          component: APageList
+          component: PageList
         },
         {
           path: 'page/publish/:id',
-          component: APageEdit
+          component: PageEdit
         },
         {
           path: 'page/publish',
-          component: APageEdit
+          component: PageEdit
         },
         {
           path: 'setting',
-          component: ASetting
+          component: Setting
         }
       ]
     },

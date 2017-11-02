@@ -47,7 +47,16 @@
 </template>
 
 <script>
+  import {
+    Row,
+    Col
+  } from 'element-ui'
+
   export default {
+    components: {
+      'el-row': Row,
+      'el-col': Col
+    },
     data () {
       return {
         visitCount: 0,

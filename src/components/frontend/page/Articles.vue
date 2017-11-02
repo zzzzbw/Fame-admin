@@ -4,9 +4,9 @@
       <h3 class="article-head text-bold">
         <router-link :to="{ path: '/article/'+article.id }">{{article.title}}</router-link>
       </h3>
-      <p class="article-date"><i class="fa fa-folder" aria-hidden="true"></i> {{article.category}}</p>
-      <p class="article-date text-italic"><i class="fa fa-calendar" aria-hidden="true"></i> {{article.date}}</p>
-      <p class="article-date"><i class="fa fa-eye" aria-hidden="true"></i> {{article.hits}}</p>
+      <p class="article-date"><span class="icon-folder"></span> {{article.category}}</p>
+      <p class="article-date text-italic"><span class="icon-calendar"></span> {{article.date}}</p>
+      <p class="article-date"><span class="icon-eye"></span> {{article.hits}}</p>
       <div class="article-tags">
         <label v-for="tag in article.tags" class="chip">
           {{tag}}
@@ -94,6 +94,7 @@
 
 <style scoped>
   @import "/static/css/markdown-css.css";
+  @import "~highlight.js/styles/googlecode.css";
 
   .article-item {
     margin-top: 40px;

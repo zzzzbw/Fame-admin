@@ -13,7 +13,7 @@
         <div class="tag-title">{{tagTitle}}</div>
         <ul class="tag-ul">
           <li v-for="article in articles" class="article-title">
-            <router-link :to="{ path: '/articles/'+article.id }" class="text-primary">{{article.title}}</router-link>
+            <router-link :to="{ path: '/article/'+article.id }" class="text-primary">{{article.title}}</router-link>
           </li>
         </ul>
       </div>
@@ -29,7 +29,7 @@
         tags: [],
         articles: [],
         tagTitle: '',
-        show: false,
+        show: false
       }
     },
     methods: {

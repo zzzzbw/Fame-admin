@@ -12,7 +12,7 @@
             <p class="tile-subtitle">{{archive.year}}</p>
             <p v-for="article in archive.articles" class="tile-title">
               <label class="text-italic">{{article.created, 'MM-DD' | time}}</label>
-              <router-link :to="{ path: '/articles/'+article.id }">{{article.title}}</router-link>
+              <router-link :to="{ path: '/article/'+article.id }">{{article.title}}</router-link>
             </p>
           </div>
         </div>

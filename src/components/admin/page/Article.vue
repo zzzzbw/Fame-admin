@@ -50,8 +50,29 @@
 
 <script>
   import { markdownEditor } from 'vue-simplemde'
+  import {
+    Button,
+    Input,
+    Form,
+    FormItem,
+    Select,
+    Option,
+    Row,
+    Col
+  } from 'element-ui'
 
   export default {
+    components: {
+      'el-button': Button,
+      'el-input': Input,
+      'el-form': Form,
+      'el-form-item': FormItem,
+      'el-select': Select,
+      'el-option': Option,
+      'el-row': Row,
+      'el-col': Col,
+      markdownEditor
+    },
     data: function () {
       return {
         configs: {
@@ -70,11 +91,8 @@
           status: ''
         },
         tags: [],
-        categories: [],
+        categories: []
       }
-    },
-    components: {
-      markdownEditor
     },
     methods: {
       getArticle () {
@@ -183,6 +201,10 @@
     }
   }
 </script>
+
+<style>
+  @import '~simplemde/dist/simplemde.min.css';
+</style>
 
 <style scoped>
   .button-list {

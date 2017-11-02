@@ -20,7 +20,7 @@
   }
 </script>
 
-<style>
+<style scoped>
   .error {
     margin-top: 180px;
   }

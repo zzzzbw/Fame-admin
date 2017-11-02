@@ -26,7 +26,6 @@
       document.title = 'Fame Blog'
     }
   }
-
 </script>
 
 <style>
@@ -35,14 +34,14 @@
   }
 </style>
 <style scoped>
-  @import '~element-ui/lib/theme-default/loading.css';
   @import "/static/css/normalize.css";
   @import "/static/css/main.css";
+  @import "/static/css/icon.css";
 
-  @font-face {
+/*  @font-face {
     font-family: 'Source Sans Pro';
     src: url("/static/fonts/SourceSansPro.ttf");
-  }
+  }*/
 
   .container {
     padding: 1em;

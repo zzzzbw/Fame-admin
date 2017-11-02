@@ -2,9 +2,9 @@
   <div>
     <h2 class="article-title text-bold">{{article.title}}</h2>
     <div class="article-info">
-      <p class="article-category"><i class="fa fa-folder" aria-hidden="true"></i> {{article.category}}</p>
-      <p class="article-date"><i class="fa fa-calendar" aria-hidden="true"></i> {{article.date}}</p>
-      <p class="article-date"><i class="fa fa-eye" aria-hidden="true"></i> {{article.hits}}</p>
+      <p class="article-category"><span class="icon-folder"></span> {{article.category}}</p>
+      <p class="article-date"><span class="icon-calendar"></span> {{article.date}}</p>
+      <p class="article-date"><span class="icon-eye"></span> {{article.hits}}</p>
     </div>
 
     <div class="markdown-body" v-html="article.content" v-highlight>
@@ -59,6 +59,7 @@
 
 <style scoped>
   @import "/static/css/markdown-css.css";
+  @import "~highlight.js/styles/googlecode.css";
 
   .article-title {
     color: #24292e;;

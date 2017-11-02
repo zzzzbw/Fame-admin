@@ -1,6 +1,11 @@
 <template>
   <div :class="[ showLeftMenu ? 'left-menu-show':'left-menu-hide' ]" class="left-menu">
-    <el-menu default-active="" :collapse="false" theme="dark" router @select="mobileToggle">
+    <el-menu default-active=""
+             background-color="#324157"
+             text-color="#fff"
+             active-text-color="#ffd04b"
+             router
+             @select="mobileToggle">
       <el-menu-item index="/admin/dashboard">
         <i class="fa fa-tachometer" aria-hidden="true"></i>
         <span slot="title">仪表盘</span>
@@ -24,7 +29,6 @@
           <i class="fa fa-book" aria-hidden="true"></i>
           <span slot="title">页面列表</span>
         </el-menu-item>
-
       </el-submenu>
 
       <el-menu-item index="/admin/setting">
@@ -36,7 +40,14 @@
 </template>
 
 <script type="text/ecmascript-6">
+  import { Menu, Submenu, MenuItem } from 'element-ui'
+
   export default {
+    components: {
+      'el-menu': Menu,
+      'el-submenu': Submenu,
+      'el-menu-item': MenuItem
+    },
     data () {
       return {
         showLeftMenu: false
@@ -74,6 +85,10 @@
     background-color: #324157;
     box-shadow: 0 2px 3px hsla(0, 0%, 7%, .1), 0 0 0 1px hsla(0, 0%, 7%, .1);
     transition: 0.3s left;
+  }
+
+  .left-menu .el-menu {
+    border-right: none;
   }
 
   .left-menu-show {

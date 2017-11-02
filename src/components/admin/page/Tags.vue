@@ -16,7 +16,7 @@
             </li>
           </ul>
           <el-input placeholder="请输入标签名称" class="meta-input" v-model.trim="tagName"></el-input>
-          <el-button type="success" style="float: right;clear: both" @click="saveOrUpdateTag">保存标签</el-button>
+          <el-button type="success" size="small" style="float: right;clear: both" @click="saveOrUpdateTag">保存标签</el-button>
         </el-card>
       </el-col>
       <el-col :xs="24" :sm="12" :md="12" :lg="12" style="margin-top: 30px">
@@ -34,7 +34,7 @@
             </li>
           </ul>
           <el-input placeholder="请输入分类名称" class="meta-input" v-model.trim="categoryName"></el-input>
-          <el-button type="success" style="float: right;clear: both" @click="saveOrUpdateCategory">保存分类</el-button>
+          <el-button type="success" size="small" style="float: right;clear: both" @click="saveOrUpdateCategory">保存分类</el-button>
         </el-card>
       </el-col>
     </el-row>
@@ -42,7 +42,22 @@
 </template>
 
 <script type="text/ecmascript-6">
+  import {
+    Row,
+    Col,
+    Button,
+    Input,
+    Card
+  } from 'element-ui'
+
   export default {
+    components: {
+      'el-row': Row,
+      'el-col': Col,
+      'el-button': Button,
+      'el-input': Input,
+      'el-card': Card
+    },
     data () {
       return {
         tags: [],

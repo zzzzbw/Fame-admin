@@ -27,11 +27,14 @@
 <script type="text/ecmascript-6">
   import MHeader from './common/MHeader'
   import LeftMenu from './common/LeftMenu'
+  import { Breadcrumb, BreadcrumbItem } from 'element-ui'
 
   export default {
     components: {
       MHeader,
-      LeftMenu
+      LeftMenu,
+      'el-breadcrumb': Breadcrumb,
+      'el-breadcrumb-item': BreadcrumbItem
     },
     created () {
       document.title = 'Fame Admin'
@@ -40,7 +43,6 @@
 </script>
 
 <style scoped>
-  @import '~element-ui/lib/theme-default/index.css';
   @import "/static/css/normalize.css";
   @import "/static/css/main.css";
 

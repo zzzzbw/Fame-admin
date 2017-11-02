@@ -30,7 +30,7 @@
         <div slot="header">
           <span>系统设置(重启服务器后会还原)</span>
         </div>
-        <el-form ref="form" v-model="staticForm" :label-position="'left'" label-width="100px">
+        <el-form ref="form" v-model="staticForm" :label-position="'left'" label-width="160px">
           <el-form-item label="网站名称(Title):">
             <el-input v-model="staticForm.title" placeholder="请输入网站名称"></el-input>
           </el-form-item>
@@ -51,7 +51,26 @@
 </template>
 
 <script type="text/ecmascript-6">
+  import {
+    Row,
+    Col,
+    Form,
+    FormItem,
+    Button,
+    Input,
+    Card
+  } from 'element-ui'
+
   export default {
+    components: {
+      'el-row': Row,
+      'el-col': Col,
+      'el-form': Form,
+      'el-form-item': FormItem,
+      'el-button': Button,
+      'el-input': Input,
+      'el-card': Card
+    },
     data: function () {
       return {
         userForm: {
