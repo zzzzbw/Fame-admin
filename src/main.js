@@ -33,6 +33,7 @@ Vue.prototype.$api = Api
 Vue.prototype.$util = FameUtil
 Vue.prototype.$moment = Moment
 Vue.prototype.$message = Message
+Vue.prototype.$hljs = hljs
 
 /* eslint-disable no-new */
 new Vue({

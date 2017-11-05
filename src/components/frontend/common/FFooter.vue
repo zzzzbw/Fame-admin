@@ -1,9 +1,9 @@
 <template>
   <div class="footer">
     <p class="copyright">
-      © 2017 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+      © 2017 | Proudly powered by <a href="https://github.com/d9577/Fame" target="_blank">Fame</a>
       <br>
-      Theme by <a href="https://github.com/yanm1ng">yanm1ng</a></p>
+      Theme by <a href="https://github.com/d9577/fame-default" target="_blank">Fame-default</a></p>
   </div>
 </template>
 

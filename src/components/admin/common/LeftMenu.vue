@@ -7,32 +7,35 @@
              router
              @select="mobileToggle">
       <el-menu-item index="/admin/dashboard">
-        <i class="fa fa-tachometer" aria-hidden="true"></i>
+        <span class="icon-dashboard"></span>&nbsp;
         <span slot="title">仪表盘</span>
       </el-menu-item>
       <el-menu-item index="/admin/article/publish">
-        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+        <span class="icon-edit"></span>&nbsp;
         <span slot="title">发布文章</span>
       </el-menu-item>
       <el-menu-item index="/admin/article?page=1">
-        <i class="fa fa-list" aria-hidden="true"></i>
+        <span class="icon-list"></span>&nbsp;
         <span slot="title">文章列表</span>
       </el-menu-item>
       <el-menu-item index="/admin/tag">
-        <i class="fa fa-tag" aria-hidden="true"></i>
+        <span class="icon-tags"></span>&nbsp;
         <span slot="title">标签/分类</span>
       </el-menu-item>
       <el-submenu index="1">
         <template slot="title">自定义页面</template>
-        <el-menu-item index="/admin/page/publish">新增页面</el-menu-item>
+        <el-menu-item index="/admin/page/publish">
+          <span class="icon-folder"></span>&nbsp;
+          <span slot="title">新增页面</span>
+        </el-menu-item>
         <el-menu-item index="/admin/page?page=1">
-          <i class="fa fa-book" aria-hidden="true"></i>
+          <span class="icon-th-list"></span>&nbsp;
           <span slot="title">页面列表</span>
         </el-menu-item>
       </el-submenu>
 
       <el-menu-item index="/admin/setting">
-        <i class="fa fa-cog" aria-hidden="true"></i>
+        <span class="icon-cog"></span>&nbsp;
         <span slot="title">网站设置</span>
       </el-menu-item>
     </el-menu>

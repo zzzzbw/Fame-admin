@@ -1,14 +1,14 @@
 <template>
   <div class="header">
     <div class="collapse">
-      <a @click="collapse"><i aria-hidden="true" class="fa fa-bars"></i></a>
+      <a @click="collapse"><span class="icon-th-list"></span></a>
     </div>
     <h3 class="title">Fame</h3>
     <ul class="header-right">
       <li>
         <a @click="logout">
-          <i class="fa fa-sign-out" aria-hidden="true"></i>
-          Log out
+          <span class="icon-sign-in"></span>
+          <span>Log out</span>
         </a>
       </li>
     </ul>
@@ -43,6 +43,7 @@
 </script>
 
 <style scoped>
+
   .header {
     width: 100%;
     height: 60px;

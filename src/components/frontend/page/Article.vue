@@ -58,7 +58,7 @@
 </script>
 
 <style scoped>
-  @import "/static/css/markdown-css.css";
+  @import '/static/css/markdown-css.css';
   @import "~highlight.js/styles/googlecode.css";
 
   .article-title {

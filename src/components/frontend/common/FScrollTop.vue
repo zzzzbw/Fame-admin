@@ -1,6 +1,6 @@
 <template>
   <div class="scroll-top" ref="scrollTop" @click="toTop">
-    <i class="fa fa-arrow-up fa-2x" aria-hidden="true"></i>
+    <span class="icon-arrow-up" style="font-size: 28px"></span>
   </div>
 </template>
 

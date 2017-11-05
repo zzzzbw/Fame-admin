@@ -24,7 +24,7 @@
       </ul>
       <div class="header-menu">
         <div class="header-menu-icon" @click="toggle">
-          <i class="fa fa-bars fa-2x" aria-hidden="true"></i>
+          <span class="icon-th-list" style="font-size: 24px"></span>
         </div>
         <div class="header-menu-list" :class="{ 'open': menuOpen }">
           <ul>

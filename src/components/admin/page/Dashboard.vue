@@ -7,7 +7,9 @@
             <h3>{{visitCount}}</h3>
             <p>网站访问量</p>
           </div>
-          <div class="icon"><i class="fa fa-eye red" aria-hidden="true"></i></div>
+          <div class="icon red">
+            <span class="icon-eye"></span>
+          </div>
         </div>
       </el-col>
       <el-col :xs="24" :sm="12" :md="12" :lg="12">
@@ -16,7 +18,9 @@
             <h3>{{articleCount}}</h3>
             <p>发布文章数</p>
           </div>
-          <div class="icon"><i class="fa fa-book" aria-hidden="true"></i></div>
+          <div class="icon">
+            <span class="icon-book"></span>
+          </div>
         </div>
       </el-col>
     </el-row>
@@ -137,7 +141,7 @@
   }
 </script>
 
-<style>
+<style scoped>
 
   .panel {
     padding: 25px 15px;
@@ -189,7 +193,7 @@
     float: right;
   }
 
-  .panel .icon .fa {
+  .panel .icon {
     font-size: 30px;
     color: #FFFFFF;
     background: #30A5FF;

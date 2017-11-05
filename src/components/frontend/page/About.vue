@@ -23,5 +23,5 @@
 </script>
 
 <style scoped>
-  @import "/static/css/markdown-css.css";
+  @import '/static/css/markdown-css.css';
 </style>
