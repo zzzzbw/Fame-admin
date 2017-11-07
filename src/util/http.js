@@ -4,7 +4,7 @@ import { Message, Loading } from 'element-ui'
 import router from '../router/index'
 
 const Axios = axios.create({
-  baseURL: 'http://localhost:9090/', // 本地做反向代理
+  baseURL: 'http://localhost:9090/api/', // 本地做反向代理
   timeout: 5000,
   responseType: 'json',
   withCredentials: true, // 是否允许带cookie这些

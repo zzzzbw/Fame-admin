@@ -6,7 +6,7 @@ import FameUtil from './util/fame'
 import Moment from 'moment'
 import hljs from 'highlight.js/lib/highlight' // 引入lib而不是整个文件
 
-import { Message } from 'element-ui'
+import { Message, Loading } from 'element-ui'
 
 // 引入需要的语言
 ['javascript', 'python', 'java', 'xml'].forEach((langName) => {
@@ -33,6 +33,7 @@ Vue.prototype.$api = Api
 Vue.prototype.$util = FameUtil
 Vue.prototype.$moment = Moment
 Vue.prototype.$message = Message
+Vue.prototype.$loading = Loading
 Vue.prototype.$hljs = hljs
 
 /* eslint-disable no-new */

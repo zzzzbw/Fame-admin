@@ -202,6 +202,10 @@
   @import '~simplemde/dist/simplemde.min.css';
   @import "~highlight.js/styles/googlecode.css";
   @import '/static/css/markdown-css.css';
+
+  .el-select-dropdown ::-webkit-scrollbar {
+    display: block;
+  }
 </style>
 
 <style scoped>

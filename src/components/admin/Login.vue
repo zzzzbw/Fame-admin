@@ -1,8 +1,8 @@
 <template>
-  <div class="container">
+  <div class="container" id="main">
     <div class="login-wrap">
       <h2 class="title">Fame Login</h2>
-      <el-form :model="userForm" :rules="rules" ref="ruleForm" label-width="0px" class="userForm">
+      <el-form :model="userForm" :rules="rules" ref="userForm" label-width="0px">
         <el-form-item prop="username">
           <el-input v-model="userForm.username" placeholder="用户名"></el-input>
         </el-form-item>
@@ -11,7 +11,7 @@
                     @keyup.enter.native="submitForm('userForm')"></el-input>
         </el-form-item>
         <div class="login-btn">
-          <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
+          <el-button type="primary" @click="submitForm('userForm')">登录</el-button>
         </div>
       </el-form>
     </div>

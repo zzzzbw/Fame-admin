@@ -1,7 +1,7 @@
 <template>
   <div>
-    <el-form>
-      <el-form-item>
+    <el-form :rules="rules" ref="articleForm" :model="article">
+      <el-form-item prop="title">
         <el-input v-model="article.title" placeholder="请输入文章标题"></el-input>
       </el-form-item>
       <el-row :gutter="30">
@@ -185,6 +185,11 @@
           content: '',
           status: ''
         },
+        rules: {
+          title: [
+            {required: true, message: '文章标题必须输入', trigger: 'blur'}
+          ]
+        },
         tags: [],
         categories: []
       }
@@ -253,31 +258,35 @@
           }
         })
       },
-      saveArticle () {
-        let params = this.article
-        params.tags = this.$util.tagsToString(this.article.tags)
-        this.$api.auth.saveArticle(params).then(data => {
-          if (data.success) {
-            this.$router.push('/admin/article')
-            this.$message({
-              message: '发布文章成功!',
-              type: 'success'
-            })
-          } else {
-            this.$message({
-              message: '发布文章失败,' + data.msg,
-              type: 'error'
+      saveArticle (formName) {
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            let params = this.article
+            params.tags = this.$util.tagsToString(this.article.tags)
+            this.$api.auth.saveArticle(params).then(data => {
+              if (data.success) {
+                this.$router.push('/admin/article')
+                this.$message({
+                  message: '发布文章成功!',
+                  type: 'success'
+                })
+              } else {
+                this.$message({
+                  message: '发布文章失败,' + data.msg,
+                  type: 'error'
+                })
+              }
             })
           }
         })
       },
       onPublish () {
         this.article.status = this.$util.STATIC.STATUS_PUBLISH
-        this.saveArticle()
+        this.saveArticle('articleForm')
       },
       onDraft () {
         this.article.status = this.$util.STATIC.STATUS_DRAFT
-        this.saveArticle()
+        this.saveArticle('articleForm')
       },
       init () {
         this.getArticle()
@@ -301,6 +310,10 @@
   @import '~simplemde/dist/simplemde.min.css';
   @import "~highlight.js/styles/googlecode.css";
   @import '/static/css/markdown-css.css';
+
+  .el-select-dropdown ::-webkit-scrollbar{
+    display: block;
+  }
 </style>
 
 <style scoped>
@@ -313,3 +326,4 @@
     display: block;
   }
 </style>
+
