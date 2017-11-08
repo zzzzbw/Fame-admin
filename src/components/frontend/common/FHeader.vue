@@ -29,19 +29,19 @@
         <div class="header-menu-list" :class="{ 'open': menuOpen }">
           <ul>
             <li class="header-menu-item text-primary">
-              <router-link :to="{ path: '/article', query: {page: '1'}}" exact>首页</router-link>
+              <a @click="to('/article',{page: '1'})">首页</a>
             </li>
             <li class="header-menu-item">
-              <router-link :to="{path: '/category'}">分类</router-link>
+              <a @click="to('/category')">分类</a>
             </li>
             <li class="header-menu-item">
-              <router-link :to="{path: '/tag'}">标签</router-link>
+              <a @click="to('/tag')">标签</a>
             </li>
             <li class="header-menu-item">
-              <router-link :to="{path: '/archive'}">归档</router-link>
+              <a @click="to('/archive')">归档</a>
             </li>
             <li class="header-menu-item">
-              <router-link :to="{path: '/about'}">关于</router-link>
+              <a @click="to('/about')">关于</a>
             </li>
           </ul>
         </div>
@@ -60,13 +60,17 @@
     methods: {
       toggle () {
         this.menuOpen = !this.menuOpen
+      },
+      to (url, query) {
+        this.$router.push({path: url, query: query})
+        this.toggle()
       }
     }
   }
 </script>
 
 <style scoped>
-  a{
+  a {
     color: #5764c6;
     text-decoration: none;
   }

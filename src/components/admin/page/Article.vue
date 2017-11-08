@@ -34,7 +34,7 @@
           </el-form-item>
         </el-col>
       </el-row>
-      <el-form-item>
+      <el-form-item prop="content">
         <markdown-editor v-model="article.content" :configs="configs" :highlight="true" ref="markdownEditor"
                          preview-class="markdown-body">
         </markdown-editor>
@@ -188,6 +188,9 @@
         rules: {
           title: [
             {required: true, message: '文章标题必须输入', trigger: 'blur'}
+          ],
+          content: [
+            {required: true, message: '文章内容不能为空', trigger: 'blur'}
           ]
         },
         tags: [],
@@ -311,7 +314,7 @@
   @import "~highlight.js/styles/googlecode.css";
   @import '/static/css/markdown-css.css';
 
-  .el-select-dropdown ::-webkit-scrollbar{
+  .el-select-dropdown ::-webkit-scrollbar {
     display: block;
   }
 </style>

@@ -4,7 +4,7 @@ import { Message, Loading } from 'element-ui'
 import router from '../router/index'
 
 const Axios = axios.create({
-  baseURL: 'http://localhost:9090/api/', // 本地做反向代理
+  baseURL: 'http://127.0.0.1:9090/api/', // 本地做反向代理
   timeout: 5000,
   responseType: 'json',
   withCredentials: true, // 是否允许带cookie这些
@@ -45,20 +45,6 @@ Axios.interceptors.response.use(function (response) {
     loadingInstace.close()
     loadingInstace = null
   }
-  let msg = ''
-  if (response.data && !response.data.success) {
-    switch (response.data.code) {
-      case 999:
-        router.push('/admin/login')
-        msg = '未登录,请先登录'
-        break
-    }
-    Message({
-      showClose: true,
-      message: msg || response.data.msg,
-      type: 'error'
-    })
-  }
   return response
 }, function (error) {
   // 处理响应失败
@@ -71,6 +57,10 @@ Axios.interceptors.response.use(function (response) {
     msg = error.message
   } else {
     switch (error.response.status) {
+      case 999:
+        msg = '未登陆，请先登陆'
+        router.push('/admin/login')
+        break
       case 404:
         msg = '该页面不存在'
         router.push('/error/404/' + msg)
