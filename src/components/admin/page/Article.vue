@@ -38,6 +38,7 @@
         <markdown-editor v-model="article.content" :configs="configs" :highlight="true" ref="markdownEditor"
                          preview-class="markdown-body">
         </markdown-editor>
+        <!-- 键修饰符，键别名 -->
       </el-form-item>
       <div class="button-list">
         <el-button>返回列表</el-button>
@@ -163,16 +164,12 @@
             title: '预览'
           }, {
             name: 'fullscreen',
-            action: function toggleFullScreen (editor) {
-              editor.toggleFullScreen()
-            },
+            action: this.toggleFullScreen,
             className: 'icon-arrows-alt',
             title: '全屏'
           }, {
             name: 'side-by-side',
-            action: function toggleSideBySide (editor) {
-              editor.toggleSideBySide()
-            },
+            action: this.toggleSideBySide,
             className: 'icon-columns',
             title: '分屏'
           }]
@@ -194,7 +191,8 @@
           ]
         },
         tags: [],
-        categories: []
+        categories: [],
+        isFullScreen: false
       }
     },
     methods: {
@@ -291,10 +289,40 @@
         this.article.status = this.$util.STATIC.STATUS_DRAFT
         this.saveArticle('articleForm')
       },
+      toggleFullScreen (editor) {
+        console.log('toggleFullScreen')
+        if (this.isFullScreen) {
+          this.isFullScreen = false
+          this.$root.$emit('indexDown')
+        } else {
+          this.isFullScreen = true
+          this.$root.$emit('indexUp')
+        }
+        editor.toggleFullScreen()
+      },
+      toggleSideBySide (editor) {
+        if (!editor.isFullscreenActive()) {
+          this.isFullScreen = true
+          this.$root.$emit('indexUp')
+        }
+        editor.toggleSideBySide()
+      },
+      escDown () {
+        let _this = this
+        document.onkeydown = function (event) {
+          if (event.keyCode === 27) {
+            if (_this.isFullScreen) {
+              _this.$root.$emit('indexDown')
+              _this.isFullScreen = false
+            }
+          }
+        }
+      },
       init () {
         this.getArticle()
         this.getTags()
         this.getCategories()
+        this.escDown()
       }
     },
     mounted () {
