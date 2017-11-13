@@ -5,8 +5,7 @@
         <el-input v-model="page.title" placeholder="请输入自定义页面标题"></el-input>
       </el-form-item>
       <el-form-item prop="content">
-        <markdown-editor v-model="page.content" :configs="configs" :highlight="true" ref="markdownEditor"
-                         preview-class="markdown-body"></markdown-editor>
+        <md-editor v-model="page.content"></md-editor>
       </el-form-item>
       <div class="button-list">
         <el-button>返回列表</el-button>
@@ -18,7 +17,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import markdownEditor from 'vue-simplemde/src/markdown-editor'
+  import MDEditor from '../common/MDEditor'
   import {
     Button,
     Input,
@@ -26,116 +25,16 @@
     FormItem
   } from 'element-ui'
 
-  import hljs from 'highlight.js/lib/highlight'
-
-  window.hljs = hljs
   export default {
     components: {
       'el-button': Button,
       'el-input': Input,
       'el-form': Form,
       'el-form-item': FormItem,
-      markdownEditor
+      'md-editor': MDEditor
     },
     data: function () {
       return {
-        configs: {
-          autoDownloadFontAwesome: false, // 禁止下载fontAwesome
-          status: false, // 禁用底部状态栏
-          spellChecker: false, // 禁用拼写检查
-          toolbar: [{
-            name: 'bold',
-            action: function toggleBold (editor) {
-              editor.toggleBold()
-            },
-            className: 'icon-bold',
-            title: '加粗'
-          }, {
-            name: 'italic',
-            action: function toggleItalic (editor) {
-              editor.toggleItalic()
-            },
-            className: 'icon-italic',
-            title: 'icon-italic'
-          }, {
-            name: 'strikethrough',
-            action: function toggleStrikethrough (editor) {
-              editor.toggleStrikethrough()
-            },
-            className: 'icon-strikethrough',
-            title: '删除线'
-          }, {
-            name: 'heading',
-            action: function toggleHeadingSmaller (editor) {
-              editor.toggleHeadingSmaller()
-            },
-            className: 'icon-header',
-            title: '标题'
-          }, {
-            name: 'code',
-            action: function toggleCodeBlock (editor) {
-              editor.toggleCodeBlock()
-            },
-            className: 'icon-code',
-            title: '代码块'
-          }, {
-            name: 'quote',
-            action: function toggleBlockquote (editor) {
-              editor.toggleBlockquote()
-            },
-            className: 'icon-quote-left',
-            title: '引用'
-          }, {
-            name: 'unordered-list',
-            action: function toggleUnorderedList (editor) {
-              editor.toggleUnorderedList()
-            },
-            className: 'icon-list-ul',
-            title: '无序列表'
-          }, {
-            name: 'ordered-list',
-            action: function toggleOrderedList (editor) {
-              editor.toggleOrderedList()
-            },
-            className: 'icon-list-ol',
-            title: '有序列表'
-          }, {
-            name: 'link',
-            action: function drawLink (editor) {
-              editor.drawLink()
-            },
-            className: 'icon-link',
-            title: '插入链接'
-          }, {
-            name: 'image',
-            action: function drawImage (editor) {
-              editor.drawImage()
-            },
-            className: 'icon-image',
-            title: '插入图片'
-          }, '|', {
-            name: 'preview',
-            action: function togglePreview (editor) {
-              editor.togglePreview()
-            },
-            className: 'icon-eye',
-            title: '预览'
-          }, {
-            name: 'fullscreen',
-            action: function toggleFullScreen (editor) {
-              editor.toggleFullScreen()
-            },
-            className: 'icon-arrows-alt',
-            title: '全屏'
-          }, {
-            name: 'side-by-side',
-            action: function toggleSideBySide (editor) {
-              editor.toggleSideBySide()
-            },
-            className: 'icon-columns',
-            title: '分屏'
-          }]
-        },
         page: {
           id: '',
           title: '',
@@ -156,7 +55,7 @@
       getPage () {
         const id = this.$route.params.id
         if (id) {
-          this.$api.getPageAuth(id).then(data => {
+          this.$api.auth.getPage(id).then(data => {
             if (data.success) {
               this.page.id = data.data.id
               this.page.title = data.data.title
@@ -177,7 +76,7 @@
       savePage (formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            this.$api.savePageAuth(this.page).then(data => {
+            this.$api.auth.savePage(this.page).then(data => {
               if (data.success) {
                 this.$router.push('/admin/page')
                 this.$message({
