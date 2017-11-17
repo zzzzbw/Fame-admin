@@ -106,7 +106,7 @@ const Setting = (resolve) => {
 }
 
 const router = new Router({
-  mode: 'hash',
+  mode: 'history',
   linkActiveClass: 'active',
   routes: [
     {

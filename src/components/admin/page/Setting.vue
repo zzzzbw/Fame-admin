@@ -1,53 +1,58 @@
 <template>
   <el-row :gutter="30">
     <el-col :xs="24" :sm="12" :md="12" :lg="12" style="margin-top: 30px">
-      <el-card class="box-card">
-        <div slot="header">
-          <span>个人设置</span>
+      <div class="panel">
+        <div class="panel-content">
+          <div class="header">
+            <div class="title">个人设置</div>
+          </div>
+          <el-form ref="form" v-model="userForm" :label-position="'left'" label-width="100px">
+            <el-form-item label="账号:">
+              <el-input v-model="userForm.username" placeholder="账号" :disabled="true"></el-input>
+            </el-form-item>
+            <el-form-item label="原密码:">
+              <el-input type="password" v-model="userForm.oldPassword" placeholder="请输入原密码"></el-input>
+            </el-form-item>
+            <el-form-item label="新密码:">
+              <el-input type="password" v-model="userForm.newPassword" placeholder="请输入新密码"></el-input>
+            </el-form-item>
+            <el-form-item label="确认新密码:">
+              <el-input type="password" v-model="userForm.repeatPassword" placeholder="请输入确认新密码"></el-input>
+            </el-form-item>
+            <el-form-item>
+              <el-button type="info" size="small" style="float: right;" @click="submitUser">保存修改
+              </el-button>
+            </el-form-item>
+          </el-form>
         </div>
-        <el-form ref="form" v-model="userForm" :label-position="'left'" label-width="100px">
-          <el-form-item label="账号:">
-            <el-input v-model="userForm.username" placeholder="账号" :disabled="true"></el-input>
-          </el-form-item>
-          <el-form-item label="原密码:">
-            <el-input type="password" v-model="userForm.oldPassword" placeholder="请输入原密码"></el-input>
-          </el-form-item>
-          <el-form-item label="新密码:">
-            <el-input type="password" v-model="userForm.newPassword" placeholder="请输入新密码"></el-input>
-          </el-form-item>
-          <el-form-item label="确认新密码:">
-            <el-input type="password" v-model="userForm.repeatPassword" placeholder="请输入确认新密码"></el-input>
-          </el-form-item>
-          <el-form-item>
-            <el-button type="info" style="float: right;" @click="submitUser">保存修改
-            </el-button>
-          </el-form-item>
-        </el-form>
-      </el-card>
+      </div>
     </el-col>
     <el-col :xs="24" :sm="12" :md="12" :lg="12" style="margin-top: 30px">
-      <el-card class="box-card">
-        <div slot="header">
-          <span>系统设置(重启服务器后会还原)</span>
+      <div class="panel">
+        <div class="panel-content">
+          <div class="header">
+            <div class="title">系统设置(重启服务器后会还原)</div>
+          </div>
+          <el-form ref="form" v-model="staticForm" :label-position="'left'" label-width="160px">
+            <el-form-item label="网站名称(Title):">
+              <el-input v-model="staticForm.title" placeholder="请输入网站名称"></el-input>
+            </el-form-item>
+            <el-form-item label="网站描述(description):">
+              <el-input v-model="staticForm.description" placeholder="请输入网站描述"></el-input>
+            </el-form-item>
+            <el-form-item label="网站关键字(keywords):">
+              <el-input v-model="staticForm.keywords" placeholder="请输入网站关键字"></el-input>
+            </el-form-item>
+            <el-form-item>
+              <el-button type="info" size="small" style="float: right;" @click="submitSitestatic">保存修改
+              </el-button>
+            </el-form-item>
+          </el-form>
         </div>
-        <el-form ref="form" v-model="staticForm" :label-position="'left'" label-width="160px">
-          <el-form-item label="网站名称(Title):">
-            <el-input v-model="staticForm.title" placeholder="请输入网站名称"></el-input>
-          </el-form-item>
-          <el-form-item label="网站描述(description):">
-            <el-input v-model="staticForm.description" placeholder="请输入网站描述"></el-input>
-          </el-form-item>
-          <el-form-item label="网站关键字(keywords):">
-            <el-input v-model="staticForm.keywords" placeholder="请输入网站关键字"></el-input>
-          </el-form-item>
-          <el-form-item>
-            <el-button type="info" style="float: right;" @click="submitSitestatic">保存修改
-            </el-button>
-          </el-form-item>
-        </el-form>
-      </el-card>
+      </div>
     </el-col>
   </el-row>
+
 </template>
 
 <script type="text/ecmascript-6">
@@ -57,8 +62,7 @@
     Form,
     FormItem,
     Button,
-    Input,
-    Card
+    Input
   } from 'element-ui'
 
   export default {
@@ -68,8 +72,7 @@
       'el-form': Form,
       'el-form-item': FormItem,
       'el-button': Button,
-      'el-input': Input,
-      'el-card': Card
+      'el-input': Input
     },
     data: function () {
       return {
@@ -161,5 +164,4 @@
 </script>
 
 <style scoped>
-
 </style>

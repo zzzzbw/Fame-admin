@@ -8,9 +8,9 @@
         <md-editor v-model="page.content"></md-editor>
       </el-form-item>
       <div class="button-list">
-        <el-button>返回列表</el-button>
-        <el-button type="info" @click="onPublish">发布页面</el-button>
-        <el-button type="warning" @click="onDraft">保存草稿</el-button>
+        <el-button size="small">返回列表</el-button>
+        <el-button type="info" size="small" @click="onPublish">发布页面</el-button>
+        <el-button type="warning" size="small" @click="onDraft">保存草稿</el-button>
       </div>
     </el-form>
   </div>

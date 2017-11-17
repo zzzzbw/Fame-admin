@@ -2,40 +2,44 @@
   <div style="margin-top: -30px">
     <el-row :gutter="30">
       <el-col :xs="24" :sm="12" :md="12" :lg="12" style="margin-top: 30px">
-        <el-card class="box-card">
-          <div slot="header">
-            <span>标签列表</span>
-          </div>
-          <ul class="meta-list">
-            <li v-for="tag in tags">
-              <span class="meta" @click="clickTag(tag.id,tag.name)">{{tag.name}}</span>
-              <span style="float: right;clear: both">
+        <div class="panel">
+          <div class="panel-content">
+            <div class="header">
+              <div class="title">标签列表</div>
+            </div>
+            <ul class="meta-list">
+              <li v-for="tag in tags">
+                <span class="meta" @click="clickTag(tag.id,tag.name)">{{tag.name}}</span>
+                <span style="float: right;clear: both">
                 <span class="meta-count">{{tag.count}}</span>
                 <el-button type="danger" size="small" @click="deleteTagHandle(tag.name)">删除</el-button>
               </span>
-            </li>
-          </ul>
-          <el-input placeholder="请输入标签名称" class="meta-input" v-model.trim="tagName"></el-input>
-          <el-button type="success" size="small" style="float: right;clear: both" @click="saveOrUpdateTag">保存标签</el-button>
-        </el-card>
+              </li>
+            </ul>
+            <el-input placeholder="请输入标签名称" class="meta-input" v-model.trim="tagName"></el-input>
+            <el-button type="success" size="small" style="float: right;clear: both" @click="saveOrUpdateTag">保存标签</el-button>
+          </div>
+        </div>
       </el-col>
       <el-col :xs="24" :sm="12" :md="12" :lg="12" style="margin-top: 30px">
-        <el-card class="box-card">
-          <div slot="header">
-            <span>分类列表</span>
-          </div>
-          <ul class="meta-list">
-            <li v-for="category in categories">
-              <span class="meta" @click="clickCategory(category.id,category.name)">{{category.name}}</span>
-              <span style="float: right;clear: both">
+        <div class="panel">
+          <div class="panel-content">
+            <div class="header">
+              <div class="title">分类列表</div>
+            </div>
+            <ul class="meta-list">
+              <li v-for="category in categories">
+                <span class="meta" @click="clickCategory(category.id,category.name)">{{category.name}}</span>
+                <span style="float: right;clear: both">
                 <span class="meta-count">{{category.count}}</span>
                 <el-button type="danger" size="small" @click="deleteCategoryHandle(category.name)">删除</el-button>
               </span>
-            </li>
-          </ul>
-          <el-input placeholder="请输入分类名称" class="meta-input" v-model.trim="categoryName"></el-input>
-          <el-button type="success" size="small" style="float: right;clear: both" @click="saveOrUpdateCategory">保存分类</el-button>
-        </el-card>
+              </li>
+            </ul>
+            <el-input placeholder="请输入分类名称" class="meta-input" v-model.trim="categoryName"></el-input>
+            <el-button type="success" size="small" style="float: right;clear: both" @click="saveOrUpdateCategory">保存分类</el-button>
+          </div>
+        </div>
       </el-col>
     </el-row>
   </div>
@@ -46,8 +50,7 @@
     Row,
     Col,
     Button,
-    Input,
-    Card
+    Input
   } from 'element-ui'
 
   export default {
@@ -55,8 +58,7 @@
       'el-row': Row,
       'el-col': Col,
       'el-button': Button,
-      'el-input': Input,
-      'el-card': Card
+      'el-input': Input
     },
     data () {
       return {
