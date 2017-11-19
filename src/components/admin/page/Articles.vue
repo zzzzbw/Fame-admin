@@ -37,7 +37,8 @@
     Button,
     Table,
     TableColumn,
-    Pagination
+    Pagination,
+    MessageBox
   } from 'element-ui'
 
   export default {
@@ -52,7 +53,8 @@
         articleDatas: [],
         total: 0,
         pageSize: 10,
-        currentPage: 1
+        currentPage: 1,
+        $confirm: null
       }
     },
     methods: {
@@ -117,6 +119,7 @@
     },
     mounted () {
       this.init(this.$route.query.page)
+      this.$confirm = MessageBox.confirm
     }
   }
 </script>
