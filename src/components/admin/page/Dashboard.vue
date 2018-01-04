@@ -1,21 +1,7 @@
 <template>
   <div>
     <el-row :gutter="50">
-      <el-col :xs="24" :sm="12" :md="12" :lg="12">
-        <div class="panel">
-          <div class="panel-content">
-              <div class="message">
-                <h3>{{visitCount}}</h3>
-                <p>网站访问量</p>
-              </div>
-              <div class="icon red">
-                <span class="icon-eye"></span>
-              </div>
-            <div style="clear: both"></div>
-          </div>
-        </div>
-      </el-col>
-      <el-col :xs="24" :sm="12" :md="12" :lg="12">
+      <el-col :xs="24" :sm="24" :md="24" :lg="24">
         <div class="panel">
           <div class="panel-content">
             <div class="message">
@@ -79,18 +65,6 @@
       }
     },
     methods: {
-      getVisitCount () {
-        this.$api.auth.getVisitCount().then(data => {
-          if (data.success) {
-            this.visitCount = data.data
-          } else {
-            this.$message({
-              message: '获取访问量失败,' + data.msg,
-              type: 'error'
-            })
-          }
-        })
-      },
       getArticleCount () {
         this.$api.auth.getArticleCount().then(data => {
           if (data.success) {
@@ -139,7 +113,6 @@
         })
       },
       init () {
-        this.getVisitCount()
         this.getArticleCount()
         this.getLogs()
         this.getArticle()
