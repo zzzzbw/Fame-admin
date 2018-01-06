@@ -1,21 +1,22 @@
-# fame-default
+## Fame博客
 
-> fame-default theme
+一个基于Vue开发的博客前端。该项目后端：[Fame](https://github.com/zzzzbw/Fame)
 
-## Build Setup
+演示站点：[http://zzzzbw.cn](http://zzzzbw.cn/)
 
-``` bash
-# install dependencies
-npm install
+基于Vue + elementui2.0 + Vue router
 
-# serve with hot reload at localhost:8080
-npm run dev
+具体使用方法请参考[快速开始](https://github.com/zzzzbw/Fame/blob/master/README.md)
 
-# build for production with minification
-npm run build
 
-# build for production and view the bundle analyzer report
-npm run build --report
-```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+### 相关截图
+
+![images](https://zzzzbw.github.io/Fame/images/index.png)
+![images](https://zzzzbw.github.io/Fame/images/article.png)
+![images](https://zzzzbw.github.io/Fame/images/login.png)
+![images](https://zzzzbw.github.io/Fame/images/Dashboard.png)
+![images](https://zzzzbw.github.io/Fame/images/admin_article_list.png)
+![images](https://zzzzbw.github.io/Fame/images/admin_article_edit.png)
+![images](https://zzzzbw.github.io/Fame/images/admin_meta_list.png)
+![images](https://zzzzbw.github.io/Fame/images/admin_web_edit.png)
