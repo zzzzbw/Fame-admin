@@ -1,31 +1,6 @@
 import { get, post, del } from './http'
 import util from './fame'
 
-const front = {
-  getArticles (page) {
-    let params = {
-      page: page,
-      limit: 5
-    }
-    return get('/article', params)
-  },
-  getArticle (id) {
-    return get('/article/' + id)
-  },
-  getCategories () {
-    return get('/category')
-  },
-  getTags () {
-    return get('/tag')
-  },
-  getPage (title) {
-    return get('/page/' + title)
-  },
-  getArchives () {
-    return get('/archive')
-  }
-}
-
 const auth = {
   login (user) {
     return post('/admin/login', user)
@@ -57,9 +32,6 @@ const auth = {
   },
   getArticleCount () {
     return get('/admin/article/count')
-  },
-  getVisitCount () {
-    return get('/admin/site/visit')
   },
   getLogs (page) {
     let params = {
@@ -154,6 +126,5 @@ const auth = {
 }
 
 export default {
-  front,
   auth
 }

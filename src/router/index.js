@@ -9,98 +9,56 @@ const Error = (resolve) => {
   })
 }
 
-const Index = (resolve) => {
-  import('@/components/frontend/Frontend').then((module) => {
-    resolve(module)
-  })
-}
-
-const Home = (resolve) => {
-  import('@/components/frontend/page/Articles').then((module) => {
-    resolve(module)
-  })
-}
-
-const Post = (resolve) => {
-  import('@/components/frontend/page/Article').then((module) => {
-    resolve(module)
-  })
-}
-
-const Category = (resolve) => {
-  import('@/components/frontend/page/Category').then((module) => {
-    resolve(module)
-  })
-}
-
-const Tag = (resolve) => {
-  import('@/components/frontend/page/Tags').then((module) => {
-    resolve(module)
-  })
-}
-
-const Archive = (resolve) => {
-  import('@/components/frontend/page/Archives').then((module) => {
-    resolve(module)
-  })
-}
-
-const About = (resolve) => {
-  import('@/components/frontend/page/About').then((module) => {
-    resolve(module)
-  })
-}
-
 const Login = (resolve) => {
-  import('@/components/admin/Login').then((module) => {
+  import('@/components/Login').then((module) => {
     resolve(module)
   })
 }
 
 const Admin = (resolve) => {
-  import('@/components/admin/Admin').then((module) => {
+  import('@/components/Admin').then((module) => {
     resolve(module)
   })
 }
 
 const Dashboard = (resolve) => {
-  import('@/components/admin/page/Dashboard').then((module) => {
+  import('@/components/page/Dashboard').then((module) => {
     resolve(module)
   })
 }
 
 const ArticleEdit = (resolve) => {
-  import('@/components/admin/page/Article').then((module) => {
+  import('@/components/page/Article').then((module) => {
     resolve(module)
   })
 }
 
 const ArticleList = (resolve) => {
-  import('@/components/admin/page/Articles').then((module) => {
+  import('@/components/page/Articles').then((module) => {
     resolve(module)
   })
 }
 
 const TagList = (resolve) => {
-  import('@/components/admin/page/Tags').then((module) => {
+  import('@/components/page/Tags').then((module) => {
     resolve(module)
   })
 }
 
 const PageList = (resolve) => {
-  import('@/components/admin/page/Pages').then((module) => {
+  import('@/components/page/Pages').then((module) => {
     resolve(module)
   })
 }
 
 const PageEdit = (resolve) => {
-  import('@/components/admin/page/Page').then((module) => {
+  import('@/components/page/Page').then((module) => {
     resolve(module)
   })
 }
 
 const Setting = (resolve) => {
-  import('@/components/admin/page/Setting').then((module) => {
+  import('@/components/page/Setting').then((module) => {
     resolve(module)
   })
 }
@@ -111,34 +69,8 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      component: Index,
-      redirect: '/article',
-      children: [
-        {
-          path: 'article',
-          component: Home
-        },
-        {
-          path: 'article/:id',
-          component: Post
-        },
-        {
-          path: 'category',
-          component: Category
-        },
-        {
-          path: 'tag',
-          component: Tag
-        },
-        {
-          path: 'archive',
-          component: Archive
-        },
-        {
-          path: 'about',
-          component: About
-        }
-      ]
+      component: Admin,
+      redirect: '/admin'
     },
     {
       path: '/admin/login',

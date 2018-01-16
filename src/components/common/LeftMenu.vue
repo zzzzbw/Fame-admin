@@ -43,14 +43,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import { Menu, Submenu, MenuItem } from 'element-ui'
-
   export default {
-    components: {
-      'el-menu': Menu,
-      'el-submenu': Submenu,
-      'el-menu-item': MenuItem
-    },
     data () {
       return {
         showLeftMenu: false

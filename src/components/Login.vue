@@ -19,15 +19,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import { Button, Input, Form, FormItem } from 'element-ui'
-
   export default {
-    components: {
-      'el-button': Button,
-      'el-input': Input,
-      'el-form': Form,
-      'el-form-item': FormItem
-    },
     data: function () {
       return {
         userForm: {

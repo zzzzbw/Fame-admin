@@ -18,19 +18,9 @@
 
 <script type="text/ecmascript-6">
   import MDEditor from '../common/MDEditor'
-  import {
-    Button,
-    Input,
-    Form,
-    FormItem
-  } from 'element-ui'
 
   export default {
     components: {
-      'el-button': Button,
-      'el-input': Input,
-      'el-form': Form,
-      'el-form-item': FormItem,
       'md-editor': MDEditor
     },
     data: function () {
@@ -109,8 +99,8 @@
 </script>
 
 <style>
-  @import '~simplemde/dist/simplemde.min.css';
-  @import "~highlight.js/styles/googlecode.css";
+  @import '../../../node_modules/simplemde/dist/simplemde.min.css';
+  @import "../../../node_modules/highlight.js/styles/googlecode.css";
   @import '/static/css/markdown-css.css';
 
   .el-select-dropdown ::-webkit-scrollbar {

@@ -56,24 +56,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import {
-    Row,
-    Col,
-    Form,
-    FormItem,
-    Button,
-    Input
-  } from 'element-ui'
-
   export default {
-    components: {
-      'el-row': Row,
-      'el-col': Col,
-      'el-form': Form,
-      'el-form-item': FormItem,
-      'el-button': Button,
-      'el-input': Input
-    },
     data: function () {
       return {
         userForm: {

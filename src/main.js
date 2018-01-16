@@ -4,15 +4,64 @@ import router from './router'
 import Api from './util/api'
 import FameUtil from './util/fame'
 import Moment from 'moment'
-import hljs from 'highlight.js/lib/highlight' // 引入lib而不是整个文件
+import hljs from './util/highlight' // 引入lib而不是整个文件
 
-import { Message, Loading } from 'element-ui'
+import {
+  Pagination,
+  Menu,
+  Submenu,
+  MenuItem,
+  MenuItemGroup,
+  Input,
+  Checkbox,
+  CheckboxButton,
+  CheckboxGroup,
+  Select,
+  Option,
+  OptionGroup,
+  Button,
+  ButtonGroup,
+  Table,
+  TableColumn,
+  Breadcrumb,
+  BreadcrumbItem,
+  Form,
+  FormItem,
+  Tag,
+  Row,
+  Col,
+  Card,
+  Container,
+  Loading,
+  Message,
+  MessageBox
+} from 'element-ui'
 
-// 引入需要的语言
-['javascript', 'python', 'java', 'xml'].forEach((langName) => {
-  const langModule = require(`highlight.js/lib/languages/${langName}`)
-  hljs.registerLanguage(langName, langModule)
-})
+Vue.use(Pagination)
+Vue.use(Menu)
+Vue.use(Submenu)
+Vue.use(MenuItem)
+Vue.use(MenuItemGroup)
+Vue.use(Input)
+Vue.use(Checkbox)
+Vue.use(CheckboxButton)
+Vue.use(CheckboxGroup)
+Vue.use(Select)
+Vue.use(Option)
+Vue.use(OptionGroup)
+Vue.use(Button)
+Vue.use(ButtonGroup)
+Vue.use(Table)
+Vue.use(TableColumn)
+Vue.use(Breadcrumb)
+Vue.use(BreadcrumbItem)
+Vue.use(Form)
+Vue.use(FormItem)
+Vue.use(Tag)
+Vue.use(Row)
+Vue.use(Col)
+Vue.use(Card)
+Vue.use(Container)
 
 // 引用highlight
 Vue.directive('highlight', function (el) {
@@ -33,8 +82,8 @@ Vue.prototype.$api = Api
 Vue.prototype.$util = FameUtil
 Vue.prototype.$moment = Moment
 Vue.prototype.$message = Message
+Vue.prototype.$confirm = MessageBox.confirm
 Vue.prototype.$loading = Loading
-Vue.prototype.$hljs = hljs
 
 /* eslint-disable no-new */
 new Vue({

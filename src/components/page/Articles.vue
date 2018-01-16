@@ -1,11 +1,11 @@
 <template>
   <div>
-    <el-table :data="pageDatas" border style="width: 100%">
+    <el-table :data="articleDatas" border style="width: 100%">
       <el-table-column prop="id" label="id" width="60"></el-table-column>
-      <el-table-column prop="title" label="标题" min-width="150" show-overflow-tooltip></el-table-column>
-      <el-table-column prop="publish" label="发布日期" min-width="150"
-                       show-overflow-tooltip></el-table-column>
-      <el-table-column prop="status" label="状态" width="100" show-overflow-tooltip></el-table-column>
+      <el-table-column prop="title" label="标题"  show-overflow-tooltip></el-table-column>
+      <el-table-column prop="publish" label="发布日期"  show-overflow-tooltip></el-table-column>
+      <el-table-column prop="category" label="分类"  show-overflow-tooltip></el-table-column>
+      <el-table-column prop="status" label="状态"  show-overflow-tooltip></el-table-column>
       <el-table-column label="操作" width="150">
         <template slot-scope="scope">
           <el-button
@@ -33,59 +33,45 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import {
-    Button,
-    Table,
-    TableColumn,
-    Pagination,
-    MessageBox
-  } from 'element-ui'
-
   export default {
-    components: {
-      'el-button': Button,
-      'el-table': Table,
-      'el-table-column': TableColumn,
-      'el-pagination': Pagination
-    },
     data: function () {
       return {
-        pageDatas: [],
+        articleDatas: [],
         total: 0,
         pageSize: 10,
-        currentPage: 1,
-        $confirm: null
+        currentPage: 1
       }
     },
     methods: {
       handleEdit (id) {
-        this.$router.push('/admin/page/publish/' + id)
+        this.$router.push('/admin/article/publish/' + id)
       },
       handleDelete (id) {
-        this.$confirm('此操作将永久删除该自定义页面, 是否继续?', '提示', {
+        this.$confirm('此操作将永久删除该文章, 是否继续?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'danger'
         }).then(() => {
-          this.deletePage(id)
+          this.deleteArticle(id)
         }).catch(() => {
         })
       },
-      initPageDatas (pages) {
-        this.pageDatas = []
-        for (let key in pages) {
-          let data = pages[key]
-          let page = {
+      initArticleDatas (articles) {
+        this.articleDatas = []
+        for (let key in articles) {
+          let data = articles[key]
+          let article = {
             id: data.id,
             title: data.title,
             publish: this.$moment(data.created).format('YYYY-MM-DD HH:mm'),
+            category: data.category || this.$util.STATIC.DEFAULT_CATEGORY,
             status: data.status
           }
-          this.pageDatas.push(page)
+          this.articleDatas.push(article)
         }
       },
-      deletePage (id) {
-        this.$api.auth.deletePage(id).then(data => {
+      deleteArticle (id) {
+        this.$api.auth.deleteArticle(id).then(data => {
           if (data.success) {
             this.$message({
               type: 'success',
@@ -101,15 +87,15 @@
         })
       },
       init (page) {
-        this.$api.auth.getPages(page || 1).then(data => {
+        this.$api.auth.getArticles(page || 1).then(data => {
           if (data.success) {
-            this.initPageDatas(data.data.list)
+            this.initArticleDatas(data.data.list)
             this.total = data.data.total
             this.pageSize = data.data.pageSize
             this.currentPage = Number(page) || 1
           } else {
             this.$message({
-              message: '获取自定义页面列表失败,' + data.msg,
+              message: '获取文章列表失败,' + data.msg,
               type: 'error'
             })
           }
@@ -117,8 +103,7 @@
       }
     },
     mounted () {
-      this.init()
-      this.$confirm = MessageBox.confirm
+      this.init(this.$route.query.page)
     }
   }
 </script>
@@ -160,4 +145,5 @@
     margin-top: 30px;
     text-align: center;
   }
+
 </style>

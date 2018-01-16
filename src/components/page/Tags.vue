@@ -46,20 +46,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import {
-    Row,
-    Col,
-    Button,
-    Input
-  } from 'element-ui'
-
   export default {
-    components: {
-      'el-row': Row,
-      'el-col': Col,
-      'el-button': Button,
-      'el-input': Input
-    },
     data () {
       return {
         tags: [],
