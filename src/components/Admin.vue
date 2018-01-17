@@ -45,9 +45,9 @@
 </script>
 
 <style scoped>
-  @import "/static/css/main.css";
-  @import "/static/css/admin.css";
-  @import "/static/css/icon.css";
+  @import "../../static/css/main.css";
+  @import "../../static/css/admin.css";
+  @import "../../static/css/icon.css";
 
   .container {
     position: fixed;

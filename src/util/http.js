@@ -2,9 +2,10 @@ import axios from 'axios'
 import qs from 'qs'
 import { Message, Loading } from 'element-ui'
 import router from '../router/index'
+import serverConfig from '../../server-config'
 
 const Axios = axios.create({
-  baseURL: 'http://127.0.0.1:9090/api/', // 本地做反向代理
+  baseURL: serverConfig.api + 'api/', // 本地做反向代理
   timeout: 5000,
   responseType: 'json',
   withCredentials: true, // 是否允许带cookie这些

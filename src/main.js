@@ -30,7 +30,6 @@ import {
   Tag,
   Row,
   Col,
-  Card,
   Container,
   Loading,
   Message,
@@ -60,7 +59,6 @@ Vue.use(FormItem)
 Vue.use(Tag)
 Vue.use(Row)
 Vue.use(Col)
-Vue.use(Card)
 Vue.use(Container)
 
 // 引用highlight
