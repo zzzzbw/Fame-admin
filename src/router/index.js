@@ -39,6 +39,12 @@ const ArticleList = (resolve) => {
   })
 }
 
+const CommentList = (resolve) => {
+  import('@/components/page/Comments').then((module) => {
+    resolve(module)
+  })
+}
+
 const TagList = (resolve) => {
   import('@/components/page/Tags').then((module) => {
     resolve(module)
@@ -98,6 +104,10 @@ const router = new Router({
         {
           path: 'article',
           component: ArticleList
+        },
+        {
+          path: 'comment',
+          component: CommentList
         },
         {
           path: 'tag',

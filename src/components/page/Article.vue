@@ -44,7 +44,6 @@
         <el-button type="warning" size="small" @click="onDraft">保存草稿</el-button>
       </div>
     </el-form>
-
   </div>
 </template>
 

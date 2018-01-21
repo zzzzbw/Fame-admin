@@ -56,57 +56,55 @@
       }
     },
     methods: {
-      getArticleCount () {
-        this.$api.auth.getArticleCount().then(data => {
-          if (data.success) {
-            this.articleCount = data.data
-          } else {
-            this.$message({
-              message: '获取文章数量失败,' + data.msg,
-              type: 'error'
-            })
-          }
-        })
+      getArticleCount (data) {
+        if (data.success) {
+          this.articleCount = data.data
+        } else {
+          this.$message({
+            message: '获取文章数量失败,' + data.msg,
+            type: 'error'
+          })
+        }
       },
-      getLogs () {
-        this.$api.auth.getLogs(1).then(data => {
-          if (data.success) {
-            for (let key in data.data.list) {
-              let d = data.data.list[key]
-              let log = {
-                message: (d.message || d.action) + d.data,
-                created: this.$moment(d.created).format('YYYY-MM-DD HH:mm')
-              }
-              this.logs.push(log)
+      getLogs (data) {
+        if (data.success) {
+          for (let key in data.data.list) {
+            let d = data.data.list[key]
+            let log = {
+              message: (d.message || d.action) + d.data,
+              created: this.$moment(d.created).format('YYYY-MM-DD HH:mm')
             }
-          } else {
-            this.$message({
-              message: '获取最新日志失败,' + data.msg,
-              type: 'error'
-            })
+            this.logs.push(log)
           }
-        })
+        } else {
+          this.$message({
+            message: '获取最新日志失败,' + data.msg,
+            type: 'error'
+          })
+        }
       },
-      getArticle () {
-        this.$api.auth.getArticles(1).then(data => {
-          if (data.success) {
-            for (let key in data.data.list) {
-              let d = data.data.list[key]
-              let article = d.title
-              this.articles.push(article)
-            }
-          } else {
-            this.$message({
-              message: '获取最新文章失败,' + data.msg,
-              type: 'error'
-            })
+      getArticle (data) {
+        if (data.success) {
+          for (let key in data.data.list) {
+            let d = data.data.list[key]
+            let article = d.title
+            this.articles.push(article)
           }
-        })
+        } else {
+          this.$message({
+            message: '获取最新文章失败,' + data.msg,
+            type: 'error'
+          })
+        }
+      },
+      initData (articlesData, logsData, articleCountData) {
+        this.getArticleCount(articleCountData)
+        this.getLogs(logsData)
+        this.getArticle(articlesData)
       },
       init () {
-        this.getArticleCount()
-        this.getLogs()
-        this.getArticle()
+        this.$axios.all([this.$api.auth.getArticle(1), this.$api.auth.getLogs(1), this.$api.auth.getArticleCount()])
+          .then(this.$axios.spread(this.initData))
       }
     },
     mounted () {

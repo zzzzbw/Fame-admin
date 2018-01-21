@@ -18,6 +18,10 @@
         <span class="icon-list"></span>&nbsp;
         <span slot="title">文章列表</span>
       </el-menu-item>
+      <el-menu-item index="/admin/comment?page=1">
+        <span class="icon-list"></span>
+        <span slot="title">评论列表</span>
+      </el-menu-item>
       <el-menu-item index="/admin/tag">
         <span class="icon-tags"></span>&nbsp;
         <span slot="title">标签/分类</span>

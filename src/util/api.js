@@ -1,4 +1,4 @@
-import { get, post, del } from './http'
+import {get, post, del} from './http'
 import util from './fame'
 
 const auth = {
@@ -53,6 +53,18 @@ const auth = {
   },
   deleteArticle (id) {
     return del('/admin/article/' + id)
+  },
+  getComments (page) {
+    let params = {
+      page: page
+    }
+    return get('/admin/comment', params)
+  },
+  getCommentDetail (id) {
+    return get('/admin/comment/' + id)
+  },
+  deleteComment (id) {
+    return del('/admin/comment/' + id)
   },
   getAllCategories () {
     let params = {

@@ -14,11 +14,11 @@ const Axios = axios.create({
   }
 })
 
-let loadingInstace = null
+let loadingInstance = null
 // 请求拦截（配置发送请求的信息） 传参序列化
 Axios.interceptors.request.use((config) => {
-  if (loadingInstace === null) {
-    loadingInstace = Loading.service({target: '#main', fullscreen: false})
+  if (loadingInstance === null) {
+    loadingInstance = Loading.service({target: '#main', fullscreen: false})
   }
 
   if (
@@ -42,16 +42,16 @@ Axios.interceptors.request.use((config) => {
 // 响应拦截（配置请求回来的信息）
 Axios.interceptors.response.use(function (response) {
   // 处理响应数据
-  if (loadingInstace !== null) {
-    loadingInstace.close()
-    loadingInstace = null
+  if (loadingInstance !== null) {
+    loadingInstance.close()
+    loadingInstance = null
   }
   return response
 }, function (error) {
   // 处理响应失败
-  if (loadingInstace !== null) {
-    loadingInstace.close()
-    loadingInstace = null
+  if (loadingInstance !== null) {
+    loadingInstance.close()
+    loadingInstance = null
   }
   let msg = '网络错误'
   if (!error.response) {
@@ -101,7 +101,7 @@ export function get (url, params = {}) {
 /**
  * post 请求方法
  * @param url
- * @param data
+ * @param params
  * @returns {Promise}
  */
 export function post (url, params = {}) {

@@ -5,6 +5,7 @@ import Api from './util/api'
 import FameUtil from './util/fame'
 import Moment from 'moment'
 import hljs from './util/highlight' // 引入lib而不是整个文件
+import axios from 'axios'
 
 import {
   Pagination,
@@ -16,6 +17,7 @@ import {
   Checkbox,
   CheckboxButton,
   CheckboxGroup,
+  Dialog,
   Select,
   Option,
   OptionGroup,
@@ -45,6 +47,7 @@ Vue.use(Input)
 Vue.use(Checkbox)
 Vue.use(CheckboxButton)
 Vue.use(CheckboxGroup)
+Vue.use(Dialog)
 Vue.use(Select)
 Vue.use(Option)
 Vue.use(OptionGroup)
@@ -77,6 +80,7 @@ Vue.filter('time', function (data, fmt) {
 
 Vue.config.productionTip = false
 Vue.prototype.$api = Api
+Vue.prototype.$axios = axios
 Vue.prototype.$util = FameUtil
 Vue.prototype.$moment = Moment
 Vue.prototype.$message = Message
