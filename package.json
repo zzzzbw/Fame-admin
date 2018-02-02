@@ -1,8 +1,8 @@
 {
   "name": "fame-default",
   "version": "1.0.0",
-  "description": "fame-default theme",
-  "author": "ZBW <920049380@qq.com>",
+  "description": "The admin of Fame blog",
+  "author": "Zzzzbw",
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",

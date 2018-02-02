@@ -103,7 +103,7 @@
         this.getArticle(articlesData)
       },
       init () {
-        this.$axios.all([this.$api.auth.getArticle(1), this.$api.auth.getLogs(1), this.$api.auth.getArticleCount()])
+        this.$axios.all([this.$api.auth.getArticles(1), this.$api.auth.getLogs(1), this.$api.auth.getArticleCount()])
           .then(this.$axios.spread(this.initData))
       }
     },
