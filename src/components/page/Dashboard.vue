@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-row :gutter="50">
-      <el-col :xs="24" :sm="24" :md="24" :lg="24">
+      <el-col :xs="24" :sm="12" :md="12" :lg="12">
         <div class="panel">
           <div class="panel-content">
             <div class="message">
@@ -10,6 +10,20 @@
             </div>
             <div class="icon">
               <span class="icon-book"></span>
+            </div>
+            <div style="clear: both"></div>
+          </div>
+        </div>
+      </el-col>
+      <el-col :xs="24" :sm="12" :md="12" :lg="12">
+        <div class="panel">
+          <div class="panel-content">
+            <div class="message">
+              <h3>{{commentCount}}</h3>
+              <p>评论数</p>
+            </div>
+            <div class="icon red">
+              <span class="icon-comment-o"></span>
             </div>
             <div style="clear: both"></div>
           </div>
@@ -49,13 +63,23 @@
   export default {
     data () {
       return {
-        visitCount: 0,
+        commentCount: 0,
         articleCount: 0,
         logs: [],
         articles: []
       }
     },
     methods: {
+      getCommentCount (data) {
+        if (data.success) {
+          this.commentCount = data.data
+        } else {
+          this.$message({
+            message: '获取评论数量失败,' + data.msg,
+            type: 'error'
+          })
+        }
+      },
       getArticleCount (data) {
         if (data.success) {
           this.articleCount = data.data
@@ -97,13 +121,15 @@
           })
         }
       },
-      initData (articlesData, logsData, articleCountData) {
+      initData (articlesData, logsData, articleCountData, commentCountData) {
         this.getArticleCount(articleCountData)
         this.getLogs(logsData)
         this.getArticle(articlesData)
+        this.getCommentCount(commentCountData)
       },
       init () {
-        this.$axios.all([this.$api.auth.getArticles(1), this.$api.auth.getLogs(1), this.$api.auth.getArticleCount()])
+        this.$axios.all([this.$api.auth.getArticles(1), this.$api.auth.getLogs(1),
+          this.$api.auth.getArticleCount(), this.$api.auth.getCommentCount()])
           .then(this.$axios.spread(this.initData))
       }
     },

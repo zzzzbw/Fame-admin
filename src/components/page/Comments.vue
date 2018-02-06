@@ -99,6 +99,9 @@
             this.total = data.data.total
             this.pageSize = data.data.pageSize
             this.currentPage = Number(page) || 1
+            for (let comment of this.commentDatas) {
+              comment.created = this.$moment(data.created).format('YYYY-MM-DD HH:mm')
+            }
           } else {
             this.$message({
               message: '获取评论列表失败,' + data.msg,
@@ -185,10 +188,10 @@
 
   .comment-dialog .comment-row-detail {
     width: 90%;
-    margin: 10px auto !important;
+    margin: 15px auto !important;
+    padding: 10px;
     border: 1px solid #eee;
     border-radius: 4px;
-    padding-top: 10px
   }
 
   .comment-dialog .comment-row-detail .el-col {
@@ -196,7 +199,7 @@
   }
 
   .comment-dialog .comment-row-detail .comment-replay {
-    padding: 0 10px;
+    padding: 10px;
     margin-bottom: 5px;
     border: 1px solid #eee;
     border-radius: 4px;

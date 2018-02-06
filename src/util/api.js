@@ -66,6 +66,9 @@ const auth = {
   deleteComment (id) {
     return del('/admin/comment/' + id)
   },
+  getCommentCount () {
+    return get('/admin/comment/count')
+  },
   getAllCategories () {
     let params = {
       type: util.STATIC.META_CATEGORY

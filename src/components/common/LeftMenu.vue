@@ -19,7 +19,7 @@
         <span slot="title">文章列表</span>
       </el-menu-item>
       <el-menu-item index="/admin/comment?page=1">
-        <span class="icon-list"></span>
+        <span class="icon-comments-o"></span>
         <span slot="title">评论列表</span>
       </el-menu-item>
       <el-menu-item index="/admin/tag">
