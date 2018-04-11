@@ -22,11 +22,16 @@ const auth = {
   getSitestatic () {
     return get('/admin/site/static')
   },
-  saveSitestatic (title, description, keywords) {
+  saveSitestatic (title, description, keywords, emailSend, emailUsername, emailPassword, emailHost, emailPort) {
     let params = {
       title: title,
       description: description,
-      keywords: keywords
+      keywords: keywords,
+      emailSend: emailSend,
+      emailUsername: emailUsername,
+      emailPassword: emailPassword,
+      emailHost: emailHost,
+      emailPort: emailPort
     }
     return post('/admin/site/static', params)
   },

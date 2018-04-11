@@ -35,7 +35,8 @@ import {
   Container,
   Loading,
   Message,
-  MessageBox
+  MessageBox,
+  Switch
 } from 'element-ui'
 
 Vue.use(Pagination)
@@ -63,6 +64,7 @@ Vue.use(Tag)
 Vue.use(Row)
 Vue.use(Col)
 Vue.use(Container)
+Vue.use(Switch)
 
 // 引用highlight
 Vue.directive('highlight', function (el) {
