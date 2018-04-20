@@ -30,9 +30,9 @@
       custom-class="comment-dialog">
       <el-row :gutter="10">
         <el-col :xs="24" :sm="12" :md="3">所属文章:</el-col>
-        <el-col :xs="24" :sm="12" :md="9">Hello word</el-col>
+        <el-col :xs="24" :sm="12" :md="9">{{comment.title}}</el-col>
         <el-col :xs="24" :sm="12" :md="3">称呼:</el-col>
-        <el-col :xs="24" :sm="12" :md="9">zzzzbw</el-col>
+        <el-col :xs="24" :sm="12" :md="9">{{comment.name}}</el-col>
       </el-row>
       <el-row :gutter="10">
         <el-col :xs="24" :sm="12" :md="3">邮箱:</el-col>
