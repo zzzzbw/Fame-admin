@@ -47,10 +47,10 @@
         <div class="panel">
           <div class="panel-content">
             <div class="header">
-              <div class="title">最新日志</div>
+              <div class="title">最新评论</div>
             </div>
             <ul class="info">
-              <li v-for="log in logs">{{log.created}} => {{log.message}}</li>
+              <li v-for="comment in comments">{{comment.name}} => {{comment.content}}</li>
             </ul>
           </div>
         </div>
@@ -65,7 +65,7 @@
       return {
         commentCount: 0,
         articleCount: 0,
-        logs: [],
+        comments: [],
         articles: []
       }
     },
@@ -90,15 +90,14 @@
           })
         }
       },
-      getLogs (data) {
+      getComments (data) {
         if (data.success) {
           for (let key in data.data.list) {
-            let d = data.data.list[key]
-            let log = {
-              message: (d.message || d.action) + d.data,
-              created: this.$moment(d.created).format('YYYY-MM-DD HH:mm')
+            let comment = data.data.list[key]
+            if (comment.content.length > 200) {
+              comment.content = comment.content.substring(0, 80) + '...'
             }
-            this.logs.push(log)
+            this.comments.push(comment)
           }
         } else {
           this.$message({
@@ -123,12 +122,12 @@
       },
       initData (articlesData, logsData, articleCountData, commentCountData) {
         this.getArticleCount(articleCountData)
-        this.getLogs(logsData)
+        this.getComments(logsData)
         this.getArticle(articlesData)
         this.getCommentCount(commentCountData)
       },
       init () {
-        this.$axios.all([this.$api.auth.getArticles(1), this.$api.auth.getLogs(1),
+        this.$axios.all([this.$api.auth.getArticles(1), this.$api.auth.getComments(1),
           this.$api.auth.getArticleCount(), this.$api.auth.getCommentCount()])
           .then(this.$axios.spread(this.initData))
       }
