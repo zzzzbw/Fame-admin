@@ -165,5 +165,7 @@
 </script>
 
 <style scoped>
-
+  .markdown-editor {
+    line-height: 1.15;
+  }
 </style>
