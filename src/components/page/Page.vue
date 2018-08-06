@@ -99,9 +99,8 @@
 </script>
 
 <style>
-  @import '../../../node_modules/simplemde/dist/simplemde.min.css';
-  @import "../../../node_modules/highlight.js/styles/googlecode.css";
-  @import '/static/css/markdown-css.css';
+  @import '~simplemde/dist/simplemde.min.css';
+  @import "~highlight.js/styles/googlecode.css";
 
   .el-select-dropdown ::-webkit-scrollbar {
     display: block;
