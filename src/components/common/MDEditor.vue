@@ -140,7 +140,7 @@
       escDown () {
         let _this = this
         document.onkeydown = function (event) {
-          if (event.keyCode === 27) {
+          if (event.code === 'Escape') {
             if (_this.isFullScreen) {
               _this.$root.$emit('indexDown')
               _this.isFullScreen = false
@@ -163,6 +163,9 @@
     }
   }
 </script>
+<style>
+
+</style>
 
 <style scoped>
   .markdown-editor {

@@ -1,12 +1,13 @@
 <template>
   <div>
-    <el-table :data="articleDatas" border style="width: 100%">
+    <el-table :data="articleDatas" border stripe style="width: 100%">
       <el-table-column prop="id" label="id" width="60"></el-table-column>
-      <el-table-column prop="title" label="标题"  show-overflow-tooltip></el-table-column>
-      <el-table-column prop="publish" label="发布日期"  show-overflow-tooltip></el-table-column>
-      <el-table-column prop="category" label="分类"  show-overflow-tooltip></el-table-column>
-      <el-table-column prop="status" label="状态"  show-overflow-tooltip></el-table-column>
-      <el-table-column label="操作" width="150">
+      <el-table-column prop="title" label="标题" show-overflow-tooltip></el-table-column>
+      <el-table-column prop="category" label="分类" show-overflow-tooltip></el-table-column>
+      <el-table-column prop="status" label="状态" width="100" show-overflow-tooltip></el-table-column>
+      <el-table-column prop="publish" label="发布日期" width="150" show-overflow-tooltip></el-table-column>
+      <el-table-column prop="modified" label="修改日期" width="150" show-overflow-tooltip></el-table-column>
+      <el-table-column fixed="right" label="操作" width="150">
         <template slot-scope="scope">
           <el-button
             size="small"
@@ -57,6 +58,7 @@
         })
       },
       initArticleDatas (articles) {
+        console.log(articles)
         this.articleDatas = []
         for (let key in articles) {
           let data = articles[key]
@@ -64,8 +66,9 @@
             id: data.id,
             title: data.title,
             publish: this.$moment(data.created).format('YYYY-MM-DD HH:mm'),
+            modified: this.$moment(data.modified).format('YYYY-MM-DD HH:mm'),
             category: data.category || this.$util.STATIC.DEFAULT_CATEGORY,
-            status: data.status
+            status: this.$util.STATIC.STATUS_PUBLISH === data.status ? '公开' : '隐藏'
           }
           this.articleDatas.push(article)
         }

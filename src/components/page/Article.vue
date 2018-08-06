@@ -1,48 +1,61 @@
 <template>
   <div>
-    <el-form :rules="rules" ref="articleForm" :model="article">
-      <el-form-item prop="title">
-        <el-input v-model="article.title" placeholder="请输入文章标题"></el-input>
-      </el-form-item>
+    <el-form label-position="top" :rules="rules" ref="articleForm" :model="article">
       <el-row :gutter="30">
-        <el-col :xs="24" :sm="12" :md="12" :lg="12">
-          <el-form-item>
-            <el-select
-              v-model="article.tags"
-              multiple
-              filterable
-              placeholder="请选择文章标签">
-              <el-option
-                v-for="tag in tags"
-                :key="tag.value"
-                :label="tag.label"
-                :value="tag.value">
-              </el-option>
-            </el-select>
+        <el-col :xs="24" :sm="16" :md="16" :lg="16">
+          <el-form-item prop="title">
+            <el-input v-model="article.title" placeholder="请输入文章标题"></el-input>
+          </el-form-item>
+          <el-form-item prop="content">
+            <md-editor v-model="article.content"></md-editor>
+            <!-- 键修饰符，键别名 -->
           </el-form-item>
         </el-col>
-        <el-col :xs="24" :sm="12" :md="12" :lg="12">
-          <el-form-item>
-            <el-select v-model="article.category" filterable placeholder="请选择文章分类">
-              <el-option
-                v-for="category in categories"
-                :key="category.value"
-                :label="category.label"
-                :value="category.value">
-              </el-option>
-            </el-select>
-          </el-form-item>
+        <el-col :xs="24" :sm="8" :md="8" :lg="8">
+          <div class="panel">
+            <div class="panel-content">
+              <el-form-item label="标签">
+                <el-select
+                  v-model="article.tags"
+                  multiple
+                  filterable
+                  placeholder="请选择文章标签">
+                  <el-option
+                    v-for="tag in tags"
+                    :key="tag.value"
+                    :label="tag.label"
+                    :value="tag.value">
+                  </el-option>
+                </el-select>
+              </el-form-item>
+              <el-form-item label="分类">
+                <el-select v-model="article.category" filterable placeholder="请选择文章分类">
+                  <el-option
+                    v-for="category in categories"
+                    :key="category.value"
+                    :label="category.label"
+                    :value="category.value">
+                  </el-option>
+                </el-select>
+              </el-form-item>
+              <el-form-item label="状态">
+                <el-switch
+                  v-model="article.status"
+                  active-value="publish"
+                  inactive-value="draft"
+                  active-text="公开"
+                  inactive-text="隐藏">
+                </el-switch>
+              </el-form-item>
+              <el-form-item>
+                <el-button-group>
+                  <el-button type="primary" size="small" @click="onPublish">发布文章</el-button>
+                </el-button-group>
+              </el-form-item>
+            </div>
+          </div>
         </el-col>
       </el-row>
-      <el-form-item prop="content">
-        <md-editor v-model="article.content"></md-editor>
-        <!-- 键修饰符，键别名 -->
-      </el-form-item>
-      <div class="button-list">
-        <el-button size="small">返回列表</el-button>
-        <el-button type="info" size="small" @click="onPublish">发布文章</el-button>
-        <el-button type="warning" size="small" @click="onDraft">保存草稿</el-button>
-      </div>
     </el-form>
   </div>
 </template>
@@ -98,6 +111,7 @@
           this.article.tags = this.$util.stringToTags('')
           this.article.category = ''
           this.article.content = ''
+          this.article.status = this.$util.STATIC.STATUS_PUBLISH
         }
       },
       initArticle (data) {
@@ -106,6 +120,7 @@
         this.article.tags = this.$util.stringToTags(data.tags)
         this.article.category = data.category
         this.article.content = data.content
+        this.article.status = data.status
       },
       getTags () {
         this.$api.auth.getAllTags().then(data => {
@@ -164,11 +179,6 @@
         })
       },
       onPublish () {
-        this.article.status = this.$util.STATIC.STATUS_PUBLISH
-        this.saveArticle('articleForm')
-      },
-      onDraft () {
-        this.article.status = this.$util.STATIC.STATUS_DRAFT
         this.saveArticle('articleForm')
       },
       init () {
@@ -179,7 +189,6 @@
     },
     mounted () {
       this.init()
-      this.content = '12312312'
     },
     watch: {
       // 监听route刷新绑定的article数据
@@ -194,19 +203,14 @@
   @import '~simplemde/dist/simplemde.min.css';
   @import "~highlight.js/styles/googlecode.css";
 
-  .el-select-dropdown ::-webkit-scrollbar {
-    display: block;
+  .markdown-editor .CodeMirror {
+    height: calc(90vh - 200px);
   }
 </style>
 
 <style scoped>
-  .button-list {
-    float: right;
-    margin-bottom: 30px;
-  }
-
   .el-select {
-    display: block;
+    width: 100%;
   }
 </style>
 

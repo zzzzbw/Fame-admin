@@ -1,17 +1,36 @@
 <template>
   <div>
     <el-form :rules="rules" ref="pageForm" :model="page">
-      <el-form-item prop="title">
-        <el-input v-model="page.title" placeholder="请输入自定义页面标题"></el-input>
-      </el-form-item>
-      <el-form-item prop="content">
-        <md-editor v-model="page.content"></md-editor>
-      </el-form-item>
-      <div class="button-list">
-        <el-button size="small">返回列表</el-button>
-        <el-button type="info" size="small" @click="onPublish">发布页面</el-button>
-        <el-button type="warning" size="small" @click="onDraft">保存草稿</el-button>
-      </div>
+      <el-row :gutter="30">
+        <el-col :xs="24" :sm="16" :md="16" :lg="16">
+          <el-form-item prop="title">
+            <el-input v-model="page.title" placeholder="请输入自定义页面标题"></el-input>
+          </el-form-item>
+          <el-form-item prop="content">
+            <md-editor v-model="page.content"></md-editor>
+          </el-form-item>
+        </el-col>
+        <el-col :xs="24" :sm="8" :md="8" :lg="8">
+          <div class="panel">
+            <div class="panel-content">
+              <el-form-item label="状态">
+                <el-switch
+                  v-model="page.status"
+                  active-value="publish"
+                  inactive-value="draft"
+                  active-text="公开"
+                  inactive-text="隐藏">
+                </el-switch>
+              </el-form-item>
+              <el-form-item>
+                <el-button-group>
+                  <el-button type="primary" size="small" @click="onPublish">发布页面</el-button>
+                </el-button-group>
+              </el-form-item>
+            </div>
+          </div>
+        </el-col>
+      </el-row>
     </el-form>
   </div>
 </template>
@@ -50,6 +69,7 @@
               this.page.id = data.data.id
               this.page.title = data.data.title
               this.page.content = data.data.content
+              this.page.status = data.data.status
             } else {
               this.$message({
                 message: '获取自定义页面失败',
@@ -61,6 +81,7 @@
           this.page.id = ''
           this.page.title = ''
           this.page.content = ''
+          this.page.status = this.$util.STATIC.STATUS_PUBLISH
         }
       },
       savePage (formName) {
@@ -84,11 +105,6 @@
         })
       },
       onPublish () {
-        this.page.status = this.$util.STATIC.STATUS_PUBLISH
-        this.savePage('pageForm')
-      },
-      onDraft () {
-        this.page.status = this.$util.STATIC.STATUS_DRAFT
         this.savePage('pageForm')
       }
     },
@@ -102,15 +118,11 @@
   @import '~simplemde/dist/simplemde.min.css';
   @import "~highlight.js/styles/googlecode.css";
 
-  .el-select-dropdown ::-webkit-scrollbar {
-    display: block;
+  .markdown-editor .CodeMirror {
+    height: calc(90vh - 200px);
   }
 </style>
 
 <style scoped>
-  .button-list {
-    float: right;
-    margin-bottom: 30px;
-  }
 </style>
 

@@ -1,12 +1,12 @@
 <template>
   <div>
-    <el-table :data="pageDatas" border style="width: 100%">
+    <el-table :data="pageDatas" border stripe style="width: 100%">
       <el-table-column prop="id" label="id" width="60"></el-table-column>
       <el-table-column prop="title" label="标题" min-width="150" show-overflow-tooltip></el-table-column>
-      <el-table-column prop="publish" label="发布日期" min-width="150"
-                       show-overflow-tooltip></el-table-column>
+      <el-table-column prop="publish" label="发布日期" width="150" show-overflow-tooltip></el-table-column>
+      <el-table-column prop="modified" label="修改日期" width="150" show-overflow-tooltip></el-table-column>
       <el-table-column prop="status" label="状态" width="100" show-overflow-tooltip></el-table-column>
-      <el-table-column label="操作" width="150">
+      <el-table-column fixed="right" label="操作" width="150">
         <template slot-scope="scope">
           <el-button
             size="small"
@@ -64,7 +64,8 @@
             id: data.id,
             title: data.title,
             publish: this.$moment(data.created).format('YYYY-MM-DD HH:mm'),
-            status: data.status
+            modified: this.$moment(data.modified).format('YYYY-MM-DD HH:mm'),
+            status: this.$util.STATIC.STATUS_PUBLISH === data.status ? '公开' : '隐藏'
           }
           this.pageDatas.push(page)
         }
